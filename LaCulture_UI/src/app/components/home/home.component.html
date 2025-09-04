@@ -1,0 +1,18 @@
+<header class="menu-header">
+  <nav>
+    <span *ngFor="let option of menuOptions"
+          [class.selected]="selectedOption === option"
+          (click)="selectOption(option)"
+          class="menu-link">
+      {{ option }}
+    </span>
+  </nav>
+</header>
+
+<ngb-carousel [interval]="7000" [pauseOnHover]="false" [pauseOnFocus]="false" *ngIf="images.length">
+  <ng-template ngbSlide *ngFor="let image of images;">
+    <div class="carousel-wrapper">
+      <img [src]="image" alt="Carousel Image" class="zoom-img">
+    </div>
+  </ng-template>
+</ngb-carousel>
