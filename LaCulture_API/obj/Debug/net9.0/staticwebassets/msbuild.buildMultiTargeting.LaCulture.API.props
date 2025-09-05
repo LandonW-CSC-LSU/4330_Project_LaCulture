@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\LaCulture.API.props" />
+</Project>
