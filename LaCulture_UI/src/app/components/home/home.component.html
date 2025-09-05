@@ -1,4 +1,4 @@
-<header class="menu-header">
+<header class="menu-header" [ngClass]="{ 'scrolled': menuHeaderClass === 'scrolled' }">
   <nav>
     <span *ngFor="let option of menuOptions"
           [class.selected]="selectedOption === option"
@@ -16,3 +16,5 @@
     </div>
   </ng-template>
 </ngb-carousel>
+
+<div class="white-section"></div>

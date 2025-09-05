@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
@@ -10,12 +10,23 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [CommonModule, FormsModule, NgbCarouselModule]
 })
 export class HomeComponent {
+  menuHeaderClass = '';
+  @HostListener('window:scroll', []) onScroll(){
+    if (window.scrollY > 0) {
+      this.menuHeaderClass = 'scrolled';
+    } else {
+      this.menuHeaderClass = '';
+    }
+  }
   menuOptions = ['Home', 'Recipes', 'Events', 'Map', 'About'];
   selectedOption = this.menuOptions[0];
   images = [
     'assets/images/mardiGras.png',
-    'assets/images/swamp.png',
+    'assets/images/swamp.jpg',
     'assets/images/oaks.jpg',
+    'assets/images/crawfish.jpg',
+    'assets/images/mardiGrasFloat.jpg',
+    'assets/images/stJosephAltar2025.png'
   ];
 
   constructor() {}
