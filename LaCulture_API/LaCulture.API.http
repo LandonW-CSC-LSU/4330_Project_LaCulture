@@ -1,0 +1,6 @@
+@LaCulture.API_HostAddress = http://localhost:5189
+
+GET {{LaCulture.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
