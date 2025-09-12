@@ -9,15 +9,31 @@
   </nav>
 </header>
 
-<ngb-carousel [interval]="7000" [pauseOnHover]="false" [pauseOnFocus]="false" *ngIf="images.length">
-  <ng-template ngbSlide *ngFor="let image of images;">
-    <div class="carousel-wrapper">
-      <img [src]="image" alt="Carousel Image" class="zoom-img">
-    </div>
-  </ng-template>
-</ngb-carousel>
+<c-carousel>
+  <c-carousel-inner>
+    @for (slide of slides; track slide.src) {
+      <c-carousel-item>
+        <img
+          [src]="slide.src"
+          class="d-block w-100"
+          loading="lazy"
+        />
+      </c-carousel-item>
+    }
+  </c-carousel-inner>
+  <c-carousel-indicators />
+  <c-carousel-control caption="Previous" direction="prev" />
+  <c-carousel-control caption="Next" direction="next" />
+</c-carousel>
 
 <!-- TODO: add quicklinks -->
-<div class="white-section">
-    <img src = "assets/images/canes.jpg" alt="First Canes" class="canes-img">
+<div class="quicklinks-section">
+    <mat-card class="quicklink-card">
+    <img mat-card-image src="assets/images/canes.jpg" alt="First Canes">
+    <mat-card-title>Canes</mat-card-title>
+    <mat-card-content>
+      The original Canes!
+    </mat-card-content>
+    <button mat-raised-button color="accent" routerLink="/canes">Go to Canes Info</button>
+  </mat-card>
 </div>
