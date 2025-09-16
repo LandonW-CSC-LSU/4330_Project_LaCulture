@@ -1,8 +1,16 @@
 import './polyfills';
-import { bootstrapApplication } from '@angular/platform-browser';
+import { bootstrapApplication, type BootstrapContext } from '@angular/platform-browser';
+import { provideServerRendering } from '@angular/platform-server';
 import { config } from './app/app.config.server';
 import { HomeComponent } from './app/components/home/home.component';
 
-const bootstrap = () => bootstrapApplication(HomeComponent, config);
+const bootstrap = (context: BootstrapContext) =>
+  bootstrapApplication(HomeComponent, {
+    ...config,
+    providers: [
+      ...(config.providers ?? []),
+      provideServerRendering(),
+    ],
+  }, context);
 
 export default bootstrap;
