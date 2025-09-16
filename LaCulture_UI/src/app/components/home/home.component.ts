@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,6 +11,7 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [CommonModule, FormsModule, NgbCarouselModule]
 })
 export class HomeComponent {
+  private map: any;
   menuHeaderClass = '';
   @HostListener('window:scroll', []) onScroll(){
     if (window.scrollY > 0) {
@@ -20,6 +22,7 @@ export class HomeComponent {
   }
   menuOptions = ['Home', 'Recipes', 'Events', 'Map', 'About'];
   selectedOption = this.menuOptions[0];
+
   images = [
     'assets/images/mardiGras.png',
     'assets/images/swamp.jpg',
@@ -29,9 +32,41 @@ export class HomeComponent {
     'assets/images/stJosephAltar2025.png'
   ];
 
+
   constructor() {}
+
+  ngAfterViewInit() {
+    if (this.selectedOption === 'Map') {
+      this.initMap();
+    }
+  }
 
   selectOption(option: string) {
     this.selectedOption = option;
+    if (option === 'Map') {
+      setTimeout(() => this.initMap(), 0);
+    }
+  }
+
+  private async initMap(): Promise<void> {
+  if (this.map) {
+    this.map.remove();
+  }
+
+  const L = await import('leaflet');
+
+  this.map = L.map('map', {
+    center: [29.9511, -90.0715],
+    zoom: 13
+  });
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(this.map);
+
+  L.marker([29.9511, -90.0715]).addTo(this.map)
+    .bindPopup('NOLA')
+    .openPopup();
+  
   }
 }
