@@ -94,16 +94,16 @@ c-carousel-item img {
     padding: 120px 32px 0 32px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 24px;
-    justify-items: start;
+    gap: 12px 20px;
+    justify-items: center;
     align-items: flex-start;
     overflow-x: hidden;
 }
 
 /* Smaller cards, aligned left */
 .quicklink-card {
-    width: 220px;
-    max-width: 90vw;
+    width: 250px;
+    max-width: 95vw;
     margin: 0;
     border-radius: 14px;
     box-shadow: 0 2px 12px rgba(128,0,128,0.10), 0 1px 4px rgba(0,0,0,0.06);
