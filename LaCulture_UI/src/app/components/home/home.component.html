@@ -9,13 +9,111 @@
   </nav>
 </header>
 
-<ngb-carousel [interval]="7000" [pauseOnHover]="false" [pauseOnFocus]="false" *ngIf="images.length">
-  <ng-template ngbSlide *ngFor="let image of images;">
-    <div class="carousel-wrapper">
-      <img [src]="image" alt="Carousel Image" class="zoom-img">
-    </div>
-  </ng-template>
-</ngb-carousel>
+<c-carousel>
+  <c-carousel-inner>
+    @for (slide of slides; track slide.src) {
+      <c-carousel-item>
+        <img
+          [src]="slide.src"
+          class="d-block w-100"
+          loading="lazy"
+        />
+      </c-carousel-item>
+    }
+  </c-carousel-inner>
+  <c-carousel-indicators />
+  <c-carousel-control caption="Previous" direction="prev" />
+  <c-carousel-control caption="Next" direction="next" />
+</c-carousel>
 
-<!-- TODO: add quicklinks -->
-<div class="white-section"></div>
+<div class="quicklinks-section">
+    <mat-card class="quicklink-card">
+    <img mat-card-image src="assets/images/brennans.jpeg" alt="Brennan's">
+    <mat-card-title>Brennan's</mat-card-title>
+    <mat-card-content>
+      Eat at Brennan's!
+    </mat-card-content>
+    <button mat-raised-button color="accent" routerLink="/brennans">Go to Brennan's Info</button>
+    </mat-card>
+
+    <mat-card class="quicklink-card">
+    <img mat-card-image src="assets/images/bourbonstreet.jpg" alt="Bourbon Street">
+    <mat-card-title>Bourbon Street</mat-card-title>
+    <mat-card-content>
+      Learn about the famous Bourbon Street!
+    </mat-card-content>
+    <button mat-raised-button color="accent" routerLink="/bourbonstreet">Go to Bourbon Street Info</button>
+    </mat-card>
+
+    <mat-card class="quicklink-card">
+    <img mat-card-image src="assets/images/statecapitol.jpg" alt="State Capitol">
+    <mat-card-title>State Capitol</mat-card-title>
+    <mat-card-content>
+      Visit the State Capitol
+    </mat-card-content>
+    <button mat-raised-button color="accent" routerLink="/statecapitol">Go to State Capitol Info</button>
+    </mat-card>
+
+    <mat-card class="quicklink-card">
+    <img mat-card-image src="assets/images/tigerstadium.jpg" alt="Tiger Stadium">
+    <mat-card-title>Tiger Stadium</mat-card-title>
+    <mat-card-content>
+      Experience the great Tiger Stadium!
+    </mat-card-content>
+    <button mat-raised-button color="accent" routerLink="/tigerstadium">Go to Tiger Stadium Info</button>
+    </mat-card>
+
+    <mat-card class="quicklink-card">
+    <img mat-card-image src="assets/images/cafedumonde.jpg" alt="Cafe Du Monde">
+    <mat-card-title>Cafe Du Monde</mat-card-title>
+    <mat-card-content>
+      Eat at the Famous Cafe Du Monde!
+    </mat-card-content>
+    <button mat-raised-button color="accent" routerLink="/cafedumonde">Go to Cafe Du Monde Info</button>
+    </mat-card>
+
+    <mat-card class="quicklink-card">
+    <img mat-card-image src="assets/images/frenchquarter.jpg" alt="French Quarter">
+    <mat-card-title>French Quarter</mat-card-title>
+    <mat-card-content>
+      Take a walk around the French Quarter!
+    </mat-card-content>
+    <button mat-raised-button color="accent" routerLink="/frenchquarter">Go to French Quarter Info</button>
+    </mat-card>
+
+    <mat-card class="quicklink-card">
+    <img mat-card-image src="assets/images/ww2.jpg" alt="WW2 Museum">
+    <mat-card-title>National WW2 Museum</mat-card-title>
+    <mat-card-content>
+      Take a tour around the National WW2 Museum!
+    </mat-card-content>
+    <button mat-raised-button color="accent" routerLink="/ww2">Go to WW2 Museum Info</button>
+    </mat-card>
+
+    <mat-card class="quicklink-card">
+    <img mat-card-image src="assets/images/tomb.jpg" alt="Marie Laveau Grave">
+    <mat-card-title>Marie Laveau Grave</mat-card-title>
+    <mat-card-content>
+      Visit the Queen of Voodoo!
+    </mat-card-content>
+    <button mat-raised-button color="accent" routerLink="/tomb">Go to Marie Laveau Grave Info</button>
+    </mat-card>
+    
+    <mat-card class="quicklink-card">
+    <img mat-card-image src="assets/images/audubon.jpg" alt="Audubon Zoo">
+    <mat-card-title>Audubon Zoo</mat-card-title>
+    <mat-card-content>
+      Visit the Audubon Zoo and Aquarium!
+    </mat-card-content>
+    <button mat-raised-button color="accent" routerLink="/audubon">Go to Audubon Zoo Info</button>
+    </mat-card>
+
+    <mat-card class="quicklink-card">
+    <img mat-card-image src="assets/images/superdome.jpg" alt="Superdome">
+    <mat-card-title>Superdome</mat-card-title>
+    <mat-card-content>
+      Go to a Saints game!
+    </mat-card-content>
+    <button mat-raised-button color="accent" routerLink="/superdome">Go to Superdome Info</button>
+    </mat-card>
+</div>
