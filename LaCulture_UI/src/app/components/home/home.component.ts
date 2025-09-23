@@ -2,13 +2,14 @@ import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { MapComponent } from '../map/map';
 
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [CommonModule, FormsModule, NgbCarouselModule]
+  imports: [CommonModule, FormsModule, NgbCarouselModule, MapComponent]
 })
 export class HomeComponent {
   private map: any;
@@ -35,43 +36,10 @@ export class HomeComponent {
 
   constructor() {}
 
-  ngAfterViewInit() {
-    if (this.selectedOption === 'Map') {
-      this.initMap();
-    }
-  }
+
 
   selectOption(option: string) {
     this.selectedOption = option;
-    if (option === 'Map') {
-      setTimeout(() => this.initMap(), 0);
-    }
   }
 
-  private async initMap(): Promise<void> {
-  if (this.map) {
-    this.map.remove();
-  }
-
-  const L = await import('leaflet');
-
-  this.map = L.map('map', {
-    center: [29.9511, -90.0715],
-    zoom: 13
-  });
-
-  const markerIcon = L.icon({
-   iconUrl: 'assets/images/marker.png',
-   iconAnchor: [37,47]
-  });
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
-  }).addTo(this.map);
-
-  L.marker([29.9511, -90.0715], {icon: markerIcon}).addTo(this.map)
-    .bindPopup('NOLA')
-    .openPopup();
-  
-  }
 }
