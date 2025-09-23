@@ -60,11 +60,16 @@ export class HomeComponent {
     zoom: 13
   });
 
+  const markerIcon = L.icon({
+   iconUrl: 'assets/images/marker.png',
+   iconAnchor: [37,47]
+  });
+
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(this.map);
 
-  L.marker([29.9511, -90.0715]).addTo(this.map)
+  L.marker([29.9511, -90.0715], {icon: markerIcon}).addTo(this.map)
     .bindPopup('NOLA')
     .openPopup();
   
