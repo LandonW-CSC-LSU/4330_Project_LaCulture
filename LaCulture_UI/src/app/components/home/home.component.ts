@@ -28,13 +28,12 @@ export class CarouselCustomConfig {
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-
-  imports: [CommonModule, FormsModule, NgbCarouselModule, MapComponent]
-
   standalone: true,
   imports: [
     CommonModule,
     FormsModule,
+    NgbCarouselModule,
+    MapComponent,
     CarouselComponent,
     CarouselInnerComponent,
     CarouselItemComponent,
