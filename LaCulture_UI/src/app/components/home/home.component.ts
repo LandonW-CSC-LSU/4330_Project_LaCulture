@@ -1,7 +1,6 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import {
   CarouselComponent,
   CarouselConfig,
@@ -41,13 +40,6 @@ export class CarouselCustomConfig {
   providers: [{ provide: CarouselConfig, useClass: CarouselCustomConfig }]
 })
 export class HomeComponent {
-  private map: any;
-  menuHeaderClass = '';
-  @HostListener('window:scroll', []) onScroll(){
-    this.menuHeaderClass = window.scrollY > 0 ? 'scrolled' : '';
-  }
-  menuOptions = ['Home', 'Recipes', 'Events', 'Map', 'About'];
-  selectedOption = this.menuOptions[0];
 
   images = [
     'assets/images/mardiGras.png',
@@ -68,21 +60,6 @@ export class HomeComponent {
   ];
 
 
-  constructor(private router: Router) {}
-
-
-
-  selectOption(option: string) {
-    this.selectedOption = option;
-    
-    // Navigate to recipes page when Recipes is clicked
-    if (option === 'Recipes') {
-      this.router.navigate(['/recipes']);
-      return;
-    }
-    
-    // Handle other menu options as needed
-    // For now, they just update the selectedOption
-  }
+  constructor() {}
 
 }

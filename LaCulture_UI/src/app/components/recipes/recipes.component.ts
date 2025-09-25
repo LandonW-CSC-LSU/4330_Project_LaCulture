@@ -87,4 +87,20 @@ export class RecipesComponent {
   likeRecipe(recipe: any) {
     recipe.likes++;
   }
+
+  addNewRecipe() {
+    // For now, show an alert. This will be replaced with a proper form/modal
+    alert('Post to Forum feature coming soon! Share your authentic Louisiana recipes with the community.');
+    
+    // TODO: Implement recipe submission form/modal
+    // This could open a modal dialog or navigate to a separate form page
+    // Features to implement:
+    // - Recipe title, description, ingredients, instructions
+    // - Image upload functionality
+    // - Category selection
+    // - Difficulty and cook time inputs
+    // - User authentication to know who's posting
+    // - Form validation
+    // - Submit to backend API
+  }
 }

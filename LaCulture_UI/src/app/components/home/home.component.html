@@ -1,14 +1,3 @@
-<header class="menu-header" [ngClass]="{ 'scrolled': menuHeaderClass === 'scrolled' }">
-  <nav>
-    <span *ngFor="let option of menuOptions"
-          [class.selected]="selectedOption === option"
-          (click)="selectOption(option)"
-          class="menu-link">
-      {{ option }}
-    </span>
-  </nav>
-</header>
-
 <!-- Main Carousel -->
 <c-carousel>
   <c-carousel-inner>

@@ -1,7 +1,6 @@
 <div class="recipes-container">
   <header class="recipes-header">
-    <h1>Louisiana Recipes Forum</h1>
-    <p>Share and discover authentic Louisiana cuisine</p>
+    <h1>Share and discover authentic Louisiana cuisine</h1>
   </header>
 
   <div class="category-filter">
@@ -38,7 +37,7 @@
           {{recipe.likes}}
         </button>
         <button mat-button>
-          <mat-icon>comment</mat-icon>
+          <mat-icon>chat_bubble</mat-icon>
           {{recipe.comments}}
         </button>
         <button mat-raised-button color="primary">View Recipe</button>
@@ -47,8 +46,8 @@
   </div>
 
   <div class="add-recipe-section">
-    <button mat-fab color="accent" class="add-recipe-fab">
-      <mat-icon>add</mat-icon>
+    <button mat-raised-button color="accent" class="add-recipe-btn" (click)="addNewRecipe()">
+      Post to Forum
     </button>
   </div>
 </div>
