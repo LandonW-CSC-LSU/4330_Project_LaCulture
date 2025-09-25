@@ -9,21 +9,6 @@
   </nav>
 </header>
 
-<div *ngIf="selectedOption !== 'Map'">
-  <ngb-carousel [interval]="7000" [pauseOnHover]="false" [pauseOnFocus]="false" *ngIf="images.length">
-    <ng-template ngbSlide *ngFor="let image of images;">
-      <div class="carousel-wrapper">
-        <img [src]="image" alt="Carousel Image" class="zoom-img">
-      </div>
-    </ng-template>
-  </ngb-carousel>
-</div>
-
-
-<app-map>*ngIf="selectedOption === 'Map'" </app-map>
-
-<!-- TODO: add quicklinks -->
-<div class="white-section"></div>
 <c-carousel>
   <c-carousel-inner>
     @for (slide of slides; track slide.src) {
