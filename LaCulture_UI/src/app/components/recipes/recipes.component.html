@@ -1,0 +1,54 @@
+<div class="recipes-container">
+  <header class="recipes-header">
+    <h1>Louisiana Recipes Forum</h1>
+    <p>Share and discover authentic Louisiana cuisine</p>
+  </header>
+
+  <div class="category-filter">
+    <button 
+      *ngFor="let category of categories" 
+      mat-raised-button
+      [class.active]="selectedCategory === category"
+      (click)="filterByCategory(category)">
+      {{category}}
+    </button>
+  </div>
+
+  <div class="recipes-grid">
+    <mat-card *ngFor="let recipe of getFilteredRecipes()" class="recipe-card">
+      <img mat-card-image [src]="recipe.image" [alt]="recipe.title" onerror="this.src='assets/images/placeholder.jpg'">
+      
+      <mat-card-header>
+        <mat-card-title>{{recipe.title}}</mat-card-title>
+        <mat-card-subtitle>by {{recipe.author}}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>{{recipe.description}}</p>
+        <div class="recipe-meta">
+          <span class="difficulty">{{recipe.difficulty}}</span>
+          <span class="cook-time">{{recipe.cookTime}}</span>
+          <span class="category">{{recipe.category}}</span>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button (click)="likeRecipe(recipe)">
+          <mat-icon>favorite</mat-icon>
+          {{recipe.likes}}
+        </button>
+        <button mat-button>
+          <mat-icon>comment</mat-icon>
+          {{recipe.comments}}
+        </button>
+        <button mat-raised-button color="primary">View Recipe</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="add-recipe-section">
+    <button mat-fab color="accent" class="add-recipe-fab">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

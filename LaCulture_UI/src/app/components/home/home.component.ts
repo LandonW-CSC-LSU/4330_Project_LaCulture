@@ -1,15 +1,13 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
-import { MapComponent } from '../map/map';
+import { Router } from '@angular/router';
 import {
   CarouselComponent,
   CarouselConfig,
   CarouselControlComponent,
   CarouselInnerComponent,
   CarouselItemComponent,
-  CarouselCaptionComponent,
   CarouselIndicatorsComponent
 } from '@coreui/angular';
 import { Injectable } from '@angular/core';
@@ -32,13 +30,10 @@ export class CarouselCustomConfig {
   imports: [
     CommonModule,
     FormsModule,
-    NgbCarouselModule,
-    MapComponent,
     CarouselComponent,
     CarouselInnerComponent,
     CarouselItemComponent,
     CarouselControlComponent,
-    CarouselCaptionComponent,
     CarouselIndicatorsComponent,
     MatButtonModule,
     MatCardModule
@@ -73,12 +68,21 @@ export class HomeComponent {
   ];
 
 
-  constructor() {}
+  constructor(private router: Router) {}
 
 
 
   selectOption(option: string) {
     this.selectedOption = option;
+    
+    // Navigate to recipes page when Recipes is clicked
+    if (option === 'Recipes') {
+      this.router.navigate(['/recipes']);
+      return;
+    }
+    
+    // Handle other menu options as needed
+    // For now, they just update the selectedOption
   }
 
 }

@@ -16,18 +16,20 @@ html, body {
 	width: 100%;
 	padding: 32px 0 16px 0;
 	text-align: center;
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 100;
+	z-index: 1000;
 	font-family: 'frenchDemo', serif;
 	backdrop-filter: blur(2px);
 	transition: background 0.5s, padding 0.5s;
 	overflow: hidden;
 }
 .scrolled {
-	background: rgba(128, 0, 128, 0.85);
+	background: rgba(128, 0, 128, 0.95);
 	padding: 8px 0 8px 0;
+	position: fixed;
+	backdrop-filter: blur(10px);
 }
 .menu-link {
 	margin: 0 18px;
@@ -46,40 +48,37 @@ html, body {
 	border-bottom: 2px solid #ffd700;
 }
 
-/* Carousel styles */
-c-carousel,
-.c-carousel-inner,
-.c-carousel-item {
-    width: 100%;
-    height: 100dvh;
-    display: block;
-    margin: 0;
-    padding: 0;
-    background: #000;
+/* Main Carousel styles */
+c-carousel {
+  margin-top: 0; /* No margin needed since menu is absolute */
+  position: relative;
 }
 
-c-carousel-item img {
-    width: 100%;
-    height: 100dvh;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    margin: 0;
-    padding: 0;
-    background: #000;
-    animation: zoomInOut 40s linear infinite;
+.carousel-wrapper {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.zoom-img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  animation: zoomInOut 20s ease-in-out infinite;
+  transform-origin: center center;
 }
 
 @keyframes zoomInOut {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-    100% {
-        transform: scale(1);
-    }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* TODO: add quicklinks */
