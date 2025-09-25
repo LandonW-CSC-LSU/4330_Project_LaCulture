@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\aidan\\OneDrive\\Documents\\GitHub\\4330_Project_LaCulture\\LaCulture_API\\LaCulture.API.csproj": {}
+    "C:\\Users\\Nick\\Documents\\GitHub\\new_project\\4330_Project_LaCulture\\LaCulture_API\\LaCulture.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\aidan\\OneDrive\\Documents\\GitHub\\4330_Project_LaCulture\\LaCulture_API\\LaCulture.API.csproj": {
+    "C:\\Users\\Nick\\Documents\\GitHub\\new_project\\4330_Project_LaCulture\\LaCulture_API\\LaCulture.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\aidan\\OneDrive\\Documents\\GitHub\\4330_Project_LaCulture\\LaCulture_API\\LaCulture.API.csproj",
+        "projectUniqueName": "C:\\Users\\Nick\\Documents\\GitHub\\new_project\\4330_Project_LaCulture\\LaCulture_API\\LaCulture.API.csproj",
         "projectName": "LaCulture.API",
-        "projectPath": "C:\\Users\\aidan\\OneDrive\\Documents\\GitHub\\4330_Project_LaCulture\\LaCulture_API\\LaCulture.API.csproj",
-        "packagesPath": "C:\\Users\\aidan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\aidan\\OneDrive\\Documents\\GitHub\\4330_Project_LaCulture\\LaCulture_API\\obj\\",
+        "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\new_project\\4330_Project_LaCulture\\LaCulture_API\\LaCulture.API.csproj",
+        "packagesPath": "C:\\Users\\Nick\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Nick\\Documents\\GitHub\\new_project\\4330_Project_LaCulture\\LaCulture_API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\aidan\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Nick\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -36,7 +36,7 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
+          "auditMode": "direct"
         },
         "SdkAnalysisLevel": "9.0.100"
       },
@@ -68,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
