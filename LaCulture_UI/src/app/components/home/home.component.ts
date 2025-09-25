@@ -62,6 +62,7 @@ export class HomeComponent {
     'assets/images/crawfish.jpg',
     'assets/images/mardiGrasFloat.jpg',
     'assets/images/stJosephAltar2025.png'
+  ];
   
   slides = [
     { src: 'assets/images/mardiGras.png', title: 'Mardi Gras', subtitle: 'A Louisiana Tradition' },
