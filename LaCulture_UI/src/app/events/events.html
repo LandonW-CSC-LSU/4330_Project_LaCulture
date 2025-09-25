@@ -1,0 +1,13 @@
+<section class="events-container">
+  <h2>Upcoming Events</h2>
+  <div class="event-list">
+    @for (item of items(); track item.id) {
+      <div class="event-card">
+        <h3>{{ item.title }}</h3>
+        <p><strong>Date:</strong> {{ item.date }}</p>
+        <p><strong>Location:</strong> {{ item.location }}</p>
+      </div>
+    }
+  </div>
+</section>
+

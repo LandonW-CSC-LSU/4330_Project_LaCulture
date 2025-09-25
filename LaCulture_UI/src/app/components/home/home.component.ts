@@ -62,4 +62,6 @@ export class HomeComponent {
   selectOption(option: string) {
     this.selectedOption = option;
   }
+
+
 }

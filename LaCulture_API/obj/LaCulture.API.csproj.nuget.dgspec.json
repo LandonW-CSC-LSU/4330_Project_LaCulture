@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nick\\Documents\\GitHub\\new_project\\4330_Project_LaCulture\\LaCulture_API\\LaCulture.API.csproj": {}
+    "C:\\Users\\Nick\\Documents\\GitHub\\new_project\\4330_Project_LaCulture\\laculture_api\\LaCulture.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nick\\Documents\\GitHub\\new_project\\4330_Project_LaCulture\\LaCulture_API\\LaCulture.API.csproj": {
+    "C:\\Users\\Nick\\Documents\\GitHub\\new_project\\4330_Project_LaCulture\\laculture_api\\LaCulture.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nick\\Documents\\GitHub\\new_project\\4330_Project_LaCulture\\LaCulture_API\\LaCulture.API.csproj",
+        "projectUniqueName": "C:\\Users\\Nick\\Documents\\GitHub\\new_project\\4330_Project_LaCulture\\laculture_api\\LaCulture.API.csproj",
         "projectName": "LaCulture.API",
-        "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\new_project\\4330_Project_LaCulture\\LaCulture_API\\LaCulture.API.csproj",
+        "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\new_project\\4330_Project_LaCulture\\laculture_api\\LaCulture.API.csproj",
         "packagesPath": "C:\\Users\\Nick\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nick\\Documents\\GitHub\\new_project\\4330_Project_LaCulture\\LaCulture_API\\obj\\",
+        "outputPath": "C:\\Users\\Nick\\Documents\\GitHub\\new_project\\4330_Project_LaCulture\\laculture_api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Nick\\AppData\\Roaming\\NuGet\\NuGet.Config"
