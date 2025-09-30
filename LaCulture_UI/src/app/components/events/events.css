@@ -1,6 +1,8 @@
 .events-container {
+  margin-top: 60px;
   padding: 20px;
-  font-family: sans-serif;
+  font-family: serif;
+  font-size: 20px;
 }
 
 h2 {
@@ -19,8 +21,20 @@ h2 {
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
 .event-card h3 {
   margin-top: 0;
+}
+
+.event-website {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: rgba(128, 0, 128, 0.85);
+  color: #ffd700;
+  border-radius: 4px;
+  font-family: serif;
+  font-size: 16px;
 }

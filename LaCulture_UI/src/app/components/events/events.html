@@ -1,0 +1,12 @@
+<div class="events-container">
+  <h2>Upcoming Events</h2>
+  <div class="event-list">
+    <div class="event-card" *ngFor="let event of items()">
+      <h3>{{ event.title }}</h3>
+      <p>{{ event.date }} | {{ event.location }}</p>
+      @if (event.website) {
+        <a [href]="event.website" target="_blank" class="event-website">Event Website</a>
+      }
+    </div>
+  </div>
+</div>

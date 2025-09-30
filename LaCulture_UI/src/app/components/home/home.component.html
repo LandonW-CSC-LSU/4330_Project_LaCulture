@@ -9,8 +9,6 @@
   </nav>
 </header>
 
-<app-events *ngIf="selectedOption === 'Events'"></app-events>
-
 <c-carousel>
   <c-carousel-inner>
     @for (slide of slides; track slide.src) {
@@ -27,6 +25,8 @@
   <c-carousel-control caption="Previous" direction="prev" />
   <c-carousel-control caption="Next" direction="next" />
 </c-carousel>
+
+<app-events *ngIf="selectedOption === 'Events'"></app-events>
 
 <div class="quicklinks-section">
     <mat-card class="quicklink-card">
