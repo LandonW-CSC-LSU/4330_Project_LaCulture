@@ -1,4 +1,6 @@
 using LaCulture.API.Services;
+using LaCulture.API.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +12,12 @@ builder.Services.AddControllers()
     });
 builder.Services.AddOpenApi();
 
+// Add DbContext
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 // Register our custom services
-builder.Services.AddScoped<IRecipeService, InMemoryRecipeService>();
+builder.Services.AddScoped<IRecipeService, DbRecipeService>();
 
 // Add CORS for Angular frontend
 builder.Services.AddCors(options =>

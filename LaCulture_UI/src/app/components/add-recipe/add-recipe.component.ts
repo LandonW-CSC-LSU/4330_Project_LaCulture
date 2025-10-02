@@ -135,23 +135,51 @@ export class AddRecipeComponent implements OnInit {
   // Form validation helpers
   isFieldInvalid(fieldName: string): boolean {
     const field = this.recipeForm.get(fieldName);
-    return !!(field && field.invalid && (field.dirty || field.touched));
+    const isInvalid = !!(field && field.invalid && (field.dirty || field.touched));
+    if (isInvalid) {
+      console.log(`Field ${fieldName} is invalid:`, {
+        value: field?.value,
+        errors: field?.errors,
+        dirty: field?.dirty,
+        touched: field?.touched
+      });
+    }
+    return isInvalid;
   }
 
   getFieldError(fieldName: string): string {
     const field = this.recipeForm.get(fieldName);
     if (field?.errors) {
+      console.log(`Errors for ${fieldName}:`, field.errors);
       if (field.errors['required']) return `${fieldName} is required`;
-      if (field.errors['minlength']) return `${fieldName} is too short`;
-      if (field.errors['maxlength']) return `${fieldName} is too long`;
+      if (field.errors['minlength']) return `${fieldName} must be at least ${field.errors['minlength'].requiredLength} characters`;
+      if (field.errors['maxlength']) return `${fieldName} cannot exceed ${field.errors['maxlength'].requiredLength} characters`;
       if (field.errors['min']) return `${fieldName} must be at least ${field.errors['min'].min}`;
       if (field.errors['max']) return `${fieldName} cannot exceed ${field.errors['max'].max}`;
+      return `${fieldName} is invalid: ${JSON.stringify(field.errors)}`;
     }
     return '';
   }
 
   // Submit form
   onSubmit(): void {
+    // Log form validation status
+    console.log('Form validation status:', {
+      formValid: this.recipeForm.valid,
+      formErrors: this.recipeForm.errors,
+      controls: {
+        title: { valid: this.recipeForm.get('title')?.valid, errors: this.recipeForm.get('title')?.errors },
+        description: { valid: this.recipeForm.get('description')?.valid, errors: this.recipeForm.get('description')?.errors },
+        category: { valid: this.recipeForm.get('category')?.valid, errors: this.recipeForm.get('category')?.errors },
+        difficulty: { valid: this.recipeForm.get('difficulty')?.valid, errors: this.recipeForm.get('difficulty')?.errors },
+        cookTime: { valid: this.recipeForm.get('cookTime')?.valid, errors: this.recipeForm.get('cookTime')?.errors },
+        prepTime: { valid: this.recipeForm.get('prepTime')?.valid, errors: this.recipeForm.get('prepTime')?.errors },
+        servings: { valid: this.recipeForm.get('servings')?.valid, errors: this.recipeForm.get('servings')?.errors },
+        ingredients: { valid: this.recipeForm.get('ingredients')?.valid, errors: this.recipeForm.get('ingredients')?.errors },
+        instructions: { valid: this.recipeForm.get('instructions')?.valid, errors: this.recipeForm.get('instructions')?.errors }
+      }
+    });
+
     if (this.recipeForm.valid) {
       this.isSubmitting = true;
       const formValue = this.recipeForm.value;
