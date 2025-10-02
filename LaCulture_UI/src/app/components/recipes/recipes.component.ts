@@ -1,8 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Recipe, RecipeCategory, RecipeCategoryDisplayNames, RecipeDifficulty, RecipeDifficultyDisplayNames } from '../../models/recipe.model';
+import { RecipeStateService } from '../../store/recipe-state.service';
+import { RecipeDialogService } from '../../services/recipe-dialog.service';
 
 @Component({
   selector: 'app-recipes',
@@ -13,94 +21,136 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ]
 })
-export class RecipesComponent {
-  recipes = [
-    {
-      id: 1,
-      title: 'Gumbo',
-      author: 'Chef Marie',
-      description: 'Traditional Louisiana gumbo with okra and seafood',
-      image: 'assets/images/gumbo.jpg',
-      category: 'Main Course',
-      difficulty: 'Medium',
-      cookTime: '2 hours',
-      likes: 45,
-      comments: 12
-    },
-    {
-      id: 2,
-      title: 'Jambalaya',
-      author: 'Cajun Cook',
-      description: 'Spicy rice dish with chicken, sausage, and shrimp',
-      image: 'assets/images/jambalaya.jpg',
-      category: 'Main Course',
-      difficulty: 'Easy',
-      cookTime: '45 minutes',
-      likes: 32,
-      comments: 8
-    },
-    {
-      id: 3,
-      title: 'Beignets',
-      author: 'Cafe Master',
-      description: 'Classic New Orleans powdered sugar donuts',
-      image: 'assets/images/beignets.jpg',
-      category: 'Dessert',
-      difficulty: 'Medium',
-      cookTime: '1 hour',
-      likes: 67,
-      comments: 23
-    },
-    {
-      id: 4,
-      title: 'Red Beans and Rice',
-      author: 'Home Cook',
-      description: 'Monday tradition with kidney beans and andouille',
-      image: 'assets/images/redbeans.jpg',
-      category: 'Main Course',
-      difficulty: 'Easy',
-      cookTime: '3 hours',
-      likes: 28,
-      comments: 15
-    }
-  ];
+export class RecipesComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
+  
+  // Observables from state service
+  recipes$: Observable<Recipe[]>;
+  filteredRecipes$: Observable<Recipe[]>;
+  loading$: Observable<boolean>;
+  error$: Observable<string | null>;
 
-  categories = ['All', 'Main Course', 'Appetizer', 'Dessert', 'Beverage'];
+  categories = ['All', ...Object.values(RecipeCategoryDisplayNames)];
   selectedCategory = 'All';
 
-  constructor() {}
-
-  filterByCategory(category: string) {
-    this.selectedCategory = category;
+  constructor(
+    private recipeStateService: RecipeStateService,
+    private recipeDialogService: RecipeDialogService,
+    private snackBar: MatSnackBar
+  ) {
+    this.recipes$ = this.recipeStateService.recipes$;
+    this.filteredRecipes$ = this.recipeStateService.filteredRecipes$;
+    this.loading$ = this.recipeStateService.loading$;
+    this.error$ = this.recipeStateService.error$;
   }
 
-  getFilteredRecipes() {
-    if (this.selectedCategory === 'All') {
-      return this.recipes;
-    }
-    return this.recipes.filter(recipe => recipe.category === this.selectedCategory);
-  }
-
-  likeRecipe(recipe: any) {
-    recipe.likes++;
-  }
-
-  addNewRecipe() {
-    // For now, show an alert. This will be replaced with a proper form/modal
-    alert('Post to Forum feature coming soon! Share your authentic Louisiana recipes with the community.');
+  ngOnInit(): void {
+    // Load initial recipes
+    this.recipeStateService.loadRecipes();
     
-    // TODO: Implement recipe submission form/modal
-    // This could open a modal dialog or navigate to a separate form page
-    // Features to implement:
-    // - Recipe title, description, ingredients, instructions
-    // - Image upload functionality
-    // - Category selection
-    // - Difficulty and cook time inputs
-    // - User authentication to know who's posting
-    // - Form validation
-    // - Submit to backend API
+    // Subscribe to errors and show snackbar notifications
+    this.error$.pipe(takeUntil(this.destroy$)).subscribe(error => {
+      if (error) {
+        this.snackBar.open(error, 'Close', { duration: 5000 });
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  filterByCategory(category: string): void {
+    this.selectedCategory = category;
+    
+    if (category === 'All') {
+      this.recipeStateService.setFilters({});
+    } else {
+      // Find the enum value that matches the display name
+      const enumValue = Object.entries(RecipeCategoryDisplayNames)
+        .find(([_, displayName]) => displayName === category)?.[0] as RecipeCategory;
+      
+      if (enumValue) {
+        this.recipeStateService.setFilters({ category: enumValue });
+      }
+    }
+  }
+
+  likeRecipe(recipe: Recipe): void {
+    this.recipeStateService.likeRecipe(recipe.id);
+  }
+
+  addNewRecipe(): void {
+    this.recipeDialogService.openAddRecipeDialog().subscribe(result => {
+      if (result) {
+        this.recipeStateService.addRecipe(result.recipe).subscribe({
+          next: (newRecipe) => {
+            this.snackBar.open('Recipe added successfully!', 'Close', { 
+              duration: 3000,
+              panelClass: ['success-snackbar']
+            });
+          },
+          error: (error) => {
+            this.snackBar.open('Failed to add recipe. Please try again.', 'Close', { 
+              duration: 5000,
+              panelClass: ['error-snackbar']
+            });
+          }
+        });
+      }
+    });
+  }
+
+  editRecipe(recipe: Recipe): void {
+    this.recipeDialogService.openEditRecipeDialog(recipe).subscribe(result => {
+      if (result) {
+        const updateData = { ...result.recipe, id: recipe.id };
+        this.recipeStateService.updateRecipe(updateData).subscribe({
+          next: (updatedRecipe) => {
+            this.snackBar.open('Recipe updated successfully!', 'Close', { 
+              duration: 3000,
+              panelClass: ['success-snackbar']
+            });
+          },
+          error: (error) => {
+            this.snackBar.open('Failed to update recipe. Please try again.', 'Close', { 
+              duration: 5000,
+              panelClass: ['error-snackbar']
+            });
+          }
+        });
+      }
+    });
+  }
+
+  deleteRecipe(recipe: Recipe): void {
+    if (confirm(`Are you sure you want to delete "${recipe.title}"?`)) {
+      this.recipeStateService.deleteRecipe(recipe.id);
+      this.snackBar.open('Recipe deleted successfully!', 'Close', { 
+        duration: 3000,
+        panelClass: ['success-snackbar']
+      });
+    }
+  }
+
+  // TrackBy function for performance optimization
+  trackByRecipeId(index: number, recipe: Recipe): number {
+    return recipe.id;
+  }
+
+  // Helper method to get display names for enums
+  getDisplayName(type: 'category' | 'difficulty', value: RecipeCategory | RecipeDifficulty): string {
+    if (type === 'category') {
+      return RecipeCategoryDisplayNames[value as RecipeCategory] || value as string;
+    } else {
+      return RecipeDifficultyDisplayNames[value as RecipeDifficulty] || value as string;
+    }
   }
 }

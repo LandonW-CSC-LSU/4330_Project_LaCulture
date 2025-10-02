@@ -27,6 +27,7 @@
   gap: 12px;
   margin-bottom: 40px;
   flex-wrap: wrap;
+  padding-top: 40px;
 }
 
 .category-filter button {
@@ -156,6 +157,67 @@
   color: #fff;
 }
 
+/* Loading Styles */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.loading-container p {
+  color: #fff;
+  margin-top: 16px;
+  font-size: 1.1rem;
+}
+
+/* Recipe Tags */
+.recipe-tags {
+  margin-top: 12px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #fff;
+}
+
+.empty-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+
+.empty-state h3 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  font-family: 'frenchDemo', serif;
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+  opacity: 0.9;
+}
+
+/* Add Recipe FAB */
 .add-recipe-section {
   position: fixed;
   bottom: 32px;
@@ -163,27 +225,76 @@
   z-index: 1000;
 }
 
-.add-recipe-btn {
+.add-recipe-fab {
   background: #8e44ad !important;
   color: #fff !important;
   box-shadow: 0 4px 16px rgba(142, 68, 173, 0.3);
-  font-size: 1.1rem !important;
-  padding: 12px 24px !important;
-  border-radius: 25px !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.5px !important;
-  min-width: 160px !important;
-  height: 48px !important;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
 }
 
-.add-recipe-btn:hover {
+.add-recipe-fab:hover {
   background: #7b1fa2 !important;
-  transform: translateY(-2px);
+  transform: scale(1.2) translateY(-2px);
   box-shadow: 0 6px 20px rgba(142, 68, 173, 0.4);
 }
 
-.add-recipe-btn mat-icon {
-  margin-right: 8px;
+.add-recipe-fab mat-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+/* Action Buttons */
+.recipe-card mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  margin-top: auto;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.recipe-card mat-card-actions button[mat-button] {
+  color: #4b006e;
+  min-width: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  height: auto;
+  line-height: 1;
+  font-size: 0.875rem;
+}
+
+.recipe-card mat-card-actions button[mat-button][color="warn"] {
+  color: #f44336;
+}
+
+.recipe-card mat-card-actions button[mat-button] mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;
+}
+
+.recipe-card mat-card-actions button[mat-raised-button] {
+  background: #4b006e;
+  color: #fff;
+  font-weight: 500;
+}
+
+/* Snackbar Styles */
+::ng-deep .success-snackbar {
+  background: #4caf50 !important;
+  color: white !important;
+}
+
+::ng-deep .error-snackbar {
+  background: #f44336 !important;
+  color: white !important;
 }
 
 @media (max-width: 768px) {
