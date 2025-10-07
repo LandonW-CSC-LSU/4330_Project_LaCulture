@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface Event {
@@ -17,7 +17,7 @@ interface Event {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventsComponent {
-  items = signal([
+  public items = signal<Event[]>([
     { id: 1, title: 'LSU vs South Carolina', date: '10/11/2025', location: 'Baton Rouge', website: 'https://lsusports.evenue.net/list/FB'},
     { id: 2, title: 'Saints vs Patriots', date: '10/12/2025', location: 'New Orleans', website: 'https://www.neworleanssaints.com/tickets/' },
     { id: 3, title: 'National Fried Chicken Festival', date: '10/4-5/2025', location: 'New Orleans', website: 'https://www.friedchickenfestival.com/' },
@@ -29,4 +29,20 @@ export class EventsComponent {
     { id: 9, title: 'New Orleans Film Festival ', date: '10/23/2025-11/2/2025', location: 'New Orleans', website: 'https://neworleansfilmsociety.org/attend/' },
     { id: 10, title: 'LGBT Halloween New Orleans (HNO)', date: '10/24-26/2025', location: 'New Orleans', website: 'https://www.halloweenneworleans.com/' }
   ]);
+
+   public locations = computed(() => ['All', ...new Set(this.items().map(e => e.location))]);
+  
+  public selectedLocation = signal<string>('All');
+
+  public filteredEvents = computed(() => {
+    const loc = this.selectedLocation();
+    if (loc === 'All') {
+      return this.items();
+    }
+    return this.items().filter(event => event.location === loc);
+  });
+
+  public filterByLocation(location: string): void {
+    this.selectedLocation.set(location);
+  }
 }
