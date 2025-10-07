@@ -46,9 +46,10 @@
 
 .recipes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
   gap: 24px;
   margin-bottom: 80px;
+  justify-content: center;
 }
 
 .recipe-card {
@@ -60,6 +61,9 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .recipe-card:hover {
@@ -68,9 +72,10 @@
 }
 
 .recipe-card img {
-  height: 200px;
+  height: 250px;
   object-fit: cover;
   width: 100%;
+  object-position: center;
 }
 
 .recipe-card mat-card-title {
@@ -223,6 +228,9 @@
   bottom: 32px;
   right: 32px;
   z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .add-recipe-fab {
@@ -231,6 +239,12 @@
   box-shadow: 0 4px 16px rgba(142, 68, 173, 0.3);
   transform: scale(1.1);
   transition: all 0.3s ease;
+  width: 56px;
+  height: 56px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .add-recipe-fab:hover {
@@ -240,9 +254,27 @@
 }
 
 .add-recipe-fab mat-icon {
-  font-size: 24px;
-  width: 24px;
-  height: 24px;
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+}
+
+::ng-deep .fab-tooltip {
+  background: #8e44ad !important;
+  color: #ffffff !important;
+  font-size: 14px !important;
+  padding: 8px 12px !important;
+  border-radius: 4px !important;
+  margin: 8px !important;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+::ng-deep .fab-tooltip.mat-mdc-tooltip-show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Action Buttons */
@@ -295,6 +327,30 @@
 ::ng-deep .error-snackbar {
   background: #f44336 !important;
   color: white !important;
+}
+
+/* Custom Tooltip Styles */
+::ng-deep .mat-mdc-tooltip {
+  background-color: #8e44ad !important;
+  font-size: 14px !important;
+  
+  padding: 8px 12px !important;
+  border-radius: 4px !important;
+  margin: 0 16px !important;
+  box-shadow: 0 4px 16px rgba(142, 68, 173, 0.3) !important;
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+::ng-deep .mat-mdc-tooltip-panel {
+  pointer-events: none;
+}
+
+::ng-deep .mat-mdc-tooltip.mat-mdc-tooltip-show {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1),
+              transform 200ms cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 @media (max-width: 768px) {
