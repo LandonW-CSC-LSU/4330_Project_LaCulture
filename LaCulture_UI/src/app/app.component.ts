@@ -91,7 +91,7 @@ export class AppComponent {
         // Add navigation when events page is created
         break;
       case 'Map':
-        // Add navigation when map page is created
+        this.router.navigate(['/map']);
         break;
       case 'About':
         // Add navigation when about page is created
