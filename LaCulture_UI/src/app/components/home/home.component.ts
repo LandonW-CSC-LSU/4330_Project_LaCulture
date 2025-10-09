@@ -1,15 +1,15 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { EventsComponent } from '../events/events'; 
+import { RouterModule } from '@angular/router';
 import {
   CarouselComponent,
   CarouselConfig,
   CarouselControlComponent,
   CarouselInnerComponent,
   CarouselItemComponent,
-  CarouselCaptionComponent,
   CarouselIndicatorsComponent
 } from '@coreui/angular';
 import { Injectable } from '@angular/core';
@@ -32,13 +32,11 @@ export class CarouselCustomConfig {
   imports: [
     CommonModule,
     FormsModule,
-    NgbCarouselModule,
-    EventsComponent,
+    RouterModule,
     CarouselComponent,
     CarouselInnerComponent,
     CarouselItemComponent,
     CarouselControlComponent,
-    CarouselCaptionComponent,
     CarouselIndicatorsComponent,
     MatButtonModule,
     MatCardModule
@@ -46,13 +44,6 @@ export class CarouselCustomConfig {
   providers: [{ provide: CarouselConfig, useClass: CarouselCustomConfig }]
 })
 export class HomeComponent {
-  private map: any;
-  menuHeaderClass = '';
-  @HostListener('window:scroll', []) onScroll(){
-    this.menuHeaderClass = window.scrollY > 0 ? 'scrolled' : '';
-  }
-  menuOptions = ['Home', 'Recipes', 'Events', 'Map', 'About'];
-  selectedOption = this.menuOptions[0];
 
   images = [
     'assets/images/mardiGras.png',
@@ -74,11 +65,5 @@ export class HomeComponent {
 
 
   constructor() {}
-
-
-
-  selectOption(option: string) {
-    this.selectedOption = option;
-  }
 
 }
