@@ -88,7 +88,7 @@ export class AppComponent {
         this.router.navigate(['/recipes']);
         break;
       case 'Events':
-        // Add navigation when events page is created
+        this.router.navigate(['/events']);
         break;
       case 'Map':
         this.router.navigate(['/map']);

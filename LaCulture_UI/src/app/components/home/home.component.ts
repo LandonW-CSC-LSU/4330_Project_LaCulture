@@ -33,6 +33,8 @@ export class CarouselCustomConfig {
     CommonModule,
     FormsModule,
     RouterModule,
+    NgbCarouselModule,
+    EventsComponent,
     CarouselComponent,
     CarouselInnerComponent,
     CarouselItemComponent,
