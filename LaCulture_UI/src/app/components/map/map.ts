@@ -1,10 +1,11 @@
 import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-map',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './map.html',
-  styleUrl: './map.css',
+  styleUrls: ['./map.css'],
   standalone: true
 })
 
