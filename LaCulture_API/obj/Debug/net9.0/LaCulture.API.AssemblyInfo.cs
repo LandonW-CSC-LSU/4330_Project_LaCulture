@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LaCulture.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+30852bb29d277e672acb4b3184974d1e7a374db9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e47a4173f1db1fda2290de399058f34984371881")]
 [assembly: System.Reflection.AssemblyProductAttribute("LaCulture.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LaCulture.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
