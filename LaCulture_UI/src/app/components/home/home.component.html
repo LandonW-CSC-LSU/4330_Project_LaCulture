@@ -1,26 +1,23 @@
-<header class="menu-header" [ngClass]="{ 'scrolled': menuHeaderClass === 'scrolled' }">
-  <nav>
-    <span *ngFor="let option of menuOptions"
-          [class.selected]="selectedOption === option"
-          (click)="selectOption(option)"
-          class="menu-link">
-      {{ option }}
-    </span>
-  </nav>
-</header>
-
-<div *ngIf="selectedOption !== 'Map'">
-  <ngb-carousel [interval]="7000" [pauseOnHover]="false" [pauseOnFocus]="false" *ngIf="images.length">
-    <ng-template ngbSlide *ngFor="let image of images;">
-      <div class="carousel-wrapper">
-        <img [src]="image" alt="Carousel Image" class="zoom-img">
-      </div>
-    </ng-template>
-  </ngb-carousel>
-</div>
-
-
-<app-map *ngIf="selectedOption === 'Map'"></app-map>
+<!-- Home Carousel -->
+<c-carousel>
+  <c-carousel-inner>
+    @for (slide of slides; track slide.src) {
+      <c-carousel-item>
+        <div class="carousel-wrapper">
+          <img
+            [src]="slide.src"
+            [alt]="slide.title"
+            class="d-block w-100 zoom-img"
+            loading="lazy"
+          />
+        </div>
+      </c-carousel-item>
+    }
+  </c-carousel-inner>
+  <c-carousel-indicators />
+  <c-carousel-control caption="Previous" direction="prev" />
+  <c-carousel-control caption="Next" direction="next" />
+</c-carousel>
 
 <!-- TODO: add quicklinks -->
 <div class="white-section"></div>
