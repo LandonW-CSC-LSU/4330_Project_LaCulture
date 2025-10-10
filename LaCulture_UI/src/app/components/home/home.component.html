@@ -19,28 +19,6 @@
   <c-carousel-control caption="Next" direction="next" />
 </c-carousel>
 
-<!-- TODO: add quicklinks -->
-<div class="white-section"></div>
-<c-carousel>
-  <c-carousel-inner>
-    @for (slide of slides; track slide.src) {
-      <c-carousel-item>
-        <div class="carousel-wrapper">
-          <img
-            [src]="slide.src"
-            [alt]="slide.title"
-            class="d-block w-100 zoom-img"
-            loading="lazy"
-          />
-        </div>
-      </c-carousel-item>
-    }
-  </c-carousel-inner>
-  <c-carousel-indicators />
-  <c-carousel-control caption="Previous" direction="prev" />
-  <c-carousel-control caption="Next" direction="next" />
-</c-carousel>
-
 <div class="quicklinks-section">
     <mat-card class="quicklink-card">
     <img mat-card-image src="assets/images/brennans.jpeg" alt="Brennan's">
