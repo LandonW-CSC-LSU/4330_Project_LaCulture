@@ -75,7 +75,45 @@ export class HomeComponent {
 
   constructor() {}
 
+  navigateToAudubonZoo(){
+    window.location.href = 'https://audubonnatureinstitute.org/zoo';
+  }
 
+  navigateToSuperdome(){
+    window.location.href = 'https://www.caesarssuperdome.com';
+  }
+
+  navigateToMarieLaveau(){
+    window.location.href = 'https://neworleanshistorical.org/items/show/1612';
+  }
+
+  navigateToWW2(){
+    window.location.href = 'https://www.nationalww2museum.org';
+  }
+
+  navigateToFrenchQuarter(){
+    window.location.href = 'https://www.frenchquarter.com/first-timers-guide-french-quarter/';
+  }
+
+  navigateToCafeDuMonde(){
+    window.location.href = 'https://shop.cafedumonde.com';
+  }
+
+  navigateToTigerStadium(){
+    window.location.href = 'https://lsusports.net/facilities/tiger-stadium';
+  }
+
+  navigateToStateCapitol(){
+    window.location.href = 'https://house.louisiana.gov/pubinfo/VirtualTour/Default.htm';
+  }
+
+  navigateToBourbon(){
+    window.location.href = 'https://www.frenchquarter.com/bourbon-street';
+  }
+
+  navigateToBrennans(){
+     window.location.href = 'https://www.brennansneworleans.com';
+  }
 
   selectOption(option: string) {
     this.selectedOption = option;
