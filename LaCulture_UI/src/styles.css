@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@import "leaflet/dist/leaflet.css";
 @font-face {
   font-family: 'frenchDemo';
   src: url('assets/fonts/frenchDemo.otf') format('opentype');
