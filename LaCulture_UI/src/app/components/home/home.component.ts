@@ -108,8 +108,4 @@ export class HomeComponent {
      window.location.href = 'https://www.brennansneworleans.com';
   }
 
-  selectOption(option: string) {
-    this.selectedOption = option;
-  }
-
 }
