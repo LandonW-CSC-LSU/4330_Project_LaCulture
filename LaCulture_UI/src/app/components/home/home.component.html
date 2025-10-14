@@ -19,28 +19,6 @@
   <c-carousel-control caption="Next" direction="next" />
 </c-carousel>
 
-<!-- TODO: add quicklinks -->
-<div class="white-section"></div>
-<c-carousel>
-  <c-carousel-inner>
-    @for (slide of slides; track slide.src) {
-      <c-carousel-item>
-        <div class="carousel-wrapper">
-          <img
-            [src]="slide.src"
-            [alt]="slide.title"
-            class="d-block w-100 zoom-img"
-            loading="lazy"
-          />
-        </div>
-      </c-carousel-item>
-    }
-  </c-carousel-inner>
-  <c-carousel-indicators />
-  <c-carousel-control caption="Previous" direction="prev" />
-  <c-carousel-control caption="Next" direction="next" />
-</c-carousel>
-
 <div class="quicklinks-section">
     <mat-card class="quicklink-card">
     <img mat-card-image src="assets/images/brennans.jpeg" alt="Brennan's">
@@ -48,7 +26,7 @@
     <mat-card-content>
       Eat at Brennan's!
     </mat-card-content>
-    <button mat-raised-button color="accent" routerLink="/brennans">Go to Brennan's Info</button>
+    <button (click)= "navigateToBrennans()" mat-raised-button color="accent" routerLink="/brennans">Go to Brennan's Info</button>
     </mat-card>
 
     <mat-card class="quicklink-card">
@@ -57,7 +35,7 @@
     <mat-card-content>
       Learn about the famous Bourbon Street!
     </mat-card-content>
-    <button mat-raised-button color="accent" routerLink="/bourbonstreet">Go to Bourbon Street Info</button>
+    <button (click)= "navigateToBourbon()" mat-raised-button color="accent" routerLink="/bourbonstreet">Go to Bourbon Street Info</button>
     </mat-card>
 
     <mat-card class="quicklink-card">
@@ -66,7 +44,7 @@
     <mat-card-content>
       Visit the State Capitol
     </mat-card-content>
-    <button mat-raised-button color="accent" routerLink="/statecapitol">Go to State Capitol Info</button>
+    <button (click)= "navigateToStateCapitol()" mat-raised-button color="accent" routerLink="/statecapitol">Go to State Capitol Info</button>
     </mat-card>
 
     <mat-card class="quicklink-card">
@@ -75,7 +53,7 @@
     <mat-card-content>
       Experience the great Tiger Stadium!
     </mat-card-content>
-    <button mat-raised-button color="accent" routerLink="/tigerstadium">Go to Tiger Stadium Info</button>
+    <button (click)= "navigateToTigerStadium()" mat-raised-button color="accent" routerLink="/tigerstadium">Go to Tiger Stadium Info</button>
     </mat-card>
 
     <mat-card class="quicklink-card">
@@ -84,7 +62,7 @@
     <mat-card-content>
       Eat at the Famous Cafe Du Monde!
     </mat-card-content>
-    <button mat-raised-button color="accent" routerLink="/cafedumonde">Go to Cafe Du Monde Info</button>
+    <button (click)= "navigateToCafeDuMonde()" mat-raised-button color="accent" routerLink="/cafedumonde">Go to Cafe Du Monde Info</button>
     </mat-card>
 
     <mat-card class="quicklink-card">
@@ -93,7 +71,7 @@
     <mat-card-content>
       Take a walk around the French Quarter!
     </mat-card-content>
-    <button mat-raised-button color="accent" routerLink="/frenchquarter">Go to French Quarter Info</button>
+    <button (click)= "navigateToFrenchQuarter()" mat-raised-button color="accent" routerLink="/frenchquarter">Go to French Quarter Info</button>
     </mat-card>
 
     <mat-card class="quicklink-card">
@@ -102,7 +80,7 @@
     <mat-card-content>
       Take a tour around the National WW2 Museum!
     </mat-card-content>
-    <button mat-raised-button color="accent" routerLink="/ww2">Go to WW2 Museum Info</button>
+    <button (click)= "navigateToWW2()" mat-raised-button color="accent" routerLink="/ww2">Go to WW2 Museum Info</button>
     </mat-card>
 
     <mat-card class="quicklink-card">
@@ -111,7 +89,7 @@
     <mat-card-content>
       Visit the Queen of Voodoo!
     </mat-card-content>
-    <button mat-raised-button color="accent" routerLink="/tomb">Go to Marie Laveau Grave Info</button>
+    <button (click)= "navigateToMarieLaveau()" mat-raised-button color="accent" routerLink="/tomb">Go to Marie Laveau Grave Info</button>
     </mat-card>
     
     <mat-card class="quicklink-card">
@@ -120,7 +98,7 @@
     <mat-card-content>
       Visit the Audubon Zoo and Aquarium!
     </mat-card-content>
-    <button mat-raised-button color="accent" routerLink="/audubon">Go to Audubon Zoo Info</button>
+    <button (click)= "navigateToAudubonZoo()" mat-raised-button color="accent" routerLink="/audubon">Go to Audubon Zoo Info</button>
     </mat-card>
 
     <mat-card class="quicklink-card">
@@ -129,6 +107,6 @@
     <mat-card-content>
       Go to a Saints game!
     </mat-card-content>
-    <button mat-raised-button color="accent" routerLink="/superdome">Go to Superdome Info</button>
+    <button (click)= "navigateToSuperdome()" mat-raised-button color="accent" routerLink="/superdome">Go to Superdome Info</button>
     </mat-card>
 </div>
