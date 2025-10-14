@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { EventsComponent } from '../events/events'; 
 import { RouterModule } from '@angular/router';
 import {
   CarouselComponent,
@@ -31,6 +33,8 @@ export class CarouselCustomConfig {
     CommonModule,
     FormsModule,
     RouterModule,
+    NgbCarouselModule,
+    EventsComponent,
     CarouselComponent,
     CarouselInnerComponent,
     CarouselItemComponent,
