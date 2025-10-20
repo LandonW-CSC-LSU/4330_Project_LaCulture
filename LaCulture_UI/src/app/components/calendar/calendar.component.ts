@@ -37,9 +37,19 @@ export class CalendarComponent implements OnInit {
 
   // Generate the days of the current month
   generateDays() {
-    const daysInMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
-    this.days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-  }
+  const firstDayOfMonth = new Date(this.currentYear, this.currentMonth, 1).getDay(); 
+  const daysInMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
+
+  // Create an array with empty slots before the first day
+  const blankDays = Array.from({ length: firstDayOfMonth }, () => 0);
+
+  // Create the days of the month
+  const monthDays = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+
+  // Combine them
+  this.days = [...blankDays, ...monthDays];
+}
+
 
   // Highlight today
   isToday(day: number) {
