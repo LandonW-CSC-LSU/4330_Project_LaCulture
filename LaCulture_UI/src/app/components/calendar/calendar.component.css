@@ -1,4 +1,10 @@
 /* Container */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0d2e7c 0%, #ccdd12 100%);
+  padding: 40px 0;
+}
 .calendar {
   max-width: 800px;
   margin: 150px auto;
