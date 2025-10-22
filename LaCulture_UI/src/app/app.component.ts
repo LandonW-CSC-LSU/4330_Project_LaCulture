@@ -46,18 +46,20 @@ import { CommonModule } from '@angular/common';
       cursor: pointer;
       color: white;
       text-shadow: 2px 2px 12px rgba(0,0,0,0.85), 0 0 2px #000;
-      transition: color 0.2s, border-bottom 0.2s;
+      transition: color 0.3s, border-bottom 0.3s, transform 0.3s ease;
       border-bottom: 2px solid transparent;
       padding-bottom: 4px;
+      display: inline-block;
     }
     .menu-link.selected,
     .menu-link:hover {
       color: #ffd700;
       border-bottom: 2px solid #ffd700;
+      transform: scale(1.1);
     }
     @media (max-width: 768px) {
       .menu-link {
-        font-size: 1.5rem;
+        font-size: 2rem;
         margin: 0 8px;
       }
     }
