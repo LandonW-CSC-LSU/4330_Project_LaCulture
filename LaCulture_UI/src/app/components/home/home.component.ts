@@ -1,15 +1,15 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
-import { MapComponent } from '../map/map';
+import { EventsComponent } from '../events/events'; 
+import { RouterModule } from '@angular/router';
 import {
   CarouselComponent,
   CarouselConfig,
   CarouselControlComponent,
   CarouselInnerComponent,
   CarouselItemComponent,
-  CarouselCaptionComponent,
   CarouselIndicatorsComponent
 } from '@coreui/angular';
 import { Injectable } from '@angular/core';
@@ -32,13 +32,13 @@ export class CarouselCustomConfig {
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
     NgbCarouselModule,
-    MapComponent,
+    EventsComponent,
     CarouselComponent,
     CarouselInnerComponent,
     CarouselItemComponent,
     CarouselControlComponent,
-    CarouselCaptionComponent,
     CarouselIndicatorsComponent,
     MatButtonModule,
     MatCardModule
@@ -46,13 +46,6 @@ export class CarouselCustomConfig {
   providers: [{ provide: CarouselConfig, useClass: CarouselCustomConfig }]
 })
 export class HomeComponent {
-  private map: any;
-  menuHeaderClass = '';
-  @HostListener('window:scroll', []) onScroll(){
-    this.menuHeaderClass = window.scrollY > 0 ? 'scrolled' : '';
-  }
-  menuOptions = ['Home', 'Recipes', 'Events', 'Map', 'About'];
-  selectedOption = this.menuOptions[0];
 
   images = [
     'assets/images/mardiGras.png',
@@ -75,10 +68,44 @@ export class HomeComponent {
 
   constructor() {}
 
+  navigateToAudubonZoo(){
+    window.location.href = 'https://audubonnatureinstitute.org/zoo';
+  }
 
+  navigateToSuperdome(){
+    window.location.href = 'https://www.caesarssuperdome.com';
+  }
 
-  selectOption(option: string) {
-    this.selectedOption = option;
+  navigateToMarieLaveau(){
+    window.location.href = 'https://neworleanshistorical.org/items/show/1612';
+  }
+
+  navigateToWW2(){
+    window.location.href = 'https://www.nationalww2museum.org';
+  }
+
+  navigateToFrenchQuarter(){
+    window.location.href = 'https://www.frenchquarter.com/first-timers-guide-french-quarter/';
+  }
+
+  navigateToCafeDuMonde(){
+    window.location.href = 'https://shop.cafedumonde.com';
+  }
+
+  navigateToTigerStadium(){
+    window.location.href = 'https://lsusports.net/facilities/tiger-stadium';
+  }
+
+  navigateToStateCapitol(){
+    window.location.href = 'https://house.louisiana.gov/pubinfo/VirtualTour/Default.htm';
+  }
+
+  navigateToBourbon(){
+    window.location.href = 'https://www.frenchquarter.com/bourbon-street';
+  }
+
+  navigateToBrennans(){
+     window.location.href = 'https://www.brennansneworleans.com';
   }
 
 }

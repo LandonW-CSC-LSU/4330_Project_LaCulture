@@ -1,0 +1,95 @@
+<div class="recipes-container">
+  
+  <!-- Loading Spinner -->
+  <div *ngIf="loading$ | async" class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Loading recipes...</p>
+  </div>
+
+  <!-- Content (shown when not loading) -->
+  <ng-container *ngIf="!(loading$ | async)">
+    
+    <!-- Category Filter -->
+    <div class="category-filter">
+      <button 
+        *ngFor="let category of categories" 
+        mat-raised-button
+        [class.active]="selectedCategory === category"
+        (click)="filterByCategory(category)">
+        {{category}}
+      </button>
+    </div>
+
+    <!-- Recipes Grid -->
+    <div class="recipes-grid">
+      <mat-card *ngFor="let recipe of filteredRecipes$ | async; trackBy: trackByRecipeId" 
+                class="recipe-card">
+        <img mat-card-image 
+             [src]="recipe.image" 
+             [alt]="recipe.title" 
+             onerror="this.src='assets/images/placeholder.jpg'">
+        
+        <mat-card-header>
+          <mat-card-title>{{recipe.title}}</mat-card-title>
+          <mat-card-subtitle>by {{recipe.author}}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p>{{recipe.description}}</p>
+          <div class="recipe-meta">
+            <span class="difficulty">{{getDisplayName('difficulty', recipe.difficulty)}}</span>
+            <span class="cook-time">{{recipe.cookTime}}</span>
+            <span class="category">{{getDisplayName('category', recipe.category)}}</span>
+          </div>
+          <div class="recipe-tags" *ngIf="recipe.tags?.length">
+            <span class="tag" *ngFor="let tag of recipe.tags">#{{tag}}</span>
+          </div>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button mat-button (click)="likeRecipe(recipe)">
+            <mat-icon [color]="recipe.likes > 0 ? 'warn' : ''">favorite</mat-icon>
+            {{recipe.likes}}
+          </button>
+          <button mat-button>
+            <mat-icon>chat_bubble</mat-icon>
+            {{recipe.comments}}
+          </button>
+          <button mat-button (click)="editRecipe(recipe)">
+            <mat-icon>edit</mat-icon>
+            Edit
+          </button>
+          <button mat-button color="warn" (click)="deleteRecipe(recipe)">
+            <mat-icon>delete</mat-icon>
+            Delete
+          </button>
+          <button mat-raised-button color="primary">View Recipe</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="(filteredRecipes$ | async)?.length === 0" class="empty-state">
+      <mat-icon class="empty-icon">restaurant</mat-icon>
+      <h3>No recipes found</h3>
+      <p>Be the first to share a delicious Louisiana recipe!</p>
+      <button mat-raised-button color="primary" (click)="addNewRecipe()">
+        Add Your First Recipe
+      </button>
+    </div>
+
+    <!-- Add Recipe Button -->
+    <div class="add-recipe-section">
+      <button mat-fab 
+              color="accent" 
+              class="add-recipe-fab" 
+              (click)="addNewRecipe()"
+              matTooltip="Add New Recipe"
+              matTooltipPosition="left"
+              matTooltipClass="fab-tooltip">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+  </ng-container>
+</div>
