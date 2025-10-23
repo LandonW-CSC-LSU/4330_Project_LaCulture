@@ -1,9 +1,14 @@
 <!-- Home Carousel -->
-<c-carousel>
-  <c-carousel-inner>
-    @for (slide of slides; track slide.src) {
-      <c-carousel-item>
-        <div class="carousel-wrapper">
+<div class="hero-section">
+  <div class="title-overlay">
+    <h1 class="main-title">Welcome to LaCulture</h1>
+    <h2 class="subtitle">Discover Louisiana</h2>
+  </div>
+  <c-carousel>
+    <c-carousel-inner>
+      @for (slide of slides; track slide.src) {
+        <c-carousel-item>
+          <div class="carousel-wrapper">
           <img
             [src]="slide.src"
             [alt]="slide.title"
