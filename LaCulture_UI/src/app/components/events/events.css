@@ -11,12 +11,12 @@
   padding: 5px;
   font-family: serif;
   font-size: 18px;
-  color: white;
 }
 
 .filter-container {
   text-align: center;
   margin-bottom: 1.5rem;
+  color: white;
 }
 
 .filter-container label {
@@ -45,12 +45,11 @@ h2 {
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
-  color: white;
+  background: rgb(255, 255, 255);
 }
 
 .event-card h3 {
   margin-top: 0;
-  color: white;
 }
 
 .event-website {
