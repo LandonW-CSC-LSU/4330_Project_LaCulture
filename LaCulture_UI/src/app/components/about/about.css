@@ -19,7 +19,7 @@ body{
 }
 .creator-image {
   width: 200px;
-  height: auto;
+  height: 300px;
   object-fit: cover;
   margin-top: 25px;
   margin-bottom: 15px;
