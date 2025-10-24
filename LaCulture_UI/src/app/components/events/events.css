@@ -1,4 +1,11 @@
 
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0d2e7c 0%, #ccdd12 100%);
+  padding: 40px 0;
+}
+
 .events-container {
   margin-top: 150px;
   padding: 5px;
@@ -9,6 +16,7 @@
 .filter-container {
   text-align: center;
   margin-bottom: 1.5rem;
+  color: white;
 }
 
 .filter-container label {
@@ -17,6 +25,7 @@
 
 h1 {
   text-align: center;
+  color: white;
 }
 
 h2 {
@@ -31,11 +40,12 @@ h2 {
 }
 
 .event-card {
-  border: 1px solid #000000;
+  border: 2px solid #000000;
   border-radius: 8px;
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
+  background: rgb(255, 255, 255);
 }
 
 .event-card h3 {
