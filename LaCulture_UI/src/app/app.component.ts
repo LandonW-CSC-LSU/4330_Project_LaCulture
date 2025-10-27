@@ -35,7 +35,7 @@ import { CommonModule } from '@angular/common';
       overflow: hidden;
     }
     .scrolled {
-      background: rgba(128, 0, 128, 0.95);
+      background: transparent;
       padding: 8px 0 8px 0;
       backdrop-filter: blur(10px);
     }
