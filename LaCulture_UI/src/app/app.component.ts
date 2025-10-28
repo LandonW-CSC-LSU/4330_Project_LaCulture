@@ -35,7 +35,7 @@ import { CommonModule } from '@angular/common';
       overflow: hidden;
     }
     .scrolled {
-      background: rgba(128, 0, 128, 0.95);
+      background: transparent;
       padding: 8px 0 8px 0;
       backdrop-filter: blur(10px);
     }
@@ -68,7 +68,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   title = 'laculture-ui';
   menuHeaderClass = '';
-  menuOptions = ['Home', 'Recipes', 'Events', 'Map', 'About', 'Calendar'];
+  menuOptions = ['Home', 'Recipes', 'Events', 'Map', 'Calendar', 'About'];
   selectedOption = this.menuOptions[0];
 
   @HostListener('window:scroll', []) 
@@ -95,11 +95,11 @@ export class AppComponent {
       case 'Map':
         this.router.navigate(['/map']);
         break;
-      case 'About':
-        // Add navigation when about page is created
-        break;
       case 'Calendar':
         this.router.navigate(['/Calendar']);
+        break;
+      case 'About':
+        this.router.navigate(['/about']);
     }
   }
 }
