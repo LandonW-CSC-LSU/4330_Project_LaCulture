@@ -68,7 +68,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   title = 'laculture-ui';
   menuHeaderClass = '';
-  menuOptions = ['Home', 'Recipes', 'Events', 'Map', 'Calendar', 'About'];
+  menuOptions = ['Home', 'Recipes', 'Events', 'Tours', 'Map', 'Calendar', 'About'];
   selectedOption = this.menuOptions[0];
 
   @HostListener('window:scroll', []) 
@@ -91,6 +91,9 @@ export class AppComponent {
         break;
       case 'Events':
         this.router.navigate(['/events']);
+        break;
+      case 'Tours':
+        this.router.navigate(['tours']);
         break;
       case 'Map':
         this.router.navigate(['/map']);

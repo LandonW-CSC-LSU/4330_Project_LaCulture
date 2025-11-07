@@ -21,7 +21,7 @@ html, body {
 
 /* Introduction Section - LSU Purple */
 .intro-section {
-    background: linear-gradient(135deg, #461D7C 0%, #5d2a9c 100%);
+    background-color: #4b006e;
     padding: 180px 40px 100px 40px;
     min-height: 400px;
     display: flex;
@@ -115,7 +115,7 @@ html, body {
 
 /* Closing Section - LSU Purple */
 .closing-section {
-    background: linear-gradient(135deg, #5d2a9c 0%, #461D7C 100%);
+    background-color: #4b006e;
     padding: 100px 40px;
     min-height: 400px;
     display: flex;
