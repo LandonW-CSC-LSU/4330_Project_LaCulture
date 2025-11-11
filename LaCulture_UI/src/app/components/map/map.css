@@ -1,17 +1,64 @@
-.map-container {
-  padding: 1px;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0d2e7c 0%, #ccdd12 100%);
+.map-top-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 125px;
+  background: rgba(128, 0, 128, 0.95);
+  z-index: 0;
+  pointer-events: none;
 }
+
 
 #map {
-  height: calc(100vh - 64px);
-  width: 100%;
+  position: fixed;
+  top: 125px;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 1;
+  overflow: hidden;
 }
 
-:host {
-  display: block;
-  height: 100%;
-  width: 100%;
+
+
+
+
+.custom-map-control {
+  background: #ffd700;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 160px;
+}
+
+.map-select {
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+
+.map-reset {
+  padding: 6px 10px;
+  background: rgba(128, 0, 128, 0.95);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.map-reset:hover {
+  background: #6C3BB2;
+}
+
+
+.leaflet-top.leaflet-right .leaflet-control {
+  margin-top: 10px;
 }
