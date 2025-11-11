@@ -1,7 +1,11 @@
 .recipes-container {
-  padding: 120px 32px 32px 32px;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0d2e7c 0%, #ccdd12 100%);
+  background-image: url('/assets/images/RecipesBackground.png');
+  background-size: cover;            /* Ensures it fills the container */
+  background-position: center;       /* Keeps it centered */
+  background-repeat: no-repeat;      /* Prevents tiling */
+  background-attachment: fixed;      /* Keeps it static while scrolling */
+  padding: 40px 5vw;                 /* Optional spacing */
+  min-height: 100vh;                 /* Ensures full viewport coverage */
 }
 
 .recipes-header {
@@ -25,9 +29,9 @@
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
   flex-wrap: wrap;
-  padding-top: 40px;
+  padding-top: 100px;
 }
 
 .category-filter button {
@@ -54,7 +58,7 @@
 
 .recipe-card {
   border-radius: 14px;
-  box-shadow: 0 4px 16px rgba(128, 0, 128, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
   background: linear-gradient(135deg, #fff 90%, #f3e6ff 100%);
@@ -80,7 +84,7 @@
 
 .recipe-card mat-card-title {
   color: #4b006e;
-  font-family: 'frenchDemo', serif;
+  font-family: '', serif;
   font-size: 1.3rem;
 }
 
