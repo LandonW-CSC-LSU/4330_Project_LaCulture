@@ -1,0 +1,170 @@
+body {
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overscroll-behavior-y: contain;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.about-page {
+    min-height: 100vh;
+}
+
+/* Introduction Section - LSU Purple */
+.intro-section {
+    background: linear-gradient(135deg, #461D7C 0%, #5d2a9c 100%);
+    padding: 180px 40px 100px 40px;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro-text {
+    text-align: center;
+    max-width: 800px;
+    color: #FDD023;
+    margin: 0 auto;
+}
+
+.intro-text h1 {
+    font-size: 48px;
+    margin-bottom: 30px;
+    margin-top: 0;
+    font-weight: 700;
+}
+
+.intro-text p {
+    font-size: 24px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Creators Section - LSU Gold */
+.creators-section {
+    background: linear-gradient(135deg, #FDD023 0%, #ffd700 100%);
+    padding: 100px 40px;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.creators-section h2 {
+    text-align: center;
+    font-size: 42px;
+    margin-bottom: 60px;
+    margin-top: 0;
+    color: #461D7C;
+}
+
+.about-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.creator-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 3px solid #461D7C;
+}
+
+.creator-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(70, 29, 124, 0.3);
+}
+
+.creator-image {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #461D7C 0%, #FDD023 100%);
+}
+
+.description {
+    font-size: 18px;
+    color: #444;
+    margin: 0;
+    max-width: 300px;
+}
+
+/* Closing Section - LSU Purple */
+.closing-section {
+    background: linear-gradient(135deg, #5d2a9c 0%, #461D7C 100%);
+    padding: 100px 40px;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.closing-text {
+    text-align: center;
+    max-width: 800px;
+    color: #FDD023;
+    margin: 0 auto;
+}
+
+.closing-text h2 {
+    font-size: 42px;
+    margin-bottom: 30px;
+    margin-top: 0;
+    font-weight: 700;
+}
+
+.closing-text p {
+    font-size: 22px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .intro-section,
+    .creators-section,
+    .closing-section {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .intro-text h1, .closing-text h2 {
+        font-size: 32px;
+    }
+    
+    .intro-text p, .closing-text p {
+        font-size: 18px;
+    }
+    
+    .creators-section h2 {
+        font-size: 32px;
+    }
+    
+    .about-container {
+        gap: 40px;
+    }
+}
