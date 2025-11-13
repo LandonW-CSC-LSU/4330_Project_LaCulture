@@ -1,25 +1,48 @@
-<div class="events-container">
-  <h1>Upcoming Events</h1>
-
-  <div class="filter-container">
-    <label for="location-filter">Filter by Location:</label>
-    <select id="location-filter" #selectLocation (change)="filterByLocation(selectLocation.value)">
-      @for(location of locations(); track location){
-        <option [value]="location">{{ location }}</option>
-      }
-    </select>
+<div class="recipes-container events-container">
+  <!-- Title -->
+  <div class="recipes-header">
+    <h1>Upcoming Events</h1>
   </div>
 
-  <div class="event-list">
-    @for(event of filteredEvents(); track event.id){
-      <div class="event-card">
-        <h3>{{ event.title }}</h3>
+  <!-- Location filter (reuses category-filter styles from recipes) -->
+  <div class="category-filter">
+    <button
+      *ngFor="let loc of locations()"
+      mat-raised-button
+      [class.active]="selectedLocation() === loc"
+      (click)="filterByLocation(loc)">
+      {{ loc }}
+    </button>
+  </div>
+
+  <!-- Events grid (uses the recipes grid and card styles so the look matches) -->
+  <div class="recipes-grid">
+    <mat-card *ngFor="let event of filteredEvents(); trackBy: trackByEventId" class="recipe-card">
+    <img mat-card-image [src]="event.image || 'assets/images/placeholder.jpg'" alt="{{ event.title }}" (error)="$event.target.src='assets/images/placeholder.jpg'">
+
+      <mat-card-header>
+        <mat-card-title>{{ event.title }}</mat-card-title>
+        <mat-card-subtitle>{{ event.location }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
         <p><strong>Date:</strong> {{ event.date }}</p>
-        <p><strong>Location:</strong> {{ event.location }}</p>
-        @if(event.website){
-          <a [href]="event.website" target="_blank" class="event-website">Event Website</a>
-        }
-      </div>
-    }
+        <p *ngIf="event.website" class="event-link">
+          <a [href]="event.website" target="_blank">Official Website</a>
+        </p>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <a mat-button color="primary" [href]="event.website" target="_blank" *ngIf="event.website">
+          <mat-icon>launch</mat-icon>
+          Visit
+        </a>
+        <button mat-button disabled>
+          <mat-icon>event</mat-icon>
+          {{ event.date }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </div>
+
 </div>
