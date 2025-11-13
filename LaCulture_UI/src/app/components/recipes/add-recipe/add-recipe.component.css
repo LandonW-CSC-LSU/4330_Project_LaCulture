@@ -1,0 +1,295 @@
+.add-recipe-dialog {
+  min-width: 520px;
+  max-width: 900px;
+  max-height: 90vh;
+}
+
+.dialog-content {
+  padding: 28px 24px 24px 24px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.form-section {
+  margin-bottom: 24px;
+  /* subtle card-like grouping for fields */
+  background: rgba(75,0,110,0.03);
+  border: 1px solid rgba(75,0,110,0.06);
+  padding: 18px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(75,0,110,0.04);
+}
+
+.form-section:last-child {
+  margin-bottom: 0;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  margin-top: 8px;
+}
+
+.form-row .mat-form-field {
+  flex: 1 1 0;
+  padding-top: 8px;
+}
+
+.form-row:last-child {
+  margin-bottom: 0;
+  background-color: #f8f5ff;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.three-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+/* Image Upload Styles */
+.image-upload-section {
+  display: flex;
+  justify-content: center;
+}
+
+.upload-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px;
+  border: 2px dashed rgba(75,0,110,0.12);
+  border-radius: 8px;
+  background-color: #fafafa;
+  transition: background-color 0.3s ease;
+}
+
+.upload-area:hover {
+  background-color: #f8f5ff;
+  border-color: rgba(75,0,110,0.22);
+}
+
+.upload-button {
+  margin-bottom: 8px;
+}
+
+.upload-hint {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+}
+
+.image-preview {
+  position: relative;
+  display: inline-block;
+}
+
+.preview-image {
+  max-width: 300px;
+  max-height: 200px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(75,0,110,0.06);
+}
+
+.remove-image-btn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #f44336;
+  color: white;
+}
+
+.remove-image-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* Dynamic List Styles */
+.dynamic-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.list-input {
+  flex: 1;
+}
+
+/* Make form controls look cleaner */
+.mat-form-field-wrapper,
+.mat-form-field-infix,
+.mat-mdc-text-field-wrapper {
+  width: 100%;
+}
+
+input.mat-input-element,
+textarea.mat-input-element {
+  padding: 10px 12px !important;
+  border-radius: 6px;
+}
+
+.mat-form-field label {
+  color: rgba(75,0,110,0.9);
+  font-weight: 500;
+}
+
+/* Action buttons styling */
+.dialog-actions button[mat-raised-button] {
+  background: linear-gradient(180deg,#5a008f,#4b006e) !important;
+  color: #fff !important;
+  box-shadow: 0 10px 30px rgba(75,0,110,0.18) !important;
+  border-radius: 8px !important;
+  padding: 10px 18px !important;
+}
+
+.add-btn, .remove-btn {
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.add-btn:hover, .remove-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Scoped styling for mat-select panel used in this component.
+   We use a dedicated panelClass (add-recipe-select-panel) so the
+   styles apply only to selects in this form. ::ng-deep is required
+   because the panel is rendered in the global overlay container. */
+::ng-deep .add-recipe-select-panel {
+  background: #fff !important;
+  color: #1a1a1a !important;
+  border-radius: 8px !important;
+  box-shadow: 0 12px 36px rgba(75,0,110,0.12) !important;
+  padding: 6px 0 !important;
+}
+
+::ng-deep .add-recipe-select-panel .mat-option,
+::ng-deep .add-recipe-select-panel .mat-mdc-list-item {
+  background: transparent !important;
+  color: inherit !important;
+}
+
+::ng-deep .add-recipe-select-panel .mat-option:hover,
+::ng-deep .add-recipe-select-panel .mat-mdc-list-item:hover,
+::ng-deep .add-recipe-select-panel .mat-option.mat-selected,
+::ng-deep .add-recipe-select-panel .mat-mdc-list-item.mat-selected {
+  background: rgba(75,0,110,0.06) !important;
+  color: #1a1a1a !important;
+}
+
+/* Make scrollbars in the panel subtle but visible on some platforms */
+::ng-deep .add-recipe-select-panel .mat-option::-webkit-scrollbar,
+::ng-deep .add-recipe-select-panel ::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+::ng-deep .add-recipe-select-panel ::-webkit-scrollbar-thumb {
+  background: rgba(75,0,110,0.12);
+  border-radius: 8px;
+}
+
+.remove-btn {
+  color: #f44336;
+  margin-top: 8px;
+}
+
+.remove-btn:disabled {
+  color: #ccc;
+}
+
+.add-btn {
+  align-self: flex-start;
+  margin-top: 8px;
+}
+
+/* Dialog Actions */
+.dialog-actions {
+  padding: 16px 24px;
+  gap: 8px;
+}
+
+.spinner {
+  margin-right: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .add-recipe-dialog {
+    min-width: 90vw;
+    max-width: 90vw;
+  }
+  
+  .two-column,
+  .three-column {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-row {
+    flex-direction: column;
+  }
+  
+  .list-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .remove-btn {
+    align-self: flex-end;
+    margin-top: 0;
+  }
+}
+
+/* Material Design Overrides */
+.mat-card-header {
+  padding-bottom: 12px;
+}
+
+.mat-card-content {
+  padding-top: 12px;
+}
+
+.mat-form-field {
+  width: 100%;
+  padding: 8px;
+}
+
+.mat-dialog-title {
+  margin-bottom: 12px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Form Validation Styles */
+.mat-form-field.mat-form-field-invalid {
+  .mat-form-field-outline-thick {
+    color: #f44336;
+  }
+}
+
+/* Loading State */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}

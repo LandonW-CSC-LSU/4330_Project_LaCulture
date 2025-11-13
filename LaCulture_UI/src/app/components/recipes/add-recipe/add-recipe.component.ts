@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { CreateRecipeRequest, RecipeCategory, RecipeDifficulty, RecipeCategoryDisplayNames, RecipeDifficultyDisplayNames } from '../../models/recipe.model';
+import { CreateRecipeRequest, RecipeCategory, RecipeDifficulty, RecipeCategoryDisplayNames, RecipeDifficultyDisplayNames } from '../../../models/recipe.model';
 
 @Component({
   selector: 'app-add-recipe',

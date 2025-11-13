@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { AddRecipeComponent } from '../components/add-recipe/add-recipe.component';
+import { AddRecipeComponent } from '../components/recipes/add-recipe/add-recipe.component';
+import { ViewRecipeComponent } from '../components/recipes/view-recipe/view-recipe.component';
 import { Recipe, CreateRecipeRequest } from '../models/recipe.model';
 
 export interface AddRecipeDialogData {
@@ -34,6 +35,19 @@ export class RecipeDialogService {
         restoreFocus: true
       }
     );
+
+    return dialogRef.afterClosed();
+  }
+
+  openViewRecipeDialog(recipe: Recipe): Observable<void> {
+    const dialogRef = this.dialog.open(ViewRecipeComponent, {
+      width: '900px',
+      maxWidth: '95vw',
+      maxHeight: '90vh',
+      panelClass: 'view-recipe-panel',
+      autoFocus: false,
+      data: { recipe }
+    });
 
     return dialogRef.afterClosed();
   }

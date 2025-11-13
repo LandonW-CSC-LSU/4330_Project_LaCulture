@@ -1,3 +1,8 @@
+.home-page{
+  margin: 0;
+  padding: 0;
+  background-color: #FFF8E8;
+}
 body {
 	box-sizing: border-box;
 	overflow-x: hidden;
@@ -126,19 +131,66 @@ c-carousel-control[direction="next"] {
     transform: scale(1);
   }
 }
+/* Quicklinks Section */
+.quicklinks-header {
+  grid-column: 1 / -1;
+  text-align: center;
+  width: 100%;
+}
+
+/* Title and lead for quicklinks (with flanking purple lines) */
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  color: #4b006e;
+  font-size: 4rem;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-title::before,
+.section-title::after {
+  content: "";
+  flex: 1 1 1rem;
+  height: 6px;
+  background: #4b006e;
+  border-radius: 3px;
+  box-shadow: 0 6px 14px rgba(75,0,110,0.08);
+  min-width: 40px;
+  max-width: calc(50% - 5rem);
+}
+
+.section-title::before { margin-right: 12px; }
+.section-title::after { margin-left: 12px; }
+
+.quicklinks-header .section-lead {
+  margin: 0 auto 12px auto;
+  text-align: center;
+  width: 100%;
+  max-width: 760px;
+  display: block;
+  color: #666;
+  font-size: 1rem;
+}
 
 .quicklinks-section {
   position: relative;
   width: 100%;
-  min-height: 100vh;
-  background: #fff;
   margin: 0;
+  min-height: 100vh;
+  background-color: #FFF8E8;
   padding: 120px 5vw 40px 5vw;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 32px;
   justify-items: center;
-  align-items: stretch;
+  align-items: stretch; /* changed from stretch to start */
   box-sizing: border-box;
 }
 
@@ -148,9 +200,9 @@ c-carousel-control[direction="next"] {
   height: 320px;
   display: flex;
   flex-direction: column;
-  padding: 24px;
-  background-color: #ffffff;
-  border-radius: 16px;
+  padding: 15px;
+  background: linear-gradient(135deg, #fff 90%, #f3e6ff 100%);
+  border-radius: 14px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
@@ -158,23 +210,23 @@ c-carousel-control[direction="next"] {
 }
 
 .quicklink-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 8px 24px rgba(128, 0, 128, 0.12), 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(128, 0, 128, 0.15);
 }
 
 .quicklink-card img {
   height: 175px;
-  object-fit: cover;
+  object-fit: fill;
   width: 100%;
   object-position: center;
 }
 
 .quicklink-card mat-card-title {
   font-family: serif;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   text-align: center;
   font-weight: 600;
-  color: #2c2c2c;
+  color: #4b006e;
   margin-bottom: 10px;
 }
 
@@ -182,7 +234,7 @@ c-carousel-control[direction="next"] {
   font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   font-size: 1rem;
   text-align: center;
-  color: #4a4a4a;
+  color: #555;
   line-height: 1.6;
 }
 
@@ -193,14 +245,11 @@ button[mat-raised-button] {
     border-radius: 6px;
     box-shadow: 0 1px 4px rgba(128,0,128,0.08);
     font-size: 0.95rem;
+    background: #4b006e;
+    color: #fff;
 }
 
 @media (max-width: 700px) {
-    .white-section {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        padding: 24px 0 0 0;
-    }
     .quicklink-card {
         width: 95vw;
         margin: 0 auto;

@@ -1,75 +1,83 @@
 <!-- Home Carousel -->
-<div class="hero-section">
-  <div class="title-overlay">
-    <h1 class="main-title">Welcome to LaCulture</h1>
-    <h2 class="subtitle">Discover Louisiana</h2>
+<div class="home-page">
+  <div class="hero-section">
+    <div class="title-overlay">
+      <h1 class="main-title">Welcome to LaCulture</h1>
+      <h2 class="subtitle">Discover Louisiana</h2>
+    </div>
+    <c-carousel>
+      <c-carousel-inner>
+        @for (slide of slides; track slide.src) {
+          <c-carousel-item>
+            <div class="carousel-wrapper">
+            <img
+              [src]="slide.src"
+              [alt]="slide.title"
+              class="d-block w-100 zoom-img"
+              loading="lazy"
+            />
+          </div>
+        </c-carousel-item>
+      }
+    </c-carousel-inner>
+    <c-carousel-indicators />
+    <c-carousel-control caption="Previous" direction="prev" />
+    <c-carousel-control caption="Next" direction="next" />
+  </c-carousel>
+  
+  <div class="quicklinks-section">
+
+    <div class="quicklinks-header">
+      <h2 class="section-title">LaCulture Hightlights</h2>
+      <p class="section-lead">Quick access to popular places and experiences around Louisiana</p>
+    </div>
+
+    <mat-card class="quicklink-card" (click)="navigateToBrennans()">
+      <img mat-card-image src="assets/images/brennans.jpeg" alt="Brennan's">
+      <mat-card-title>Brennan's</mat-card-title>
+      <mat-card-content>Eat at Brennan's!</mat-card-content>
+    </mat-card>
+
+    <mat-card class="quicklink-card" (click)="navigateToStateCapitol()">
+      <img mat-card-image src="assets/images/statecapitol.jpg" alt="State Capitol">
+      <mat-card-title>State Capitol</mat-card-title>
+      <mat-card-content>Visit the State Capitol</mat-card-content>
+    </mat-card>
+
+    <mat-card class="quicklink-card" (click)="navigateToTigerStadium()">
+      <img mat-card-image src="assets/images/tigerstadium.jpg" alt="Tiger Stadium">
+      <mat-card-title>Tiger Stadium</mat-card-title>
+      <mat-card-content>Experience the great Tiger Stadium!</mat-card-content>
+    </mat-card>
+
+    <mat-card class="quicklink-card" (click)="navigateToCafeDuMonde()">
+      <img mat-card-image src="assets/images/cafedumonde.jpg" alt="Cafe Du Monde">
+      <mat-card-title>Cafe Du Monde</mat-card-title>
+      <mat-card-content>Eat at the Famous Cafe Du Monde!</mat-card-content>
+    </mat-card>
+
+    <mat-card class="quicklink-card" (click)="navigateToFrenchQuarter()">
+      <img mat-card-image src="assets/images/frenchquarter.jpg" alt="French Quarter">
+      <mat-card-title>French Quarter</mat-card-title>
+      <mat-card-content>Take a walk around the French Quarter!</mat-card-content>
+    </mat-card>
+
+    <mat-card class="quicklink-card" (click)="navigateToWW2()">
+      <img mat-card-image src="assets/images/ww2.jpg" alt="WW2 Museum">
+      <mat-card-title>National WW2 Museum</mat-card-title>
+      <mat-card-content>Take a tour around the National WW2 Museum!</mat-card-content>
+    </mat-card>
+
+    <mat-card class="quicklink-card" (click)="navigateToAudubonZoo()">
+      <img mat-card-image src="assets/images/audubon.jpg" alt="Audubon Zoo">
+      <mat-card-title>Audubon Zoo</mat-card-title>
+      <mat-card-content>Visit the Audubon Zoo and Aquarium!</mat-card-content>
+    </mat-card>
+
+    <mat-card class="quicklink-card" (click)="navigateToSuperdome()">
+      <img mat-card-image src="assets/images/superdome.jpg" alt="Superdome">
+      <mat-card-title>Superdome</mat-card-title>
+      <mat-card-content>Go to a Saints game!</mat-card-content>
+    </mat-card>
   </div>
-  <c-carousel>
-    <c-carousel-inner>
-      @for (slide of slides; track slide.src) {
-        <c-carousel-item>
-          <div class="carousel-wrapper">
-          <img
-            [src]="slide.src"
-            [alt]="slide.title"
-            class="d-block w-100 zoom-img"
-            loading="lazy"
-          />
-        </div>
-      </c-carousel-item>
-    }
-  </c-carousel-inner>
-  <c-carousel-indicators />
-  <c-carousel-control caption="Previous" direction="prev" />
-  <c-carousel-control caption="Next" direction="next" />
-</c-carousel>
-
-<div class="quicklinks-section">
-  <mat-card class="quicklink-card" (click)="navigateToBrennans()">
-    <img mat-card-image src="assets/images/brennans.jpeg" alt="Brennan's">
-    <mat-card-title>Brennan's</mat-card-title>
-    <mat-card-content>Eat at Brennan's!</mat-card-content>
-  </mat-card>
-
-  <mat-card class="quicklink-card" (click)="navigateToStateCapitol()">
-    <img mat-card-image src="assets/images/statecapitol.jpg" alt="State Capitol">
-    <mat-card-title>State Capitol</mat-card-title>
-    <mat-card-content>Visit the State Capitol</mat-card-content>
-  </mat-card>
-
-  <mat-card class="quicklink-card" (click)="navigateToTigerStadium()">
-    <img mat-card-image src="assets/images/tigerstadium.jpg" alt="Tiger Stadium">
-    <mat-card-title>Tiger Stadium</mat-card-title>
-    <mat-card-content>Experience the great Tiger Stadium!</mat-card-content>
-  </mat-card>
-
-  <mat-card class="quicklink-card" (click)="navigateToCafeDuMonde()">
-    <img mat-card-image src="assets/images/cafedumonde.jpg" alt="Cafe Du Monde">
-    <mat-card-title>Cafe Du Monde</mat-card-title>
-    <mat-card-content>Eat at the Famous Cafe Du Monde!</mat-card-content>
-  </mat-card>
-
-  <mat-card class="quicklink-card" (click)="navigateToFrenchQuarter()">
-    <img mat-card-image src="assets/images/frenchquarter.jpg" alt="French Quarter">
-    <mat-card-title>French Quarter</mat-card-title>
-    <mat-card-content>Take a walk around the French Quarter!</mat-card-content>
-  </mat-card>
-
-  <mat-card class="quicklink-card" (click)="navigateToWW2()">
-    <img mat-card-image src="assets/images/ww2.jpg" alt="WW2 Museum">
-    <mat-card-title>National WW2 Museum</mat-card-title>
-    <mat-card-content>Take a tour around the National WW2 Museum!</mat-card-content>
-  </mat-card>
-
-  <mat-card class="quicklink-card" (click)="navigateToAudubonZoo()">
-    <img mat-card-image src="assets/images/audubon.jpg" alt="Audubon Zoo">
-    <mat-card-title>Audubon Zoo</mat-card-title>
-    <mat-card-content>Visit the Audubon Zoo and Aquarium!</mat-card-content>
-  </mat-card>
-
-  <mat-card class="quicklink-card" (click)="navigateToSuperdome()">
-    <img mat-card-image src="assets/images/superdome.jpg" alt="Superdome">
-    <mat-card-title>Superdome</mat-card-title>
-    <mat-card-content>Go to a Saints game!</mat-card-content>
-  </mat-card>
 </div>

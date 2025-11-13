@@ -149,3 +149,20 @@ a:hover {
     font-size: 14px;
   }
 }
+
+/* Make the dialog container for viewing recipes scrollable so the whole card can scroll
+   (image/title will scroll away as you scroll down the dialog) */
+.view-recipe-panel .mat-dialog-container {
+  max-height: 90vh !important;
+  padding: 0 !important; /* card handles its own padding */
+  overflow: auto !important; /* allow the dialog itself to scroll */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-recipe-panel .view-recipe-card {
+  width: 100%;
+  max-width: 900px;
+  max-height: none !important;
+}

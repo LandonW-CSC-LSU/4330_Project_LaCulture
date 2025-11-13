@@ -36,7 +36,7 @@
           <div class="form-row two-column">
             <mat-form-field appearance="outline">
               <mat-label>Category</mat-label>
-              <mat-select formControlName="category">
+              <mat-select formControlName="category" panelClass="add-recipe-select-panel">
                 <mat-option *ngFor="let category of categories" [value]="category.value">
                   {{ category.label }}
                 </mat-option>
@@ -48,7 +48,7 @@
 
             <mat-form-field appearance="outline">
               <mat-label>Difficulty</mat-label>
-              <mat-select formControlName="difficulty">
+              <mat-select formControlName="difficulty" panelClass="add-recipe-select-panel">
                 <mat-option *ngFor="let difficulty of difficulties" [value]="difficulty.value">
                   {{ difficulty.label }}
                 </mat-option>

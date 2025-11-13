@@ -58,12 +58,6 @@ import { filter } from 'rxjs/operators';
       border-bottom: 2px solid #ffd700;
       transform: scale(1.1);
     }
-    @media (max-width: 768px) {
-      .menu-link {
-        font-size: 2rem;
-        margin: 0 8px;
-      }
-    }
   `]
 })
 export class AppComponent implements OnInit {
