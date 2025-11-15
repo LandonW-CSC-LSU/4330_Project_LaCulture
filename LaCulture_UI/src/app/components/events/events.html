@@ -4,7 +4,6 @@
     <h1>Upcoming Events</h1>
   </div>
 
-  <!-- Location filter (reuses category-filter styles from recipes) -->
   <div class="category-filter">
     <button
       *ngFor="let loc of locations()"
@@ -27,15 +26,12 @@
 
       <mat-card-content>
         <p><strong>Date:</strong> {{ event.date }}</p>
-        <p *ngIf="event.website" class="event-link">
-          <a [href]="event.website" target="_blank">Official Website</a>
-        </p>
       </mat-card-content>
 
       <mat-card-actions>
         <a mat-button color="primary" [href]="event.website" target="_blank" *ngIf="event.website">
           <mat-icon>launch</mat-icon>
-          Visit
+          Event Website!
         </a>
         <button mat-button disabled>
           <mat-icon>event</mat-icon>
