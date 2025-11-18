@@ -35,7 +35,7 @@ export class EventsComponent {
     { id: 1, title: 'LSU vs Texas A&M', date: '10/25/2025', location: 'Baton Rouge', website: 'https://lsusports.evenue.net/list/FB', image: 'assets/images/tigerstadium.jpg'},
     { id: 2, title: 'Saints vs Buccaneers', date: '10/26/2025', location: 'New Orleans', website: 'https://www.neworleanssaints.com/tickets/', image: 'assets/images/superdome.jpg' },
     { id: 3, title: 'National Fried Chicken Festival', date: '10/4-5/2025', location: 'New Orleans', website: 'https://www.friedchickenfestival.com/', image: 'assets/images/crawfish.jpg' },
-    { id: 4, title: 'Beignet Fest', date: '11/15/2025', location: 'New Orleans', website: 'https://beignetfest.com/', image: 'assets/images/download.jpg'}
+    { id: 4, title: 'Beignet Fest', date: '11/15/2025', location: 'New Orleans', website: 'https://beignetfest.com/', image: 'assets/images/beignets.jpg'}
   ]);
 
    public locations = computed(() => ['All', ...new Set(this.items().map(e => e.location))]);

@@ -1,6 +1,5 @@
-<div class="recipes-container events-container">
-  <!-- Title -->
-  <div class="recipes-header">
+<div class="events-container">
+  <div class="events-header">
     <h1>Upcoming Events</h1>
   </div>
 
@@ -15,8 +14,8 @@
   </div>
 
   <!-- Events grid (uses the recipes grid and card styles so the look matches) -->
-  <div class="recipes-grid">
-    <mat-card *ngFor="let event of filteredEvents(); trackBy: trackByEventId" class="recipe-card">
+  <div class="events-grid">
+    <mat-card *ngFor="let event of filteredEvents(); trackBy: trackByEventId" class="events-card">
     <img mat-card-image [src]="event.image || 'assets/images/placeholder.jpg'" alt="{{ event.title }}" (error)="$event.target.src='assets/images/placeholder.jpg'">
 
       <mat-card-header>
