@@ -1,5 +1,5 @@
 <mat-card class="view-recipe-card">
-  <img mat-card-image [src]="data.recipe?.image || 'assets/images/placeholder.jpg'" [alt]="data.recipe?.title"/>
+  <img mat-card-image [src]="data.recipe?.image || 'assets/images/placeholder.png'" [alt]="data.recipe?.title" onerror="this.src='assets/images/placeholder.png'"/>
   <mat-card-header>
     <mat-card-title>{{ data.recipe?.title }}</mat-card-title>
     <mat-card-subtitle *ngIf="data.recipe?.author">by {{ data.recipe.author }}</mat-card-subtitle>

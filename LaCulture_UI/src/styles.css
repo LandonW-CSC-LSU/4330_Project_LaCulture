@@ -166,3 +166,40 @@ a:hover {
   max-width: 900px;
   max-height: none !important;
 }
+
+/* Snackbar Styles - Global */
+.success-snackbar {
+  --mdc-snackbar-container-color: #4caf50 !important;
+  --mat-snack-bar-button-color: #ffffff !important;
+}
+
+.success-snackbar .mdc-snackbar__surface {
+  background-color: #4caf50 !important;
+}
+
+.success-snackbar .mdc-snackbar__label,
+.success-snackbar .mat-mdc-snack-bar-label {
+  color: #ffffff !important;
+}
+
+.success-snackbar .mat-mdc-button {
+  color: #ffffff !important;
+}
+
+.error-snackbar {
+  --mdc-snackbar-container-color: #f44336 !important;
+  --mat-snack-bar-button-color: #ffffff !important;
+}
+
+.error-snackbar .mdc-snackbar__surface {
+  background-color: #f44336 !important;
+}
+
+.error-snackbar .mdc-snackbar__label,
+.error-snackbar .mat-mdc-snack-bar-label {
+  color: #ffffff !important;
+}
+
+.error-snackbar .mat-mdc-button {
+  color: #ffffff !important;
+}

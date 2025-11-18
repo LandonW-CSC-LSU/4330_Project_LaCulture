@@ -28,7 +28,7 @@ export class EventsComponent {
     { id: 8, title: 'LGBT Halloween New Orleans (HNO)', date: '10/24-26/2025', location: 'New Orleans', website: 'https://www.halloweenneworleans.com/' },
     { id: 9, title: 'NOLA Reggae Fest', date: '10/24-26/2025', location: 'New Orleans', website: 'https://www.eventbrite.com/e/2025-nola-reggae-fest-tickets-1369000991819' },
     { id: 10, title: 'Krewe of BOO!', date: '10/25/2025', location: 'New Orleans', website: 'https://www.kreweofboo.com/' },
-    { id: 11, title: 'Tremé Fall Festival', date: '10/25/2025', location: 'New Orleans', website: 'https://www.tremefest.org/' },
+    { id: 11, title: 'Treme Fall Fest', date: '10/25/2025', location: 'New Orleans', website: 'https://www.tremefest.org/' },
     { id: 12, title: 'NOLA MusiCon', date: '10/28-30/2025', location: 'New Orleans', website: 'https://www.nolamusicon.com/' },
     { id: 13, title: 'Bayou Bacchanal', date: '10/31-11/1/2025', location: 'New Orleans', website: 'https://www.friendsofculture.org/' },
     { id: 14, title: 'Freret Street Fall Festival', date: '11/1/2025', location: 'New Orleans', website: 'https://freretstreetfestival.org/' },

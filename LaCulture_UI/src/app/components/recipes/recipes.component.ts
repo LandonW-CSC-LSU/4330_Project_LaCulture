@@ -62,7 +62,10 @@ export class RecipesComponent implements OnInit, OnDestroy {
     // Subscribe to errors and show snackbar notifications
     this.error$.pipe(takeUntil(this.destroy$)).subscribe(error => {
       if (error) {
-        this.snackBar.open(error, 'Close', { duration: 5000 });
+        this.snackBar.open(error, 'Close', { 
+          duration: 5000,
+          panelClass: ['error-snackbar']
+        });
       }
     });
   }
