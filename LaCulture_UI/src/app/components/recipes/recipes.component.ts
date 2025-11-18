@@ -50,6 +50,11 @@ export class RecipesComponent implements OnInit, OnDestroy {
     this.error$ = this.recipeStateService.error$;
   }
 
+  viewRecipe(recipe: Recipe): void {
+    // Open the read-only dialog via the dialog service
+    this.recipeDialogService.openViewRecipeDialog(recipe).subscribe();
+  }
+
   ngOnInit(): void {
     // Load initial recipes
     this.recipeStateService.loadRecipes();
