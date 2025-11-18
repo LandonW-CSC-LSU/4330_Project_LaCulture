@@ -371,6 +371,17 @@
   font-weight: 500;
 }
 
+/* Snackbar Styles */
+::ng-deep .success-snackbar {
+  background: #4caf50 !important;
+  color: white !important;
+}
+
+::ng-deep .error-snackbar {
+  background: #f44336 !important;
+  color: white !important;
+}
+
 /* Custom Tooltip Styles */
 ::ng-deep .mat-mdc-tooltip {
   font-size: 16px;
