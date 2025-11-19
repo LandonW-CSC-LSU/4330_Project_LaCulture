@@ -37,14 +37,14 @@
 }
 
 .map-select {
-  padding: 6px 8px;
+  padding: 8px;
   border-radius: 6px;
   font-size: 14px;
 }
 
 
 .map-reset {
-  padding: 6px 10px;
+  padding: 8px;
   background: rgba(128, 0, 128, 0.95);
   color: white;
   border: none;
@@ -56,6 +56,25 @@
 
 .map-reset:hover {
   background: #6C3BB2;
+}
+
+.heat-container {
+  padding: 8px;
+  height: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.heat-toggle-label {
+  user-select: none;
+  font-size: 14px;
+}
+
+.heat-toggle {
+  accent-color: rgba(128, 0, 128, 0.95);
+  transform: scale(1.2);
 }
 
 

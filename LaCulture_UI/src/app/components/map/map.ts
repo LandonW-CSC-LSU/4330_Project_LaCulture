@@ -59,6 +59,24 @@ export class MapComponent implements AfterViewInit, OnDestroy {
       L.DomEvent.on(resetBtn, 'click', () => {
         this.setView();
       });
+      const heatContainer=L.DomUtil.create('div', 'heat-container', div);
+      const heatLabel=L.DomUtil.create('label', 'heat-toggle-label', heatContainer);
+      const heatmapToggle=L.DomUtil.create('input', 'heat-toggle', heatContainer);
+      heatmapToggle.type = 'checkbox';
+      heatmapToggle.checked = true;
+      heatmapToggle.id = 'heatmap-toggle';
+      heatLabel.htmlFor = 'heatmap-toggle';
+      heatLabel.textContent = 'Show Heatmap'
+      L.DomEvent.disableClickPropagation(heatmapToggle);
+      L.DomEvent.disableClickPropagation(heatLabel);
+      L.DomEvent.on(heatmapToggle, 'change', () => {
+        if (heatmapToggle.checked) {
+          this.map.addLayer(this.heatmapLayer);
+        } else {
+          this.map.removeLayer(this.heatmapLayer);
+        }
+        });
+
       return div;
     };
 
