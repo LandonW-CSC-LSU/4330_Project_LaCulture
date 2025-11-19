@@ -7,8 +7,8 @@
 :host {
     display: block;
     font-family: 'Georgia', serif;
-    background: linear-gradient(135deg, #2d1b4e 0%, #4a2c5e 50%, #6b3e7a 100%);
-    color: #fff;
+    background: #FFF8E8;
+    color: #FFF8E8;
     min-height: 100vh;
 }
 
@@ -26,13 +26,6 @@ header {
     text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
     margin-bottom: 0.5rem;
     letter-spacing: 2px;
-}
-
-.tagline {
-    font-style: italic;
-    font-size: 1.2rem;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 main {
@@ -65,13 +58,13 @@ main {
     padding: 0.8rem 1.5rem;
     border: none;
     background: transparent;
-    color: #fff;
+    color: black;
     font-size: 1rem;
     outline: none;
 }
 
 .search-container input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
+    color: black;
 }
 
 .search-container button {
