@@ -1,0 +1,226 @@
+<div class="add-recipe-dialog">
+  <h2 mat-dialog-title>{{ data?.recipe ? 'Edit Recipe' : 'Add New Recipe' }}</h2>
+  
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content class="dialog-content">
+      
+      <!-- Basic Information -->
+      <mat-card class="form-section">
+        <mat-card-header>
+          <mat-card-title>Basic Information</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Recipe Title</mat-label>
+              <input matInput formControlName="title" placeholder="Enter recipe title">
+              <mat-error *ngIf="isFieldInvalid('title')">
+                {{ getFieldError('title') }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Description</mat-label>
+              <textarea matInput 
+                        formControlName="description" 
+                        rows="3" 
+                        placeholder="Describe your recipe..."></textarea>
+              <mat-error *ngIf="isFieldInvalid('description')">
+                {{ getFieldError('description') }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row two-column">
+            <mat-form-field appearance="outline">
+              <mat-label>Category</mat-label>
+              <mat-select formControlName="category" panelClass="add-recipe-select-panel">
+                <mat-option *ngFor="let category of categories" [value]="category.value">
+                  {{ category.label }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="isFieldInvalid('category')">
+                Category is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Difficulty</mat-label>
+              <mat-select formControlName="difficulty" panelClass="add-recipe-select-panel">
+                <mat-option *ngFor="let difficulty of difficulties" [value]="difficulty.value">
+                  {{ difficulty.label }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="isFieldInvalid('difficulty')">
+                Difficulty is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row three-column">
+            <mat-form-field appearance="outline">
+              <mat-label>Prep Time</mat-label>
+              <input matInput formControlName="prepTime" placeholder="e.g., 30 minutes">
+              <mat-error *ngIf="isFieldInvalid('prepTime')">
+                Prep time is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Cook Time</mat-label>
+              <input matInput formControlName="cookTime" placeholder="e.g., 1 hour">
+              <mat-error *ngIf="isFieldInvalid('cookTime')">
+                Cook time is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Servings</mat-label>
+              <input matInput type="number" formControlName="servings" min="1" max="50">
+              <mat-error *ngIf="isFieldInvalid('servings')">
+                {{ getFieldError('servings') }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Tags (comma-separated)</mat-label>
+              <input matInput 
+                     formControlName="tags" 
+                     placeholder="e.g., seafood, traditional, spicy">
+              <mat-hint>Separate tags with commas</mat-hint>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Image Upload -->
+      <mat-card class="form-section">
+        <mat-card-header>
+          <mat-card-title>Recipe Image</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="image-upload-section">
+            <div *ngIf="!imagePreview" class="upload-area">
+              <input type="file" 
+                     #fileInput 
+                     (change)="onFileSelected($event)" 
+                     accept="image/*" 
+                     style="display: none;">
+              <button type="button" 
+                      mat-stroked-button 
+                      (click)="fileInput.click()"
+                      class="upload-button">
+                <mat-icon>cloud_upload</mat-icon>
+                Upload Image
+              </button>
+              <p class="upload-hint">Click to upload a recipe image (optional)</p>
+            </div>
+            
+            <div *ngIf="imagePreview" class="image-preview">
+              <img [src]="imagePreview" alt="Recipe preview" class="preview-image">
+              <button type="button" 
+                      mat-icon-button 
+                      (click)="removeImage()" 
+                      class="remove-image-btn">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Ingredients -->
+      <mat-card class="form-section">
+        <mat-card-header>
+          <mat-card-title>Ingredients</mat-card-title>
+          <mat-card-subtitle>List all ingredients needed for your recipe</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div formArrayName="ingredients" class="dynamic-list">
+            <div *ngFor="let ingredient of ingredients.controls; let i = index" 
+                 [formGroupName]="i" 
+                 class="list-item">
+              <mat-form-field appearance="outline" class="list-input">
+                <mat-label>Ingredient {{ i + 1 }}</mat-label>
+                <input matInput formControlName="text" placeholder="e.g., 1 cup flour">
+                <mat-error *ngIf="ingredient.get('text')?.invalid && ingredient.get('text')?.touched">
+                  Ingredient is required
+                </mat-error>
+              </mat-form-field>
+              <button type="button" 
+                      mat-icon-button 
+                      (click)="removeIngredient(i)"
+                      [disabled]="ingredients.length <= 1"
+                      class="remove-btn">
+                <mat-icon>remove_circle_outline</mat-icon>
+              </button>
+            </div>
+            <button type="button" 
+                    mat-stroked-button 
+                    (click)="addIngredient()" 
+                    class="add-btn">
+              <mat-icon>add</mat-icon>
+              Add Ingredient
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Instructions -->
+      <mat-card class="form-section">
+        <mat-card-header>
+          <mat-card-title>Instructions</mat-card-title>
+          <mat-card-subtitle>Step-by-step cooking instructions</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div formArrayName="instructions" class="dynamic-list">
+            <div *ngFor="let instruction of instructions.controls; let i = index" 
+                 [formGroupName]="i" 
+                 class="list-item">
+              <mat-form-field appearance="outline" class="list-input">
+                <mat-label>Step {{ i + 1 }}</mat-label>
+                <textarea matInput 
+                          formControlName="text" 
+                          rows="2"
+                          placeholder="Describe this cooking step..."></textarea>
+                <mat-error *ngIf="instruction.get('text')?.invalid && instruction.get('text')?.touched">
+                  Instruction is required
+                </mat-error>
+              </mat-form-field>
+              <button type="button" 
+                      mat-icon-button 
+                      (click)="removeInstruction(i)"
+                      [disabled]="instructions.length <= 1"
+                      class="remove-btn">
+                <mat-icon>remove_circle_outline</mat-icon>
+              </button>
+            </div>
+            <button type="button" 
+                    mat-stroked-button 
+                    (click)="addInstruction()" 
+                    class="add-btn">
+              <mat-icon>add</mat-icon>
+              Add Step
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end" class="dialog-actions">
+      <button type="button" mat-button (click)="onCancel()">Cancel</button>
+      <button type="submit" 
+              mat-raised-button 
+              color="primary"
+              [disabled]="recipeForm.invalid || isSubmitting">
+        <mat-spinner *ngIf="isSubmitting" diameter="20" class="spinner"></mat-spinner>
+        {{ data?.recipe ? 'Update Recipe' : 'Add Recipe' }}
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>
