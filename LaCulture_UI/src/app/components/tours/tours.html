@@ -1,7 +1,7 @@
 <header>
     <div class="header-content">
         <h1>Tours</h1>
-        <p class="tagline">Laissez les bons temps rouler!</p>
+        <p class="tagline">Browse through many of the tours offered through Louisiana!!</p>
     </div>
 </header>
 
@@ -14,19 +14,34 @@
                 placeholder="Search tours by name or keyword..."
                 aria-label="Search tours"
             >
-            <button aria-label="Search"></button>
+            <button aria-label="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4b006e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </button>
         </div>
     </section>
 
     <section class="tours-section">
         <div class="tours-grid" *ngIf="filteredTours.length > 0">
-            <div class="tour-card" *ngFor="let tour of filteredTours">
-                <h3>{{ tour.name }}</h3>
-                <p>{{ tour.description }}</p>
-                <div class="tour-price">${{ tour.price }}</div>
-            </div>
+            <a 
+                [href]="tour.url" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="tour-card" 
+                *ngFor="let tour of filteredTours"
+            >
+                <div class="tour-card-accent"></div>
+                <img [src]="tour.image" [alt]="tour.name" class="tour-image">
+                <div class="tour-content">
+                    <h3>{{ tour.name }}</h3>
+                    <p>{{ tour.description }}</p>
+                    <div class="tour-price">${{ tour.price }}</div>
+                </div>
+            </a>
         </div>
-        
+    
         <div class="no-results" *ngIf="filteredTours.length === 0">
             <p>No tours found. Try a different search term!</p>
         </div>
