@@ -21,6 +21,7 @@ export class EventsComponent implements OnInit {
   public items = signal<Event[]>([]);
   public isLoading = signal<boolean>(true);
   public error = signal<string | null>(null);
+  public selectedEventForCalendar = signal<Event | null>(null);
 
   public locations = computed(() => ['All', ...new Set(this.items().map(e => e.location))]);
   
@@ -74,22 +75,34 @@ export class EventsComponent implements OnInit {
     this.router.navigate(['/map'], { queryParams: { eventId } });
   }
 
+  public showCalendarDialog(event: Event): void {
+    this.selectedEventForCalendar.set(event);
+  }
+
+  public closeCalendarDialog(): void {
+    this.selectedEventForCalendar.set(null);
+  }
+
   public addToGoogleCalendar(event: Event): void {
     const url = this.calendarService.getGoogleCalendarUrl(event);
     this.calendarService.openCalendarLink(url);
+    this.closeCalendarDialog();
   }
 
   public addToOutlook(event: Event): void {
     const url = this.calendarService.getOutlookUrl(event);
     this.calendarService.openCalendarLink(url);
+    this.closeCalendarDialog();
   }
 
   public addToYahooCalendar(event: Event): void {
     const url = this.calendarService.getYahooCalendarUrl(event);
     this.calendarService.openCalendarLink(url);
+    this.closeCalendarDialog();
   }
 
   public downloadICS(event: Event): void {
     this.calendarService.downloadICS(event);
+    this.closeCalendarDialog();
   }
 }

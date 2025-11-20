@@ -1,15 +1,10 @@
 :host {
   display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
 }
 
 .map-container {
   position: fixed;
-  top: 0;
+  top: 99px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -28,7 +23,7 @@
 }
 
 .section-title {
-  padding-top: 80px;
+  padding-top: 100px;
   font-family: 'Playfair Display', serif;
   color: #4b006e;
   font-size: 3rem;

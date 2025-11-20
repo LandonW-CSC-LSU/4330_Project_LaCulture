@@ -61,29 +61,11 @@
             
             <button 
               mat-raised-button 
-              [matMenuTriggerFor]="calendarMenu"
-              color="primary">
+              color="primary"
+              (click)="showCalendarDialog(event)">
               <mat-icon>event</mat-icon>
               Add to Calendar
             </button>
-            <mat-menu #calendarMenu="matMenu">
-              <button mat-menu-item (click)="addToGoogleCalendar(event)">
-                <mat-icon>event</mat-icon>
-                <span>Google Calendar</span>
-              </button>
-              <button mat-menu-item (click)="addToOutlook(event)">
-                <mat-icon>event</mat-icon>
-                <span>Outlook</span>
-              </button>
-              <button mat-menu-item (click)="addToYahooCalendar(event)">
-                <mat-icon>event</mat-icon>
-                <span>Yahoo Calendar</span>
-              </button>
-              <button mat-menu-item (click)="downloadICS(event)">
-                <mat-icon>download</mat-icon>
-                <span>Download ICS</span>
-              </button>
-            </mat-menu>
             
             @if (event.website) {
               <a [href]="event.website" target="_blank" mat-raised-button color="primary">
@@ -97,3 +79,28 @@
     </div>
   }
 </div>
+
+<!-- Calendar Dialog -->
+@if (selectedEventForCalendar()) {
+  <div class="calendar-dialog-overlay" (click)="closeCalendarDialog()">
+    <div class="calendar-dialog" (click)="$event.stopPropagation()">
+      <h3>Add to Calendar</h3>
+      <p>Select your calendar service:</p>
+      <div class="calendar-options">
+        <button class="calendar-option-btn google" (click)="addToGoogleCalendar(selectedEventForCalendar()!)">
+          <span>📅</span> Google Calendar
+        </button>
+        <button class="calendar-option-btn outlook" (click)="addToOutlook(selectedEventForCalendar()!)">
+          <span>📧</span> Outlook
+        </button>
+        <button class="calendar-option-btn yahoo" (click)="addToYahooCalendar(selectedEventForCalendar()!)">
+          <span>📮</span> Yahoo Calendar
+        </button>
+        <button class="calendar-option-btn ics" (click)="downloadICS(selectedEventForCalendar()!)">
+          <span>💾</span> Download ICS
+        </button>
+      </div>
+      <button class="calendar-close-btn" (click)="closeCalendarDialog()">Cancel</button>
+    </div>
+  </div>
+}
