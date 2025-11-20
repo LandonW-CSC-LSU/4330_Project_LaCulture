@@ -1,64 +1,188 @@
-
 :host {
   display: block;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0d2e7c 0%, #ccdd12 100%);
-  padding: 40px 0;
+  background-color: #FFF8E8;
 }
 
 .events-container {
-  margin-top: 150px;
-  padding: 5px;
+  padding: 120px 32px 32px 32px;
+  min-height: 100vh;
+}
+
+.events-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.events-header h1 {
+  color: #ffffff;
   font-family: serif;
-  font-size: 18px;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #000000;
 }
 
-.filter-container {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: white;
+.category-filter {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  padding-top: 40px;
 }
 
-.filter-container label {
-  margin-right: 0.5rem;
+.category-filter button {
+  background: #4b006e;
+  color: #ffffff; 
+  transition: all 0.3s ease;
+  border: 2px solid #4b006e;
 }
 
-h1 {
-  text-align: center;
-  color: white;
+.category-filter button.active,
+.category-filter button:hover {
+  background: #4b006e;
+  color: #fff;
+  border-color: #4b006e;
 }
 
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.event-list {
+.events-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
+  gap: 24px;
+  margin-bottom: 80px;
+  justify-content: center;
 }
 
-.event-card {
-  border: 2px solid #000000;
-  border-radius: 8px;
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  background: rgb(255, 255, 255);
+.events-card {
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(128, 0, 128, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  background: linear-gradient(135deg, #fff 90%, #f3e6ff 100%);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
 }
 
-.event-card h3 {
-  margin-top: 0;
+.events-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(128, 0, 128, 0.15);
 }
 
-.event-website {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 8px 12px;
-  background-color: rgba(128, 0, 128, 0.85);
-  color: #ffd700;
-  border-radius: 4px; 
+.events-card img {
+  height: 250px;
+  object-fit: cover;
+  width: 100%;
+  object-position: center;
+}
+
+.events-card mat-card-title {
+  color: #4b006e;
   font-family: serif;
-  font-size: 16px;
+  font-size: 1.3rem;
+}
+
+.events-card mat-card-subtitle {
+  color: #8e44ad;
+  font-style: italic;
+}
+
+.events-card mat-card-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.events-card mat-card-content p {
+  color: #555;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.events-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.events-meta span {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.category {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.events-card mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.events-card mat-card-actions button[mat-button] {
+  color: #4b006e;
+  min-width: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  height: auto;
+  line-height: 1;
+}
+
+.events-card mat-card-actions button[mat-button] mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;
+}
+
+.events-card mat-card-actions button[mat-raised-button] {
+  background: #4b006e;
+  color: #fff;
+}
+
+/* Responsive adjustments */
+@media (min-width: 900px) {
+  .events-card img { height: 280px; }
+}
+
+@media (min-width: 1200px) {
+  .events-card img { height: 320px; }
+}
+
+@media (max-width: 768px) {
+  .events-container {
+    padding: 80px 16px 16px 16px;
+  }
+
+  .events-header h1 {
+    font-size: 2rem;
+  }
+
+  .category-filter {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .category-filter button {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .events-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
