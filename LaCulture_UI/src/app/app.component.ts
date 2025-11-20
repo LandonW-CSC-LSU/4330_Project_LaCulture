@@ -63,7 +63,7 @@ import { filter } from 'rxjs/operators';
 export class AppComponent implements OnInit {
   title = 'laculture-ui';
   menuHeaderClass = '';
-  menuOptions = ['Home', 'Recipes', 'Events', 'Map', 'Calendar', 'About'];
+  menuOptions = ['Home', 'Recipes', 'Events', 'Tours', 'Map', 'Calendar', 'About'];
   selectedOption = this.menuOptions[0];
   isHomePage = true;
 
@@ -120,6 +120,9 @@ export class AppComponent implements OnInit {
         break;
       case 'Events':
         this.router.navigate(['/events']);
+        break;
+      case 'Tours':
+        this.router.navigate(['tours']);
         break;
       case 'Map':
         this.router.navigate(['/map']);

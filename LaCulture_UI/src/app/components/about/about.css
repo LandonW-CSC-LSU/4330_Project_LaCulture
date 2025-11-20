@@ -66,6 +66,9 @@ html, body {
 
 /* Introduction Section */
 .intro-section {
+    background-color: #4b006e;
+    padding: 180px 40px 100px 40px;
+    min-height: 400px;
     background-color: #FFF8E8;
     padding: 60px 40px;
     display: flex;
@@ -249,6 +252,9 @@ html, body {
 
 /* Closing Section */
 .closing-section {
+    background-color: #4b006e;
+    padding: 100px 40px;
+    min-height: 400px;
     background-color: #FFF8E8;
     padding: 80px 40px 100px 40px;
     display: flex;

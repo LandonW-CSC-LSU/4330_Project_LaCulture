@@ -84,7 +84,7 @@
 }
 
 .map-select {
-  padding: 6px 8px;
+  padding: 8px;
   border-radius: 6px;
   border: 1px solid #4b006e;
   font-size: 14px;
@@ -99,6 +99,8 @@
 }
 
 .map-reset {
+  padding: 8px;
+  background: rgba(128, 0, 128, 0.95);
   padding: 6px 10px;
   background: #4b006e;
   color: white;
@@ -113,6 +115,26 @@
 .map-reset:hover {
   background: #6a1b9a;
 }
+
+.heat-container {
+  padding: 8px;
+  height: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.heat-toggle-label {
+  user-select: none;
+  font-size: 14px;
+}
+
+.heat-toggle {
+  accent-color: rgba(128, 0, 128, 0.95);
+  transform: scale(1.2);
+}
+
 
 .leaflet-top.leaflet-right .leaflet-control {
   margin-top: 10px;
