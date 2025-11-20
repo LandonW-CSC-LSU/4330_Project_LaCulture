@@ -1,4 +1,7 @@
 import { Component, AfterViewInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { EventService } from '../../services/event.service';
+import { Event } from '../../models/event.model';
 
 @Component({
   selector: 'app-map',
@@ -11,6 +14,13 @@ export class MapComponent implements AfterViewInit, OnDestroy {
   private map: any;
   private L: any;
   private view: any;
+  private markers: Map<number, any> = new Map();
+  private highlightedEventId: number | null = null;
+
+  constructor(
+    private eventService: EventService,
+    private route: ActivatedRoute
+  ) {}
 
   async ngAfterViewInit(): Promise<void> {
     const L = await import('leaflet');
@@ -28,7 +38,8 @@ export class MapComponent implements AfterViewInit, OnDestroy {
       detectRetina: true
     }).addTo(this.map);
 
-    this.addMapPoints();
+    // Load events from API and add markers
+    this.loadEventsAndAddMarkers();
 
     const viewControl = (L as any).control({ position: 'topright' });
 
@@ -44,7 +55,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
       // prevent map drag when clicking on the select box
       L.DomEvent.disableClickPropagation(div);
-      L.DomEvent.on(select, 'change', (e: Event) => this.changeView(e));
+      L.DomEvent.on(select, 'change', (e: any) => this.changeView(e));
       const resetBtn = L.DomUtil.create('button', 'map-reset', div);
       resetBtn.textContent = 'Reset View';
       L.DomEvent.disableClickPropagation(resetBtn);
@@ -56,9 +67,18 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
   viewControl.addTo(this.map);
   this.changeView({ target: { value: 'neworleans' } } as any);
+
+  // Check for eventId query parameter
+  this.route.queryParams.subscribe(params => {
+    const eventId = params['eventId'];
+    if (eventId) {
+      this.highlightedEventId = +eventId;
+      this.highlightEvent(+eventId);
+    }
+  });
   }
 
-  changeView(event: Event): void {
+  changeView(event: any): void {
     const view = (event.target as HTMLSelectElement).value;
 
     const views = {
@@ -92,6 +112,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     this.view = (views as any)[view];
     this.setView();
   }
+  
   setView(): void {
     this.map.options.minZoom = this.view.minZoom;
     this.map.setView(this.view.center, this.view.zoom);
@@ -110,51 +131,62 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-//Functionality is placeholder to the actual function which will load from events API (being worked on now)
+  private loadEventsAndAddMarkers(): void {
+    this.eventService.getAllEvents().subscribe({
+      next: (events) => {
+        this.addMapPoints(events);
+      },
+      error: (err) => {
+        console.error('Error loading events for map:', err);
+        // Optionally show error message to user
+      }
+    });
+  }
 
-  addMapPoints(): void {
-
+  private addMapPoints(events: Event[]): void {
     const markerIcon = this.L.icon({
       iconUrl: 'assets/images/betterstar.png',
       iconSize: [40,40],
       iconAnchor: [22, 21]
     });
 
-    const events: MapEvent[] = [
-      { id: 1,  title: 'LSU vs Texas A&M',               date: '10/25/2025',         location: 'Baton Rouge',      website: 'https://lsusports.evenue.net/list/FB', coords: [30.4120, -91.1830] },
-      { id: 2,  title: 'Saints vs Buccaneers',           date: '10/26/2025',         location: 'New Orleans',      website: 'https://www.neworleanssaints.com/tickets/', coords: [29.9511, -90.0812] },
-      { id: 3,  title: 'National Fried Chicken Festival', date: '10/4-5/2025',        location: 'New Orleans',      website: 'https://www.friedchickenfestival.com/', coords: [29.9935, -90.0640] },
-      { id: 4,  title: 'Oktoberfest',                    date: '10/10-25/2025',      location: 'New Orleans',      website: 'https://deutscheshaus.org/oktoberfest/', coords: [29.9903, -90.0930] },
-      { id: 5,  title: 'Nola Funk Fest 2025',            date: '10/17-19/2025',      location: 'New Orleans',      website: 'https://www.nolafunkfest.com/', coords: [29.9412, -90.0672] },
-      { id: 6,  title: 'Praise Fest',                    date: '10/17-19/2025',      location: 'New Orleans',      website: 'https://www.praisefestnola.com/', coords: [29.9538, -90.0638] },
-      { id: 7,  title: 'New Orleans Film Festival',      date: '10/23/2025–11/2/2025', location: 'New Orleans',    website: 'https://neworleansfilmsociety.org/attend/', coords: [29.9520, -90.0700] },
-      { id: 8,  title: 'HNO Halloween New Orleans',      date: '10/24-26/2025',      location: 'New Orleans',      website: 'https://www.halloweenneworleans.com/', coords: [29.9570, -90.0620] },
-      { id: 9,  title: 'NOLA Reggae Fest',               date: '10/24-26/2025',      location: 'New Orleans',      website: 'https://www.eventbrite.com/e/2025-nola-reggae-fest-tickets-1369000991819', coords: [29.9880, -90.0930] },
-      { id: 10, title: 'Krewe of BOO!',                  date: '10/25/2025',         location: 'New Orleans',      website: 'https://www.kreweofboo.com/', coords: [29.9510, -90.0720] },
-      { id: 11, title: 'Treme Fall Fest',                date: '10/25/2025',         location: 'New Orleans',      website: 'https://www.tremefest.org/', coords: [29.9713, -90.0707] },
-      { id: 12, title: 'NOLA MusiCon',                   date: '10/28-30/2025',      location: 'New Orleans',      website: 'https://www.nolamusicon.com/', coords: [29.9412, -90.0672] },
-      { id: 13, title: 'Bayou Bacchanal',                date: '10/31–11/1/2025',    location: 'New Orleans',      website: 'https://www.friendsofculture.org/', coords: [29.9688, -90.0715] },
-      { id: 14, title: 'Freret Street Fall Festival',    date: '11/1/2025',          location: 'New Orleans',      website: 'https://freretstreetfestival.org/', coords: [29.9386, -90.1030] },
-      { id: 15, title: 'Tremé Creole Gumbo Festival',    date: '11/8-9/2025',        location: 'New Orleans',      website: 'https://www.jazzandheritage.org/events/2025-treme-creole-gumbo-festival/', coords: [29.9670, -90.0708] },
-      { id: 16, title: 'Beignet Fest',                   date: '11/15/2025',         location: 'New Orleans',      website: 'https://beignetfest.com/', coords: [29.9895, -90.0945] }
-    ];
+    const highlightedIcon = this.L.icon({
+      iconUrl: 'assets/images/betterstar.png',
+      iconSize: [60,60],
+      iconAnchor: [30, 30]
+    });
+
     for (const event of events) {
-      this.L.marker(event.coords, { icon: markerIcon })
+      const coords: [number, number] = [event.latitude, event.longitude];
+      const isHighlighted = event.id === this.highlightedEventId;
+      
+      const marker = this.L.marker(coords, { 
+        icon: isHighlighted ? highlightedIcon : markerIcon 
+      })
       .addTo(this.map)
       .bindTooltip(`${event.title} — ${event.date}`)
-      .on('click', () => window.open(event.website, '_blank'));
+      .on('click', () => {
+        if (event.website) {
+          window.open(event.website, '_blank');
+        }
+      });
+
+      this.markers.set(event.id, marker);
+
+      // If this is the highlighted event, open its popup and pan to it
+      if (isHighlighted) {
+        marker.openTooltip();
+        this.map.setView(coords, 15, { animate: true });
+      }
     }
-    
   }
 
-  
-}
-
-interface MapEvent {
-  id: number;
-  title: string;
-  date: string;
-  location: string;
-  website: string;
-  coords: [number, number];
+  private highlightEvent(eventId: number): void {
+    const marker = this.markers.get(eventId);
+    if (marker) {
+      const coords = marker.getLatLng();
+      this.map.setView([coords.lat, coords.lng], 15, { animate: true });
+      marker.openTooltip();
+    }
+  }
 }
