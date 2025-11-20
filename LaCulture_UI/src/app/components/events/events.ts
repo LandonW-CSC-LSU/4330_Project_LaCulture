@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 interface Event {
   id: number;
@@ -11,7 +14,7 @@ interface Event {
 
 @Component({
   selector: 'app-events',
-  imports: [CommonModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule],
   templateUrl: './events.html', 
   styleUrls: ['./events.css'],
   changeDetection: ChangeDetectionStrategy.OnPush

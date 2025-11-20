@@ -1,64 +1,188 @@
-
-:host {
-  display: block;
+.events-container {
+  background-color: #FFF8E8;
+  position: relative;             
+  padding: 40px 5vw;                
   min-height: 100vh;
-  background: linear-gradient(135deg, #0d2e7c 0%, #ccdd12 100%);
-  padding: 40px 0;
 }
 
-.events-container {
-  margin-top: 150px;
-  padding: 5px;
-  font-family: serif;
-  font-size: 18px;
+.events-header {
+  grid-column: 1 / -1;
+  margin-bottom: 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.section-title {
+  padding-top: 100px;
+  font-family: 'Playfair Display', serif;
+  color: #4b006e;
+  font-size: 4rem;
+  margin: 0 auto 6px auto;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  max-width: 1600px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.section-title::before,
+.section-title::after {
+  content: "";
+  flex: 1 1 1rem;
+  height: 6px;
+  background: #4b006e;
+  border-radius: 3px;
+  box-shadow: 0 6px 14px rgba(75,0,110,0.08);
+  min-width: 40px;
+  max-width: calc(50% - 5rem);
+}
+
+.section-title::before { margin-right: 12px; }
+.section-title::after { margin-left: 12px; }
+
+.section-lead {
+  color: #666;
+  font-size: 1rem;
+  margin: 0 auto 12px auto;
+  max-width: 760px;
 }
 
 .filter-container {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: white;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
 }
 
-.filter-container label {
-  margin-right: 0.5rem;
+.filter-container button {
+  background: #4b006e;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  border: 2px solid #4b006e;
 }
 
-h1 {
-  text-align: center;
-  color: white;
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
+.filter-container button.active,
+.filter-container button:hover {
+  color: #4b006e;
+  background: #ffffff;
+  border: 2px solid #4b006e;
 }
 
 .event-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
+  gap: 24px;
+  margin-bottom: 80px;
+  justify-content: center;
 }
 
 .event-card {
-  border: 2px solid #000000;
-  border-radius: 8px;
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  background: rgb(255, 255, 255);
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  background: linear-gradient(135deg, #fff 90%, #f3e6ff 100%);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
 }
 
-.event-card h3 {
-  margin-top: 0;
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(128, 0, 128, 0.15);
 }
 
-.event-website {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 8px 12px;
-  background-color: rgba(128, 0, 128, 0.85);
-  color: #ffd700;
-  border-radius: 4px; 
-  font-family: serif;
-  font-size: 16px;
+.event-card mat-card-header {
+  padding: 16px;
+  background: linear-gradient(135deg, #f8f8ff 0%, #f3e6ff 100%);
+}
+
+.event-card mat-card-title {
+  color: #4b006e;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.event-card mat-card-subtitle {
+  color: #7b1fa2;
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.event-card mat-card-content {
+  padding: 16px;
+  flex-grow: 1;
+}
+
+.event-date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #555;
+  font-size: 1rem;
+}
+
+.event-date mat-icon {
+  color: #4b006e;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.event-card mat-card-actions {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.event-card mat-card-actions a[mat-raised-button] {
+  background: #4b006e;
+  color: #ffffff;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.event-card mat-card-actions a[mat-raised-button]:hover {
+  background: #6a1b9a;
+}
+
+.event-card mat-card-actions mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 768px) {
+  .events-container {
+    padding: 80px 16px 16px 16px;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    padding-top: 60px;
+  }
+
+  .filter-container button {
+    width: 70%;
+    max-width: 200px;
+  }
+
+  .event-list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
