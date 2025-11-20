@@ -27,6 +27,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
   async ngAfterViewInit(): Promise<void> {
     const L = await import('leaflet');
+    // @ts-ignore - leaflet.heat module exists at runtime
     await import('leaflet.heat');
     this.L = (window as any).L;
     console.log("HeatLayer exists now?", this.L.heatLayer);
@@ -281,27 +282,33 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
 
   addMapPoints(events: MapEvent[]): void {
-
     const markerIcon = this.L.icon({
       iconUrl: 'assets/images/betterstar.png',
       iconSize: [40,40],
       iconAnchor: [22, 21]
     });
 
+    for (const event of events) {
+      const marker = this.L.marker(event.coords, { icon: markerIcon })
+      .addTo(this.map)
+      .bindTooltip(`${event.title} — ${event.date}`)
+      .on('click', () => window.open(event.website, '_blank'));
+    }
+  }
+
   private loadEventsAndAddMarkers(): void {
     this.eventService.getAllEvents().subscribe({
       next: (events) => {
-        this.addMapPoints(events);
+        this.addDatabaseMapPoints(events);
         this.setupCalendarIntegration(events);
       },
       error: (err) => {
         console.error('Error loading events for map:', err);
-        // Optionally show error message to user
       }
     });
   }
 
-  private addMapPoints(events: Event[]): void {
+  private addDatabaseMapPoints(events: Event[]): void {
     // Create custom div icon with fleur-de-lis emoji
     const markerIcon = this.L.divIcon({
       html: '<div style="font-size: 36px; filter: drop-shadow(0 0 2px rgba(0,0,0,1)) drop-shadow(0 0 4px rgba(0,0,0,0.8));">⚜️</div>',
@@ -328,40 +335,6 @@ export class MapComponent implements AfterViewInit, OnDestroy {
         icon: isHighlighted ? highlightedIcon : markerIcon 
       })
       .addTo(this.map)
-      .bindTooltip(`${event.title} — ${event.date}`)
-      .on('click', () => window.open(event.website, '_blank'));
-
-    }
-    
-  }
-
-  addHeatmap(events: MapEvent[]): void {
-    const heatPoints=events.map(e => [
-      e.coords[0],
-      e.coords[1],
-      e.popularity*2
-    ])
-
-    this.heatmapLayer=this.L.heatLayer(heatPoints, {
-      radius: 60,
-      blur: 50,
-      maxZoom:14,
-      max: 1.0
-    });
-    this.map.addLayer(this.heatmapLayer)
-  }
-  
-}
-
-
-interface MapEvent {
-  id: number;
-  title: string;
-  popularity: number;
-  date: string;
-  location: string;
-  website: string;
-  coords: [number, number];
       .bindPopup(popupContent, { 
         maxWidth: 300,
         className: 'event-popup'
@@ -410,13 +383,6 @@ interface MapEvent {
   }
 
   private showCalendarOptions(event: Event): void {
-    const options = [
-      { name: 'Google Calendar', action: () => this.addToGoogleCalendar(event) },
-      { name: 'Outlook', action: () => this.addToOutlook(event) },
-      { name: 'Yahoo Calendar', action: () => this.addToYahooCalendar(event) },
-      { name: 'Download ICS', action: () => this.downloadICS(event) }
-    ];
-
     const choice = confirm(
       `Add "${event.title}" to your calendar:\n\n` +
       '1. Google Calendar\n' +
@@ -429,7 +395,6 @@ interface MapEvent {
     if (choice) {
       this.addToGoogleCalendar(event);
     } else {
-      // Show a more sophisticated dialog
       this.showCalendarDialog(event);
     }
   }
@@ -512,12 +477,38 @@ interface MapEvent {
     this.calendarService.downloadICS(event);
   }
 
+  addHeatmap(events: MapEvent[]): void {
+    const heatPoints = events.map(e => [
+      e.coords[0],
+      e.coords[1],
+      e.popularity * 2
+    ]);
+
+    this.heatmapLayer = this.L.heatLayer(heatPoints, {
+      radius: 60,
+      blur: 50,
+      maxZoom: 14,
+      max: 1.0
+    });
+    this.map.addLayer(this.heatmapLayer);
+  }
+
   private highlightEvent(eventId: number): void {
     const marker = this.markers.get(eventId);
     if (marker) {
       const coords = marker.getLatLng();
       this.map.setView([coords.lat, coords.lng], 15, { animate: true });
-      marker.openTooltip();
+      marker.openPopup();
     }
   }
+}
+
+interface MapEvent {
+  id: number;
+  title: string;
+  popularity: number;
+  date: string;
+  location: string;
+  website: string;
+  coords: [number, number];
 }

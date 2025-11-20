@@ -8,6 +8,7 @@ export interface Event {
   longitude: number;
   description?: string;
   category?: string;
+  image?: string;
 }
 
 export interface CreateEventDto {

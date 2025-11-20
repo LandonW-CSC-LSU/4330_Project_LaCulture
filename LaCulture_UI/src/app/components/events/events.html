@@ -1,18 +1,5 @@
 <div class="events-container">
   <div class="events-header">
-    <h1>Upcoming Events</h1>
-  </div>
-
-  <div class="category-filter">
-    <button
-      *ngFor="let loc of locations()"
-      mat-raised-button
-      [class.active]="selectedLocation() === loc"
-      (click)="filterByLocation(loc)">
-      {{ loc }}
-    </button>
-  </div>
-  <div class="events-header">
     <h2 class="section-title">Upcoming Events</h2>
     <p class="section-lead">Discover exciting events happening across Louisiana</p>
   </div>
@@ -44,33 +31,6 @@
         {{location}}
       </button>
     </div>
-
-  <!-- Events grid (uses the recipes grid and card styles so the look matches) -->
-  <div class="events-grid">
-    <mat-card *ngFor="let event of filteredEvents(); trackBy: trackByEventId" class="events-card">
-    <img mat-card-image [src]="event.image || 'assets/images/placeholder.jpg'" alt="{{ event.title }}" (error)="$event.target.src='assets/images/placeholder.jpg'">
-
-      <mat-card-header>
-        <mat-card-title>{{ event.title }}</mat-card-title>
-        <mat-card-subtitle>{{ event.location }}</mat-card-subtitle>
-      </mat-card-header>
-
-      <mat-card-content>
-        <p><strong>Date:</strong> {{ event.date }}</p>
-      </mat-card-content>
-
-      <mat-card-actions>
-        <a mat-button color="primary" [href]="event.website" target="_blank" *ngIf="event.website">
-          <mat-icon>launch</mat-icon>
-          Event Website!
-        </a>
-        <button mat-button disabled>
-          <mat-icon>event</mat-icon>
-          {{ event.date }}
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
 
     <div class="event-list">
       @for(event of filteredEvents(); track event.id){
