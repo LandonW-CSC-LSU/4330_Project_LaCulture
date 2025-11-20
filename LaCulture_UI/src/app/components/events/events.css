@@ -167,18 +167,33 @@
   box-shadow: 0 4px 8px rgba(75, 0, 110, 0.3);
 }
 
-.event-card mat-card-actions button[mat-raised-button][color="accent"] {
-  background: #8e44ad;
+.event-card mat-card-actions button[mat-raised-button][color="primary"] {
+  background: #4b006e;
 }
 
-.event-card mat-card-actions button[mat-raised-button][color="accent"]:hover {
-  background: #9b59b6;
+.event-card mat-card-actions button[mat-raised-button][color="primary"]:hover {
+  background: #6a1b9a;
 }
 
 .event-card mat-card-actions mat-icon {
   font-size: 18px;
   width: 18px;
   height: 18px;
+}
+
+/* Calendar menu styling */
+::ng-deep .mat-mdc-menu-panel {
+  min-width: 200px;
+}
+
+::ng-deep .mat-mdc-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+::ng-deep .mat-mdc-menu-item mat-icon {
+  color: #4b006e;
 }
 
 .event-description {

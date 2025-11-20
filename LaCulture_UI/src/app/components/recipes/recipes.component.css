@@ -238,10 +238,24 @@
   justify-content: center;
   padding: 60px 20px;
   text-align: center;
+  min-height: 400px;
+}
+
+.loading-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  color: #4b006e;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .loading-container p {
-  color: #fff;
+  color: #4b006e;
   margin-top: 16px;
   font-size: 1.1rem;
 }

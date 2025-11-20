@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EventService } from '../../services/event.service';
+import { CalendarService } from '../../services/calendar.service';
 import { Event } from '../../models/event.model';
 
 @Component({
@@ -19,6 +20,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private eventService: EventService,
+    private calendarService: CalendarService,
     private route: ActivatedRoute
   ) {}
 
@@ -135,6 +137,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     this.eventService.getAllEvents().subscribe({
       next: (events) => {
         this.addMapPoints(events);
+        this.setupCalendarIntegration(events);
       },
       error: (err) => {
         console.error('Error loading events for map:', err);
@@ -144,15 +147,18 @@ export class MapComponent implements AfterViewInit, OnDestroy {
   }
 
   private addMapPoints(events: Event[]): void {
-    const markerIcon = this.L.icon({
-      iconUrl: 'assets/images/betterstar.png',
-      iconSize: [40,40],
-      iconAnchor: [22, 21]
+    // Create custom div icon with fleur-de-lis emoji
+    const markerIcon = this.L.divIcon({
+      html: '<div style="font-size: 36px; filter: drop-shadow(0 0 2px rgba(0,0,0,1)) drop-shadow(0 0 4px rgba(0,0,0,0.8));">⚜️</div>',
+      className: 'custom-marker-icon',
+      iconSize: [40, 40],
+      iconAnchor: [20, 20]
     });
 
-    const highlightedIcon = this.L.icon({
-      iconUrl: 'assets/images/betterstar.png',
-      iconSize: [60,60],
+    const highlightedIcon = this.L.divIcon({
+      html: '<div style="font-size: 54px; filter: drop-shadow(0 0 3px rgba(0,0,0,1)) drop-shadow(0 0 6px rgba(0,0,0,0.8));">⚜️</div>',
+      className: 'custom-marker-icon-highlighted',
+      iconSize: [60, 60],
       iconAnchor: [30, 30]
     });
 
@@ -160,25 +166,161 @@ export class MapComponent implements AfterViewInit, OnDestroy {
       const coords: [number, number] = [event.latitude, event.longitude];
       const isHighlighted = event.id === this.highlightedEventId;
       
+      // Create popup content with calendar button
+      const popupContent = this.createPopupContent(event);
+      
       const marker = this.L.marker(coords, { 
         icon: isHighlighted ? highlightedIcon : markerIcon 
       })
       .addTo(this.map)
-      .bindTooltip(`${event.title} — ${event.date}`)
+      .bindPopup(popupContent, { 
+        maxWidth: 300,
+        className: 'event-popup'
+      })
       .on('click', () => {
-        if (event.website) {
-          window.open(event.website, '_blank');
-        }
+        marker.openPopup();
       });
 
       this.markers.set(event.id, marker);
 
       // If this is the highlighted event, open its popup and pan to it
       if (isHighlighted) {
-        marker.openTooltip();
+        marker.openPopup();
         this.map.setView(coords, 15, { animate: true });
       }
     }
+  }
+
+  private createPopupContent(event: Event): string {
+    return `
+      <div class="map-event-popup">
+        <h3>${event.title}</h3>
+        <p class="event-date"><strong>📅 ${event.date}</strong></p>
+        <p class="event-location">📍 ${event.location}</p>
+        ${event.description ? `<p class="event-description">${event.description}</p>` : ''}
+        <div class="popup-actions">
+          ${event.website ? `<a href="${event.website}" target="_blank" class="popup-btn website-btn">
+            <span>🌐</span> Visit Website
+          </a>` : ''}
+          <button class="popup-btn calendar-btn" onclick="window.addEventToCalendar(${event.id})">
+            <span>📅</span> Add to Calendar
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  private setupCalendarIntegration(events: Event[]): void {
+    // Expose calendar function to window for popup buttons
+    (window as any).addEventToCalendar = (eventId: number) => {
+      const event = events.find(e => e.id === eventId);
+      if (event) {
+        this.showCalendarOptions(event);
+      }
+    };
+  }
+
+  private showCalendarOptions(event: Event): void {
+    const options = [
+      { name: 'Google Calendar', action: () => this.addToGoogleCalendar(event) },
+      { name: 'Outlook', action: () => this.addToOutlook(event) },
+      { name: 'Yahoo Calendar', action: () => this.addToYahooCalendar(event) },
+      { name: 'Download ICS', action: () => this.downloadICS(event) }
+    ];
+
+    const choice = confirm(
+      `Add "${event.title}" to your calendar:\n\n` +
+      '1. Google Calendar\n' +
+      '2. Outlook\n' +
+      '3. Yahoo Calendar\n' +
+      '4. Download ICS file\n\n' +
+      'Click OK to choose Google Calendar, or Cancel to see other options.'
+    );
+
+    if (choice) {
+      this.addToGoogleCalendar(event);
+    } else {
+      // Show a more sophisticated dialog
+      this.showCalendarDialog(event);
+    }
+  }
+
+  private showCalendarDialog(event: Event): void {
+    const dialog = document.createElement('div');
+    dialog.className = 'calendar-dialog-overlay';
+    dialog.innerHTML = `
+      <div class="calendar-dialog">
+        <h3>Add to Calendar</h3>
+        <p>Select your calendar service:</p>
+        <div class="calendar-options">
+          <button class="calendar-option-btn google" data-type="google">
+            <span>📅</span> Google Calendar
+          </button>
+          <button class="calendar-option-btn outlook" data-type="outlook">
+            <span>📧</span> Outlook
+          </button>
+          <button class="calendar-option-btn yahoo" data-type="yahoo">
+            <span>📮</span> Yahoo Calendar
+          </button>
+          <button class="calendar-option-btn ics" data-type="ics">
+            <span>💾</span> Download ICS
+          </button>
+        </div>
+        <button class="calendar-close-btn">Cancel</button>
+      </div>
+    `;
+
+    document.body.appendChild(dialog);
+
+    // Add event listeners
+    dialog.querySelector('.google')?.addEventListener('click', () => {
+      this.addToGoogleCalendar(event);
+      document.body.removeChild(dialog);
+    });
+
+    dialog.querySelector('.outlook')?.addEventListener('click', () => {
+      this.addToOutlook(event);
+      document.body.removeChild(dialog);
+    });
+
+    dialog.querySelector('.yahoo')?.addEventListener('click', () => {
+      this.addToYahooCalendar(event);
+      document.body.removeChild(dialog);
+    });
+
+    dialog.querySelector('.ics')?.addEventListener('click', () => {
+      this.downloadICS(event);
+      document.body.removeChild(dialog);
+    });
+
+    dialog.querySelector('.calendar-close-btn')?.addEventListener('click', () => {
+      document.body.removeChild(dialog);
+    });
+
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) {
+        document.body.removeChild(dialog);
+      }
+    });
+  }
+
+  private addToGoogleCalendar(event: Event): void {
+    const url = this.calendarService.getGoogleCalendarUrl(event);
+    this.calendarService.openCalendarLink(url);
+  }
+
+  private addToOutlook(event: Event): void {
+    const url = this.calendarService.getOutlookUrl(event);
+    this.calendarService.openCalendarLink(url);
+  }
+
+  private addToYahooCalendar(event: Event): void {
+    const url = this.calendarService.getYahooCalendarUrl(event);
+    this.calendarService.openCalendarLink(url);
+  }
+
+  private downloadICS(event: Event): void {
+    this.calendarService.downloadICS(event);
   }
 
   private highlightEvent(eventId: number): void {

@@ -125,7 +125,7 @@ export class AppComponent implements OnInit {
         this.router.navigate(['/map']);
         break;
       case 'Calendar':
-        this.router.navigate(['/Calendar']);
+        this.router.navigate(['/calendar']);
         break;
       case 'About':
         this.router.navigate(['/about']);

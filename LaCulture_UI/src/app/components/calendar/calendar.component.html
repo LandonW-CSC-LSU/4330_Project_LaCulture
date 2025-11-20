@@ -1,5 +1,4 @@
 <div class="calendar-page">
-
   <div class="calendar">
     <div class="calendar-header">
       <button (click)="prevMonth()">&#10094;</button>
@@ -11,18 +10,90 @@
       <div *ngFor="let day of weekDays">{{ day }}</div>
     </div>
 
-    <div class="calendar-grid">
+    <div *ngIf="loading()" class="loading-container">
+      <mat-icon class="loading-icon">hourglass_empty</mat-icon>
+      <p>Loading events...</p>
+    </div>
+
+    <div *ngIf="!loading()" class="calendar-grid">
       <div *ngFor="let day of days"
            class="calendar-day"
            [class.empty]="!day"
            [class.today]="isToday(day)">
         <div class="day-number">{{ day || '' }}</div>
         <ul class="day-events" *ngIf="day">
-          <li *ngFor="let event of getEventsForDay(day)">
+          <li *ngFor="let event of getEventsForDay(day)" 
+              (click)="openEventDetails(event)"
+              [title]="event.title">
             {{ event.title }}
           </li>
         </ul>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Event Details Modal -->
+<div class="event-modal-overlay" *ngIf="showEventModal" (click)="closeEventModal()">
+  <div class="event-modal" (click)="$event.stopPropagation()" *ngIf="selectedEvent">
+    <button class="modal-close" (click)="closeEventModal()">&times;</button>
+    
+    <h2>{{ selectedEvent.title }}</h2>
+    
+    <div class="event-details">
+      <div class="detail-row">
+        <span class="detail-icon">📅</span>
+        <span class="detail-text">{{ selectedEvent.date }}</span>
+      </div>
+      
+      <div class="detail-row">
+        <span class="detail-icon">📍</span>
+        <span class="detail-text">{{ selectedEvent.location }}</span>
+      </div>
+      
+      <div class="detail-row" *ngIf="selectedEvent.category">
+        <span class="detail-icon">🏷️</span>
+        <span class="detail-text">{{ selectedEvent.category }}</span>
+      </div>
+      
+      <div class="detail-row description" *ngIf="selectedEvent.description">
+        <p>{{ selectedEvent.description }}</p>
+      </div>
+    </div>
+    
+    <div class="modal-actions">
+      <a *ngIf="selectedEvent.website" 
+         [href]="selectedEvent.website" 
+         target="_blank" 
+         class="btn btn-website">
+        <span>🌐</span> Visit Website
+      </a>
+      <button class="btn btn-calendar" (click)="openCalendarDialog()">
+        <span>📅</span> Add to Calendar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Calendar Selection Dialog -->
+<div class="calendar-dialog-overlay" *ngIf="showCalendarDialog" (click)="closeCalendarDialog()">
+  <div class="calendar-dialog" (click)="$event.stopPropagation()">
+    <h3>Add to Calendar</h3>
+    <p>Select your calendar service:</p>
+    <div class="calendar-options">
+      <button class="calendar-option-btn" (click)="addToGoogleCalendar()">
+        <span>📅</span> Google Calendar
+      </button>
+      <button class="calendar-option-btn" (click)="addToOutlook()">
+        <span>📧</span> Outlook
+      </button>
+      <button class="calendar-option-btn" (click)="addToYahooCalendar()">
+        <span>📮</span> Yahoo Calendar
+      </button>
+      <button class="calendar-option-btn" (click)="downloadICS()">
+        <span>💾</span> Download ICS
+      </button>
+    </div>
+    <button class="calendar-close-btn" (click)="closeCalendarDialog()">Cancel</button>
   </div>
 </div>

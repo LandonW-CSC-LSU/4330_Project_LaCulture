@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-interface CalendarEvent {
-  date: string; // or Date if you prefer
-  title: string;
-}
+import { MatIconModule } from '@angular/material/icon';
+import { EventService } from '../../services/event.service';
+import { CalendarService } from '../../services/calendar.service';
+import { Event } from '../../models/event.model';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css'],
-   imports: [CommonModule]
+  standalone: true,
+  imports: [CommonModule, MatIconModule],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarComponent implements OnInit {
   currentMonth: number = new Date().getMonth();
@@ -22,17 +23,37 @@ export class CalendarComponent implements OnInit {
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
-  events: CalendarEvent[] = [
-    { date: '2025-10-10', title: 'Meeting' },
-    { date: '2025-10-12', title: 'Appointment' },
-    { date: '2025-10-12', title: 'Schedule' },
-    { date: '2025-10-15', title: 'Conference' },
-    { date: '2025-10-17', title: 'Project Demo' },
-    // Add more events here
-  ];
+  events = signal<Event[]>([]);
+  selectedEvent: Event | null = null;
+  showEventModal: boolean = false;
+  showCalendarDialog: boolean = false;
+  loading = signal<boolean>(true);
+
+  constructor(
+    private eventService: EventService,
+    private calendarService: CalendarService
+  ) {}
 
   ngOnInit(): void {
+    console.log('Calendar component initialized');
     this.generateDays();
+    this.loadEvents();
+  }
+
+  loadEvents(): void {
+    console.log('Loading events...');
+    this.loading.set(true);
+    this.eventService.getAllEvents().subscribe({
+      next: (events) => {
+        console.log('Events loaded:', events);
+        this.events.set(events);
+        this.loading.set(false);
+      },
+      error: (err) => {
+        console.error('Error loading events:', err);
+        this.loading.set(false);
+      }
+    });
   }
 
   // Generate the days of the current month
@@ -82,10 +103,73 @@ export class CalendarComponent implements OnInit {
   }
 
   // Get events for a specific day
-  getEventsForDay(day: number): CalendarEvent[] {
-    const dayString = `${this.currentYear}-${(this.currentMonth + 1)
-      .toString()
-      .padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-    return this.events.filter(event => event.date === dayString);
+  getEventsForDay(day: number): Event[] {
+    if (!day) return [];
+    
+    return this.events().filter(event => {
+      const eventDate = new Date(event.date);
+      return eventDate.getDate() === day &&
+             eventDate.getMonth() === this.currentMonth &&
+             eventDate.getFullYear() === this.currentYear;
+    });
+  }
+
+  // Open event details modal
+  openEventDetails(event: Event): void {
+    this.selectedEvent = event;
+    this.showEventModal = true;
+  }
+
+  // Close event modal
+  closeEventModal(): void {
+    this.showEventModal = false;
+    this.selectedEvent = null;
+  }
+
+  // Open calendar dialog
+  openCalendarDialog(): void {
+    if (this.selectedEvent) {
+      this.showCalendarDialog = true;
+    }
+  }
+
+  // Close calendar dialog
+  closeCalendarDialog(): void {
+    this.showCalendarDialog = false;
+  }
+
+  // Add to Google Calendar
+  addToGoogleCalendar(): void {
+    if (this.selectedEvent) {
+      const url = this.calendarService.getGoogleCalendarUrl(this.selectedEvent);
+      this.calendarService.openCalendarLink(url);
+      this.closeCalendarDialog();
+    }
+  }
+
+  // Add to Outlook
+  addToOutlook(): void {
+    if (this.selectedEvent) {
+      const url = this.calendarService.getOutlookUrl(this.selectedEvent);
+      this.calendarService.openCalendarLink(url);
+      this.closeCalendarDialog();
+    }
+  }
+
+  // Add to Yahoo Calendar
+  addToYahooCalendar(): void {
+    if (this.selectedEvent) {
+      const url = this.calendarService.getYahooCalendarUrl(this.selectedEvent);
+      this.calendarService.openCalendarLink(url);
+      this.closeCalendarDialog();
+    }
+  }
+
+  // Download ICS file
+  downloadICS(): void {
+    if (this.selectedEvent) {
+      this.calendarService.downloadICS(this.selectedEvent);
+      this.closeCalendarDialog();
+    }
   }
 }

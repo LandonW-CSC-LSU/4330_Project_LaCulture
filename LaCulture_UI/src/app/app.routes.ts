@@ -12,7 +12,7 @@ export const routes: Routes = [
   { path: 'recipes', component: RecipesComponent },
   { path: 'map', component: MapComponent },
   { path: 'events', component: EventsComponent },
-  { path: 'Calendar', component: CalendarComponent },
+  { path: 'calendar', component: CalendarComponent },
   { path: 'about', component: AboutComponent},
   { path: '**', redirectTo: '' }
 ];

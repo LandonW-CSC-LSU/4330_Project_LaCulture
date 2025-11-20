@@ -1,14 +1,15 @@
 <div class="recipes-container">
-  <!-- Loading Spinner -->
-  <div *ngIf="loading$ | async" class="loading-container">
-    <mat-spinner diameter="50"></mat-spinner>
-    <p>Loading recipes...</p>
-  </div>
-
   <div class="recipes-header">
     <h2 class="section-title">Recipes of Louisiana</h2>
     <p class="section-lead">Bring authentic Louisiana cooking to your kitchen!</p>
   </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading$ | async" class="loading-container">
+    <mat-icon class="loading-icon">hourglass_empty</mat-icon>
+    <p>Loading recipes...</p>
+  </div>
+
   <!-- Content (shown when not loading) -->
   <ng-container *ngIf="!(loading$ | async)">
     
