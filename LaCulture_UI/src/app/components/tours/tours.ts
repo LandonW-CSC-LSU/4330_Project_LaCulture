@@ -28,72 +28,54 @@ export class ToursComponent{
       name: "New Orleans Ghost Adventures",
       description: "Get a haunted tour from New Orleans Ghost Adventures! Visit famous cemeteries and spooky locations all throughout the city of New Orleans. From bus tours to bar crawls, these tours will have you witnessing the true spirits of the city!",
       price: "32-59",
-      keywords: ["bus tour", "haunted", "ghost", "cemetery", "bar crawl", "spirits", "voodoo"],
+      keywords: ["bus tour", "haunted", "ghost", "cemetery", "bar crawl", "spirits", "voodoo", "spooky"],
       image: "assets/images/scarystreet.webp",
       url: "https://www.neworleansghostadventurestour.com/haunted-city-cemetery-tour/"
     },
     {
       id: 2,
-      name: "Garden District Mansion Tour",
-      description: "Stroll through one of America's most beautiful neighborhoods featuring stunning antebellum mansions, lush gardens, and oak-lined streets. Learn about the wealthy history of uptown New Orleans.",
-      price: "32-59",
-      keywords: ["garden district", "mansions", "architecture", "gardens", "uptown", "historic homes"],
-      image: "https://images.unsplash.com/photo-1568849676085-51415703900f?w=800&h=500&fit=crop",
-      url: "https://example.com/french-quarter-tour" 
+      name: "Airboat Adventures",
+      description: "Experience a fast, exciting airboat tour through some of the swamps of Louisiana! Get a guided tour of some of the state's ecosystem and learn all about nature. Get the chance to see alligators, nutria, and more!",
+      price: "17-85",
+      keywords: ["swamp", "air boat", "water", "bayou", "ride"],
+      image: "assets/images/airboat.webp",
+      url: "https://airboatadventures.com/airboat-tours/?msclkid=6c9c837f3f7d19c0df23ea6194e1cc74&utm_source=bing&utm_medium=cpc&utm_campaign=Nonbrand&utm_term=airboat%20tours%20new%20orleans&utm_content=Airboat%20Tours" 
     },
     {
       id: 3,
-      name: "Cemetery & Voodoo Tour",
-      description: "Discover the mystical side of New Orleans with visits to above-ground cemeteries and voodoo history. Learn about Marie Laveau and the unique burial traditions of the Crescent City.",
-      price: "60",
-      keywords: ["cemetery", "voodoo", "marie laveau", "spirits", "mystical", "supernatural", "burial"],
-      image: "https://images.unsplash.com/photo-1568849676085-51415703900f?w=800&h=500&fit=crop",
-      url: "https://example.com/french-quarter-tour" 
+      name: "Mardi Gras World Tours",
+      description: "Discover and learn about the history of Mardi Gras at Mardi Gras World! Take a tour to see many of the floats used in the parades during Mardi Gras. Find out how Mardi Gras started and some of the many parades that are driven through the city. You even receive a king cake slice to taste the true, authentice Mardi Gras dessert!",
+      price: "24.95-29.95",
+      keywords: ["mardi gras", "floats", "king cake", "history", "parade", "beads", "jester"],
+      image: "assets/images/mardigrasworld.jpg",
+      url: "https://www.mardigrasworld.com/" 
     },
     {
       id: 4,
-      name: "Jazz & Music Heritage Tour",
-      description: "Walk in the footsteps of jazz legends through the birthplace of America's greatest art form. Visit historic music venues, Congo Square, and learn about Louis Armstrong and other jazz pioneers.",
-      price: "50",
-      keywords: ["jazz", "music", "louis armstrong", "congo square", "heritage", "brass band"],
-      image: "https://images.unsplash.com/photo-1568849676085-51415703900f?w=800&h=500&fit=crop",
-      url: "https://example.com/french-quarter-tour"
+      name: "New Orleans Carriage Tours",
+      description: "Receive a carriage tour around the great city of New Orleans! Enjoy the sights and scenes from the comfort of a carriage. If there's any landmark you'd like to experience, this is the tour to take!",
+      price: "60-150",
+      keywords: ["carriage", "horses", "new orleans", "french quarter", "city", "sight seeing"],
+      image: "assets/images/carriage.jpg",
+      url: "https://www.neworleanscarriages.com/"
     },
     {
       id: 5,
-      name: "Creole Cuisine Food Tour",
-      description: "Taste your way through New Orleans with stops at legendary restaurants and hidden gems. Sample gumbo, beignets, po'boys, and other Creole classics while learning culinary history.",
-      price: "85",
-      keywords: ["food", "cuisine", "gumbo", "beignets", "restaurants", "creole", "cajun", "eating"],
-      image: "https://images.unsplash.com/photo-1568849676085-51415703900f?w=800&h=500&fit=crop",
-      url: "https://example.com/french-quarter-tour" 
+      name: "Steamboat Natchez Cruise",
+      description: "Get a cruise on the Mississippi River with the Steamboat Natchez Cruise! Choose one of the many offers whether it's a simple cruise or a cruise with food! Sit back and relax as the sounds and breeze of the Mississippi River pass by as you enjoy the view!",
+      price: "43.50-80",
+      keywords: ["steamboat", "river", "cruise", "dinner", "lunch", "morning", "evening", "eating"],
+      image: "assets/images/steamboat.webp",
+      url: "https://steamboat-natchez.new-orleans-tickets.com/?ci=1&cm=555472187_1300723480686885_c_o_steamboat%20new%20orleans_p_{extensionid}&msclkid=ccf22ae6bbf7125953bd43f808274f19&utm_source=bing&utm_medium=cpc&utm_campaign=New%20Orleans%20-%20Steamboat%20Natchez%20-%20Other%20Languages%20-%20USA%20-%20Search%20-%20All%20-%20All%20-%20cid6103&utm_term=steamboat%20new%20orleans&utm_content=Generic%20-%20Phrase%20-%20English%20-%20All" 
     },
     {
       id: 6,
-      name: "Swamp & Bayou Adventure",
-      description: "Journey into Louisiana's mysterious swamplands on an airboat tour. See alligators, exotic birds, and cypress trees while learning about Cajun culture and wetland ecosystems.",
-      price: "95",
-      keywords: ["swamp", "bayou", "airboat", "alligator", "nature", "wildlife", "cajun", "wetlands"],
-      image: "https://images.unsplash.com/photo-1568849676085-51415703900f?w=800&h=500&fit=crop",
-      url: "https://example.com/french-quarter-tour" 
-    },
-    {
-      id: 7,
-      name: "Ghost & Haunted History Tour",
-      description: "Experience the supernatural side of the most haunted city in America. Visit locations of famous hauntings, hear chilling tales, and explore the dark history of New Orleans after sunset.",
-      price: "40",
-      keywords: ["ghost", "haunted", "supernatural", "spooky", "paranormal", "night", "scary"],
-      image: "https://images.unsplash.com/photo-1568849676085-51415703900f?w=800&h=500&fit=crop",
-      url: "https://example.com/french-quarter-tour" 
-    },
-    {
-      id: 8,
-      name: "Steamboat River Cruise",
-      description: "Relax on an authentic paddlewheel steamboat cruising the mighty Mississippi River. Enjoy live jazz music, Creole cuisine, and stunning views of the New Orleans skyline.",
-      price: "75",
-      keywords: ["river", "steamboat", "cruise", "mississippi", "boat", "paddlewheel", "jazz cruise"],
-      image: "https://images.unsplash.com/photo-1568849676085-51415703900f?w=800&h=500&fit=crop",
-      url: "https://example.com/french-quarter-tour" 
+      name: "Abita Beer Tour",
+      description: "Have a guided tour through the Louisiana based brewery for Abita Beer! Walk through and see how the products are made. Get enriched in the history of the company and how they came to be as large as they are now. You even get a beer or a flight of six products depending on your package!",
+      price: "10-18",
+      keywords: ["Abita", "beer", "brewery", "alcohol", "21+", "tasting"],
+      image: "assets/images/abita.webp",
+      url: "https://abita.com/visit/tours/" 
     },
   ];
 
