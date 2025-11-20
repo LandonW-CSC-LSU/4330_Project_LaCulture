@@ -50,6 +50,14 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     this.addMapPoints(events);
     this.addHeatmap(events);
     
+    // Check for eventId query parameter before loading events
+    this.route.queryParams.subscribe(params => {
+      const eventId = params['eventId'];
+      if (eventId) {
+        this.highlightedEventId = +eventId;
+      }
+    });
+
     // Load events from API and add markers
     this.loadEventsAndAddMarkers();
 
@@ -96,16 +104,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     };
 
   viewControl.addTo(this.map);
-  this.changeView({ target: { value: 'neworleans' } } as any);
-
-  // Check for eventId query parameter
-  this.route.queryParams.subscribe(params => {
-    const eventId = params['eventId'];
-    if (eventId) {
-      this.highlightedEventId = +eventId;
-      this.highlightEvent(+eventId);
-    }
-  });
+  // Don't set default view yet - wait for events to load
   }
 
   changeView(event: any): void {
@@ -301,9 +300,19 @@ export class MapComponent implements AfterViewInit, OnDestroy {
       next: (events) => {
         this.addDatabaseMapPoints(events);
         this.setupCalendarIntegration(events);
+        
+        // After markers are loaded, check if we need to highlight an event
+        if (this.highlightedEventId) {
+          this.highlightEvent(this.highlightedEventId);
+        } else {
+          // Set default view to New Orleans if no event is highlighted
+          this.changeView({ target: { value: 'neworleans' } } as any);
+        }
       },
       error: (err) => {
         console.error('Error loading events for map:', err);
+        // Set default view even on error
+        this.changeView({ target: { value: 'neworleans' } } as any);
       }
     });
   }
@@ -383,20 +392,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
   }
 
   private showCalendarOptions(event: Event): void {
-    const choice = confirm(
-      `Add "${event.title}" to your calendar:\n\n` +
-      '1. Google Calendar\n' +
-      '2. Outlook\n' +
-      '3. Yahoo Calendar\n' +
-      '4. Download ICS file\n\n' +
-      'Click OK to choose Google Calendar, or Cancel to see other options.'
-    );
-
-    if (choice) {
-      this.addToGoogleCalendar(event);
-    } else {
-      this.showCalendarDialog(event);
-    }
+    this.showCalendarDialog(event);
   }
 
   private showCalendarDialog(event: Event): void {
@@ -497,6 +493,9 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     const marker = this.markers.get(eventId);
     if (marker) {
       const coords = marker.getLatLng();
+      // Clear map bounds to allow navigation to any location
+      this.map.setMaxBounds(null);
+      this.map.options.minZoom = 0;
       this.map.setView([coords.lat, coords.lng], 15, { animate: true });
       marker.openPopup();
     }

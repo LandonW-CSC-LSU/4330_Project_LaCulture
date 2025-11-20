@@ -16,6 +16,13 @@
               class="d-block w-100 zoom-img"
               loading="lazy"
             />
+            <div class="slide-action-button">
+              <a [routerLink]="slide.route" class="explore-button">
+                <span class="button-icon">⚜️</span>
+                {{ slide.buttonText }}
+                <span class="button-icon">⚜️</span>
+              </a>
+            </div>
           </div>
         </c-carousel-item>
       }

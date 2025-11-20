@@ -358,7 +358,8 @@
 .calendar-close-btn {
   width: 100%;
   padding: 12px;
-  background: #e0e0e0;
+  background: #4b006e;
+  color: white;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
@@ -367,5 +368,6 @@
 }
 
 .calendar-close-btn:hover {
-  background: #d0d0d0;
+  background: #6a1b9a;
+  color: white;
 }
