@@ -1,43 +1,106 @@
 <div class="events-container">
   <div class="events-header">
-    <h1>Upcoming Events</h1>
+    <h2 class="section-title">Upcoming Events</h2>
+    <p class="section-lead">Discover exciting events happening across Louisiana</p>
   </div>
 
-  <div class="category-filter">
-    <button
-      *ngFor="let loc of locations()"
-      mat-raised-button
-      [class.active]="selectedLocation() === loc"
-      (click)="filterByLocation(loc)">
-      {{ loc }}
-    </button>
-  </div>
+  <!-- Loading State -->
+  @if (isLoading()) {
+    <div class="loading-container">
+      <mat-icon class="loading-icon">hourglass_empty</mat-icon>
+      <p>Loading events...</p>
+    </div>
+  }
 
-  <!-- Events grid (uses the recipes grid and card styles so the look matches) -->
-  <div class="events-grid">
-    <mat-card *ngFor="let event of filteredEvents(); trackBy: trackByEventId" class="events-card">
-    <img mat-card-image [src]="event.image || 'assets/images/placeholder.jpg'" alt="{{ event.title }}" (error)="$event.target.src='assets/images/placeholder.jpg'">
+  <!-- Error State -->
+  @if (error()) {
+    <div class="error-container">
+      <mat-icon class="error-icon">error</mat-icon>
+      <p>{{ error() }}</p>
+    </div>
+  }
 
-      <mat-card-header>
-        <mat-card-title>{{ event.title }}</mat-card-title>
-        <mat-card-subtitle>{{ event.location }}</mat-card-subtitle>
-      </mat-card-header>
+  <!-- Events Content -->
+  @if (!isLoading() && !error()) {
+    <div class="filter-container">
+      <button 
+        *ngFor="let location of locations()" 
+        mat-raised-button
+        [class.active]="selectedLocation() === location"
+        (click)="filterByLocation(location)">
+        {{location}}
+      </button>
+    </div>
 
-      <mat-card-content>
-        <p><strong>Date:</strong> {{ event.date }}</p>
-      </mat-card-content>
+    <div class="event-list">
+      @for(event of filteredEvents(); track event.id){
+        <mat-card class="event-card">
+          <mat-card-header>
+            <mat-card-title>{{ event.title }}</mat-card-title>
+            <mat-card-subtitle>{{ event.location }}</mat-card-subtitle>
+          </mat-card-header>
+          
+          <mat-card-content>
+            <div class="event-date">
+              <mat-icon>event</mat-icon>
+              <span>{{ event.date }}</span>
+            </div>
+            @if (event.description) {
+              <p class="event-description">{{ event.description }}</p>
+            }
+          </mat-card-content>
 
-      <mat-card-actions>
-        <a mat-button color="primary" [href]="event.website" target="_blank" *ngIf="event.website">
-          <mat-icon>launch</mat-icon>
-          Event Website!
-        </a>
-        <button mat-button disabled>
-          <mat-icon>event</mat-icon>
-          {{ event.date }}
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
-
+          <mat-card-actions>
+            <button 
+              mat-raised-button 
+              color="accent"
+              (click)="viewOnMap(event.id)">
+              <mat-icon>map</mat-icon>
+              View on Map
+            </button>
+            
+            <button 
+              mat-raised-button 
+              color="primary"
+              (click)="showCalendarDialog(event)">
+              <mat-icon>event</mat-icon>
+              Add to Calendar
+            </button>
+            
+            @if (event.website) {
+              <a [href]="event.website" target="_blank" mat-raised-button color="primary">
+                <mat-icon>launch</mat-icon>
+                Visit Website
+              </a>
+            }
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
+  }
 </div>
+
+<!-- Calendar Dialog -->
+@if (selectedEventForCalendar()) {
+  <div class="calendar-dialog-overlay" (click)="closeCalendarDialog()">
+    <div class="calendar-dialog" (click)="$event.stopPropagation()">
+      <h3>Add to Calendar</h3>
+      <p>Select your calendar service:</p>
+      <div class="calendar-options">
+        <button class="calendar-option-btn google" (click)="addToGoogleCalendar(selectedEventForCalendar()!)">
+          <span>📅</span> Google Calendar
+        </button>
+        <button class="calendar-option-btn outlook" (click)="addToOutlook(selectedEventForCalendar()!)">
+          <span>📧</span> Outlook
+        </button>
+        <button class="calendar-option-btn yahoo" (click)="addToYahooCalendar(selectedEventForCalendar()!)">
+          <span>📮</span> Yahoo Calendar
+        </button>
+        <button class="calendar-option-btn ics" (click)="downloadICS(selectedEventForCalendar()!)">
+          <span>💾</span> Download ICS
+        </button>
+      </div>
+      <button class="calendar-close-btn" (click)="closeCalendarDialog()">Cancel</button>
+    </div>
+  </div>
+}

@@ -1,45 +1,157 @@
 <div class="about-page">
-    <div class="intro-section">
-        <div class="intro-text">
-            <h1>What is LaCulture?</h1>
-            <p>LaCulture is a website to help people from around the nation or even locals to learn the culture of Louisiana! Exploring our site should provide you with the resources to be able to learn so much more about culture!</p>
-        </div>
+    <div class="about-header">
+        <h2 class="section-title">What is LaCulture?</h2>
+        <p class="section-lead">LaCulture is a website to help people from around the nation or even locals to learn the culture of Louisiana! Exploring our site should provide you with the resources to be able to learn so much more about culture!</p>
     </div>
 
     <div class="creators-section">
-        <h2>Meet Our Team</h2>
+        <h3>Meet Our Team</h3>
         <div class="about-container">
-            <div class="creator-card">
-                <img src="assets/images/aidan.jpg" alt="Aidan" class="creator-image">
-                <p class="description">This is Aidan!</p>
-                <p class="description">He's our Scrum Master!</p>
+            <div class="team-member">
+                <mat-card class="creator-card">
+                    <img mat-card-image src="assets/images/aidan.jpg" alt="Aidan" class="creator-image">
+                    <mat-card-header>
+                        <div class="header-text">
+                            <mat-card-title>Aidan</mat-card-title>
+                            <mat-card-subtitle>Scrum Master</mat-card-subtitle>
+                        </div>
+                        <mat-card-actions>
+                            <a href="https://github.com/AllinOne000" target="_blank" mat-icon-button aria-label="GitHub">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/aidan-labrano-33732a383" target="_blank" mat-icon-button aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                        </mat-card-actions>
+                    </mat-card-header>
+                </mat-card>
+                <div class="member-description">
+                    <h4>Aidan - Scrum Master</h4>
+                    <p>As our Scrum Master, Aidan ensures the team follows Agile methodologies and keeps our development process smooth and efficient. He facilitates daily standups, sprint planning, and retrospectives.</p>
+                </div>
             </div>
-            <div class="creator-card">
-                <img src="assets/images/royce.jpg" alt="Royce" class="creator-image">
-                <p class="description">This is Royce!</p>
-                <p class="description">He's our Design Lead!</p>
+
+            <div class="team-member">
+                <mat-card class="creator-card">
+                    <img mat-card-image src="assets/images/royce.jpg" alt="Royce" class="creator-image">
+                    <mat-card-header>
+                        <div class="header-text">
+                            <mat-card-title>Royce</mat-card-title>
+                            <mat-card-subtitle>Design Lead</mat-card-subtitle>
+                        </div>
+                        <mat-card-actions>
+                            <a href="https://github.com" target="_blank" mat-icon-button aria-label="GitHub">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" mat-icon-button aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                        </mat-card-actions>
+                    </mat-card-header>
+                </mat-card>
+                <div class="member-description">
+                    <h4>Royce - Design Lead</h4>
+                    <p>Royce leads our design efforts, crafting the beautiful and intuitive user interface you see throughout LaCulture. He ensures our application is both aesthetically pleasing and user-friendly.</p>
+                </div>
             </div>
-            <div class="creator-card">
-                <img src="assets/images/felix.jpg" alt="Felix" class="creator-image">
-                <p class="description">This is Felix!</p>
-                <p class="description">He's our Development Lead!</p>
+
+            <div class="team-member">
+                <mat-card class="creator-card">
+                    <img mat-card-image src="assets/images/felix.jpg" alt="Felix" class="creator-image">
+                    <mat-card-header>
+                        <div class="header-text">
+                            <mat-card-title>Felix</mat-card-title>
+                            <mat-card-subtitle>Development Lead</mat-card-subtitle>
+                        </div>
+                        <mat-card-actions>
+                            <a href=" https://github.com/fschaf2" target="_blank" mat-icon-button aria-label="GitHub">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/felix-schafer-6a76b3229" target="_blank" mat-icon-button aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                        </mat-card-actions>
+                    </mat-card-header>
+                </mat-card>
+                <div class="member-description">
+                    <h4>Felix - Development Lead</h4>
+                    <p>Felix guides our development team, architecting robust solutions and ensuring code quality. He oversees the technical implementation and keeps our codebase maintainable and scalable.</p>
+                </div>
             </div>
-            <div class="creator-card">
-                <img src="assets/images/landon.png" alt="Landon" class="creator-image">
-                <p class="description">This is Landon!</p>
-                <p class="description">He's our Project Manager!</p>
+
+            <div class="team-member">
+                <mat-card class="creator-card">
+                    <img mat-card-image src="assets/images/landon.png" alt="Landon" class="creator-image">
+                    <mat-card-header>
+                        <div class="header-text">
+                            <mat-card-title>Landon</mat-card-title>
+                            <mat-card-subtitle>Project Manager</mat-card-subtitle>
+                        </div>
+                        <mat-card-actions>
+                            <a href="https://github.com/LandonW-CSC-LSU" target="_blank" mat-icon-button aria-label="GitHub">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/landon-walls-932792245/" target="_blank" mat-icon-button aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                        </mat-card-actions>
+                    </mat-card-header>
+                </mat-card>
+                <div class="member-description">
+                    <h4>Landon - Project Manager</h4>
+                    <p>Landon coordinates all aspects of the LaCulture project, managing timelines, resources, and stakeholder communications. He ensures we deliver on our goals and stay aligned with our vision.</p>
+                </div>
             </div>
-            <div class="creator-card">
-                <img src="assets/images/nick.jpg" alt="Nick" class="creator-image">
-                <p class="description">This is Nick!</p>
-                <p class="description">He's our Quality Assurance Engineer!</p>
+
+            <div class="team-member">
+                <mat-card class="creator-card">
+                    <img mat-card-image src="assets/images/nick.jpg" alt="Nick" class="creator-image">
+                    <mat-card-header>
+                        <div class="header-text">
+                            <mat-card-title>Nick</mat-card-title>
+                            <mat-card-subtitle>Quality Assurance</mat-card-subtitle>
+                        </div>
+                        <mat-card-actions>
+                            <a href="https://github.com/NicholasLuke" target="_blank" mat-icon-button aria-label="GitHub">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/nicholas-luke-088045276/" target="_blank" mat-icon-button aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                        </mat-card-actions>
+                    </mat-card-header>
+                </mat-card>
+                <div class="member-description">
+                    <h4>Nick - Quality Assurance</h4>
+                    <p>Nick ensures LaCulture meets the highest quality standards through rigorous testing and validation. He identifies bugs, verifies features, and guarantees a smooth user experience.</p>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="closing-section">
         <div class="closing-text">
-            <h2>Our Goals</h2>
+            <h3>Our Goals</h3>
             <p>We want to be able to provide an all-in-one website for users to: plan trips, make classic Louisiana cuisines, find the best rated restaurants, and better understand Louisiana's vast history! Having to do constant searches through the internet can be a pain and can draw people away from learning. This website hopes to eliminate all those endless searches and actually give users the power to explore for themselves! Our site gives users the ability to organize their learning and make the experience much better!</p>
         </div>
     </div>

@@ -1,61 +1,114 @@
-.map-top-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 125px;
-  background: rgba(128, 0, 128, 0.95);
-  z-index: 0;
-  pointer-events: none;
+:host {
+  display: block;
 }
 
-
-#map {
+.map-container {
   position: fixed;
-  top: 125px;
+  top: 99px;
   left: 0;
   right: 0;
   bottom: 0;
+  background-color: #FFF8E8;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-header {
+  background-color: #FFF8E8;
+  padding: 20px 5vw;
+  text-align: center;
+  z-index: 400;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.section-title {
+  padding-top: 100px;
+  font-family: 'Playfair Display', serif;
+  color: #4b006e;
+  font-size: 3rem;
+  margin: 0 auto 6px auto;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.section-title::before,
+.section-title::after {
+  content: "";
+  flex: 1 1 1rem;
+  height: 6px;
+  background: #4b006e;
+  border-radius: 3px;
+  box-shadow: 0 6px 14px rgba(75,0,110,0.08);
+  min-width: 40px;
+  max-width: calc(50% - 5rem);
+}
+
+.section-title::before { margin-right: 12px; }
+.section-title::after { margin-left: 12px; }
+
+.section-lead {
+  color: #666;
+  font-size: 1rem;
+  margin: 0 auto 12px auto;
+  max-width: 760px;
+}
+
+#map {
+  flex: 1;
   z-index: 1;
   overflow: hidden;
 }
 
-
-
-
-
 .custom-map-control {
-  background: #ffd700;
+  background: #ffffff;
+  border: 2px solid #4b006e;
   border-radius: 8px;
   padding: 12px;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
-  font-family: sans-serif;
+  box-shadow: 0 3px 12px rgba(75, 0, 110, 0.25);
+  font-family: 'Segoe UI', sans-serif;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  min-width: 160px;
+  min-width: 250px;
 }
 
 .map-select {
   padding: 8px;
   border-radius: 6px;
+  border: 1px solid #4b006e;
   font-size: 14px;
+  color: #4b006e;
+  background: #ffffff;
+  cursor: pointer;
 }
 
+.map-select:focus {
+  outline: 2px solid #4b006e;
+  outline-offset: 2px;
+}
 
 .map-reset {
   padding: 8px;
   background: rgba(128, 0, 128, 0.95);
+  padding: 6px 10px;
+  background: #4b006e;
   color: white;
   border: none;
   border-radius: 6px;
   font-size: 14px;
   cursor: pointer;
   transition: 0.2s ease;
+  font-weight: 500;
 }
 
 .map-reset:hover {
-  background: #6C3BB2;
+  background: #6a1b9a;
 }
 
 .heat-container {
@@ -80,4 +133,218 @@
 
 .leaflet-top.leaflet-right .leaflet-control {
   margin-top: 10px;
+}
+
+/* Custom marker icons */
+.custom-marker-icon,
+.custom-marker-icon-highlighted {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+    padding-top: 60px;
+  }
+  
+  .map-header {
+    padding: 15px 3vw;
+  }
+}
+
+/* Map popup styling */
+.map-event-popup {
+  font-family: 'Arial', sans-serif;
+  padding: 8px;
+  max-width: 280px;
+}
+
+.map-event-popup h3 {
+  margin: 0 0 12px 0;
+  color: #4b006e;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.map-event-popup .event-date,
+.map-event-popup .event-location {
+  margin: 6px 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.map-event-popup .event-description {
+  margin: 10px 0;
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+.map-event-popup .popup-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.popup-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: white;
+}
+
+.website-btn {
+  background: #4b006e;
+  color: white !important;
+}
+
+.website-btn:hover {
+  background: #6a1b9a;
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(75, 0, 110, 0.3);
+}
+
+.calendar-btn {
+    background: #4b006e;
+    color: white;
+}
+
+.calendar-btn:hover {
+  background: #9b59b6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(142, 68, 173, 0.3);
+}
+
+/* Calendar dialog overlay */
+.calendar-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.calendar-dialog {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.calendar-dialog h3 {
+  margin: 0 0 8px 0;
+  color: #4b006e;
+  font-size: 1.5rem;
+}
+
+.calendar-dialog p {
+  margin: 0 0 20px 0;
+  color: #666;
+}
+
+.calendar-options {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.calendar-option-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #333;
+}
+
+.calendar-option-btn:hover {
+  border-color: #8e44ad;
+  background: #f9f5ff;
+  transform: translateX(4px);
+}
+
+.calendar-option-btn span {
+  font-size: 1.4rem;
+}
+
+.calendar-close-btn {
+  width: 100%;
+  padding: 12px;
+  background: #4b006e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.calendar-close-btn:hover {
+  background: #6a1b9a;
+  color: white;
+}
+
+/* Leaflet popup customization */
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  padding: 0;
+}
+
+.leaflet-popup-content {
+  margin: 0;
+}
+
+.event-popup .leaflet-popup-content-wrapper {
+  background: white;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }

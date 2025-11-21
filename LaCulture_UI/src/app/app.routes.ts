@@ -14,7 +14,7 @@ export const routes: Routes = [
   { path: 'map', component: MapComponent },
   { path: 'tours', component: ToursComponent},
   { path: 'events', component: EventsComponent },
-  { path: 'Calendar', component: CalendarComponent },
+  { path: 'calendar', component: CalendarComponent },
   { path: 'about', component: AboutComponent},
   { path: '**', redirectTo: '' }
 ];

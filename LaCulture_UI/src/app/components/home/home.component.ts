@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
-import { EventsComponent } from '../events/events'; 
 import { RouterModule } from '@angular/router';
 import {
   CarouselComponent,
@@ -34,7 +33,6 @@ export class CarouselCustomConfig {
     FormsModule,
     RouterModule,
     NgbCarouselModule,
-    EventsComponent,
     CarouselComponent,
     CarouselInnerComponent,
     CarouselItemComponent,
@@ -57,12 +55,12 @@ export class HomeComponent {
   ];
   
   slides = [
-    { src: 'assets/images/mardiGras.png', title: 'Mardi Gras', subtitle: 'A Louisiana Tradition' },
-    { src: 'assets/images/swamp.jpg', title: 'Swamp', subtitle: 'Bayou Life' },
-    { src: 'assets/images/oaks.jpg', title: 'Oaks', subtitle: 'Historic Trees' },
-    { src: 'assets/images/crawfish.jpg', title: 'Crawfish', subtitle: 'Cajun Cuisine' },
-    { src: 'assets/images/mardiGrasFloat.jpg', title: 'Float', subtitle: 'Parade Magic' },
-    { src: 'assets/images/stJosephAltar2025.png', title: 'St Joseph Altar', subtitle: 'Cultural Heritage' }
+    { src: 'assets/images/mardiGras.png', title: 'Mardi Gras', subtitle: 'A Louisiana Tradition', buttonText: 'Experience Events', route: '/events' },
+    { src: 'assets/images/swamp.jpg', title: 'Swamp', subtitle: 'Bayou Life', buttonText: 'Explore Map', route: '/map' },
+    { src: 'assets/images/oaks.jpg', title: 'Oaks', subtitle: 'Historic Trees', buttonText: 'Discover Tours', route: '/tours' },
+    { src: 'assets/images/crawfish.jpg', title: 'Crawfish', subtitle: 'Cajun Cuisine', buttonText: 'View Recipes', route: '/recipes' },
+    { src: 'assets/images/mardiGrasFloat.jpg', title: 'Float', subtitle: 'Parade Magic', buttonText: 'Calendar', route: '/calendar' },
+    { src: 'assets/images/stJosephAltar2025.png', title: 'St Joseph Altar', subtitle: 'Cultural Heritage', buttonText: 'About LaCulture', route: '/about' }
   ];
 
 

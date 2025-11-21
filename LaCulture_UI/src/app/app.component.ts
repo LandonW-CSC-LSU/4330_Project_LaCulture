@@ -80,6 +80,7 @@ export class AppComponent implements OnInit {
       // Check if we're on the home page
       this.isHomePage = this.router.url === '/' || this.router.url === '/home';
       this.updateMenuHeaderClass();
+      this.updateSelectedOption();
     });
   }
 
@@ -87,6 +88,27 @@ export class AppComponent implements OnInit {
     // Initialize the header state
     this.isHomePage = this.router.url === '/' || this.router.url === '/home';
     this.updateMenuHeaderClass();
+    this.updateSelectedOption();
+  }
+
+  private updateSelectedOption() {
+    const url = this.router.url.split('?')[0]; // Remove query params
+    
+    if (url === '/' || url === '/home') {
+      this.selectedOption = 'Home';
+    } else if (url === '/recipes') {
+      this.selectedOption = 'Recipes';
+    } else if (url === '/events') {
+      this.selectedOption = 'Events';
+    } else if (url === '/tours') {
+      this.selectedOption = 'Tours';
+    } else if (url === '/map') {
+      this.selectedOption = 'Map';
+    } else if (url === '/calendar') {
+      this.selectedOption = 'Calendar';
+    } else if (url === '/about') {
+      this.selectedOption = 'About';
+    }
   }
 
   private updateMenuHeaderClass() {
@@ -128,7 +150,7 @@ export class AppComponent implements OnInit {
         this.router.navigate(['/map']);
         break;
       case 'Calendar':
-        this.router.navigate(['/Calendar']);
+        this.router.navigate(['/calendar']);
         break;
       case 'About':
         this.router.navigate(['/about']);

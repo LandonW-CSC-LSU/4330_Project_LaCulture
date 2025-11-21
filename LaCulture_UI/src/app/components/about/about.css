@@ -17,13 +17,60 @@ html, body {
 
 .about-page {
     min-height: 100vh;
+    background-color: #FFF8E8;
 }
 
-/* Introduction Section - LSU Purple */
+/* Header Section */
+.about-header {
+    padding: 40px 5vw 20px 5vw;
+    text-align: center;
+    background-color: #FFF8E8;
+}
+
+.section-title {
+    padding-top: 100px;
+    font-family: 'Playfair Display', serif;
+    color: #4b006e;
+    font-size: 4rem;
+    margin: 0 auto 6px auto;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    max-width: 1600px;
+    width: 100%;
+}
+
+.section-title::before,
+.section-title::after {
+    content: "";
+    flex: 1 1 1rem;
+    height: 6px;
+    background: #4b006e;
+    border-radius: 3px;
+    box-shadow: 0 6px 14px rgba(75,0,110,0.08);
+    min-width: 40px;
+    max-width: calc(50% - 5rem);
+}
+
+.section-title::before { margin-right: 12px; }
+.section-title::after { margin-left: 12px; }
+
+.section-lead {
+    color: #666;
+    font-size: 1.2rem;
+    margin: 0 auto 12px auto;
+    max-width: 760px;
+}
+
+/* Introduction Section */
 .intro-section {
     background-color: #4b006e;
     padding: 180px 40px 100px 40px;
     min-height: 400px;
+    background-color: #FFF8E8;
+    padding: 60px 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,91 +79,181 @@ html, body {
 .intro-text {
     text-align: center;
     max-width: 800px;
-    color: #FDD023;
+    color: #333;
     margin: 0 auto;
 }
 
-.intro-text h1 {
-    font-size: 48px;
+.intro-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
     margin-bottom: 30px;
     margin-top: 0;
-    font-weight: 700;
+    font-weight: 600;
+    color: #4b006e;
 }
 
 .intro-text p {
-    font-size: 24px;
+    font-size: 1.2rem;
     line-height: 1.6;
     margin: 0;
+    color: #555;
 }
 
-/* Creators Section - LSU Gold */
+/* Creators Section */
 .creators-section {
-    background: linear-gradient(135deg, #FDD023 0%, #ffd700 100%);
-    padding: 100px 40px;
-    min-height: 600px;
+    background-color: #FFF8E8;
+    padding: 40px 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.creators-section h2 {
+.creators-section h3 {
+    font-family: 'Playfair Display', serif;
     text-align: center;
-    font-size: 42px;
+    font-size: 2.5rem;
     margin-bottom: 60px;
     margin-top: 0;
-    color: #461D7C;
+    color: #4b006e;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
+
+.creators-section h3::before,
+.creators-section h3::after {
+    content: "";
+    flex: 1 1 1rem;
+    height: 6px;
+    background: #4b006e;
+    border-radius: 3px;
+    box-shadow: 0 6px 14px rgba(75,0,110,0.08);
+    min-width: 40px;
+    max-width: calc(50% - 5rem);
+}
+
+.creators-section h3::before { margin-right: 12px; }
+.creators-section h3::after { margin-left: 12px; }
 
 .about-container {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 60px;
-    max-width: 1400px;
+    flex-direction: column;
+    gap: 48px;
+    max-width: 1200px;
     margin: 0 auto;
     width: 100%;
 }
 
+.team-member {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    align-items: center;
+}
+
 .creator-card {
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    background: linear-gradient(135deg, #fff 90%, #f3e6ff 100%);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 3px solid #461D7C;
+    width: 280px;
+    flex-shrink: 0;
 }
 
 .creator-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(70, 29, 124, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(128, 0, 128, 0.15);
 }
 
-.creator-image {
-    width: 200px;
-    height: 300px;
+.creator-card img.creator-image {
+    width: 100%;
+    height: 320px;
     object-fit: cover;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #461D7C 0%, #FDD023 100%);
+    object-position: center;
 }
 
-.description {
-    font-size: 18px;
-    color: #444;
+.creator-card mat-card-header {
+    padding: 16px 16px 8px 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.creator-card .header-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.creator-card mat-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #4b006e;
     margin: 0;
-    max-width: 300px;
 }
 
-/* Closing Section - LSU Purple */
+.creator-card mat-card-subtitle {
+    color: #7b1fa2;
+    font-style: italic;
+    margin-top: 4px;
+    font-size: 1rem;
+}
+
+.creator-card mat-card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+}
+
+.creator-card mat-card-actions a[mat-icon-button] {
+    color: #4b006e;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.creator-card mat-card-actions a[mat-icon-button]:hover {
+    color: #7b1fa2;
+    transform: scale(1.1);
+}
+
+.member-description {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.member-description h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #4b006e;
+    margin: 0 0 16px 0;
+    font-weight: 600;
+}
+
+.member-description p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    margin: 0;
+}
+
+/* Closing Section */
 .closing-section {
-    background-color: #4b006e;
-    padding: 100px 40px;
+    background: linear-gradient(135deg, #4b006e 0%, #6b009e 50%, #4b006e 100%);
+    padding: 80px 40px 100px 40px;
     min-height: 400px;
     display: flex;
     align-items: center;
@@ -126,25 +263,52 @@ html, body {
 .closing-text {
     text-align: center;
     max-width: 800px;
-    color: #FDD023;
+    color: #ffffff;
     margin: 0 auto;
 }
 
-.closing-text h2 {
-    font-size: 42px;
+.closing-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
     margin-bottom: 30px;
     margin-top: 0;
-    font-weight: 700;
+    font-weight: 600;
+    color: #FFF8E8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
 }
 
+.closing-text h3::before,
+.closing-text h3::after {
+    content: "";
+    flex: 1 1 1rem;
+    height: 6px;
+    background: #FFF8E8;
+    border-radius: 3px;
+    box-shadow: 0 6px 14px rgba(255, 248, 232, 0.2);
+    min-width: 40px;
+    max-width: calc(50% - 5rem);
+}
+
+.closing-text h3::before { margin-right: 12px; }
+.closing-text h3::after { margin-left: 12px; }
+
 .closing-text p {
-    font-size: 22px;
+    font-size: 1.2rem;
     line-height: 1.6;
     margin: 0;
+    color: #ffffff;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .section-title {
+        font-size: 2.5rem;
+        padding-top: 60px;
+    }
+
     .intro-section,
     .creators-section,
     .closing-section {
@@ -152,19 +316,41 @@ html, body {
         padding-right: 20px;
     }
     
-    .intro-text h1, .closing-text h2 {
-        font-size: 32px;
+    .intro-text h3, .closing-text h3 {
+        font-size: 2rem;
     }
     
     .intro-text p, .closing-text p {
-        font-size: 18px;
+        font-size: 1rem;
     }
     
-    .creators-section h2 {
-        font-size: 32px;
+    .creators-section h3 {
+        font-size: 2rem;
     }
     
     .about-container {
-        gap: 40px;
+        gap: 32px;
+    }
+
+    .team-member {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .creator-card {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .member-description {
+        text-align: center;
+    }
+
+    .member-description h4 {
+        font-size: 1.5rem;
+    }
+
+    .member-description p {
+        font-size: 1rem;
     }
 }

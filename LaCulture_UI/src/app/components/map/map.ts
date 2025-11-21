@@ -1,4 +1,8 @@
 import { Component, AfterViewInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { EventService } from '../../services/event.service';
+import { CalendarService } from '../../services/calendar.service';
+import { Event } from '../../models/event.model';
 
 @Component({
   selector: 'app-map',
@@ -12,9 +16,18 @@ export class MapComponent implements AfterViewInit, OnDestroy {
   private L: any;
   private view: any;
   private heatmapLayer: any;
+  private markers: Map<number, any> = new Map();
+  private highlightedEventId: number | null = null;
+
+  constructor(
+    private eventService: EventService,
+    private calendarService: CalendarService,
+    private route: ActivatedRoute
+  ) {}
 
   async ngAfterViewInit(): Promise<void> {
     const L = await import('leaflet');
+    // @ts-ignore - leaflet.heat module exists at runtime
     await import('leaflet.heat');
     this.L = (window as any).L;
     console.log("HeatLayer exists now?", this.L.heatLayer);
@@ -37,6 +50,16 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     this.addMapPoints(events);
     this.addHeatmap(events);
     
+    // Check for eventId query parameter before loading events
+    this.route.queryParams.subscribe(params => {
+      const eventId = params['eventId'];
+      if (eventId) {
+        this.highlightedEventId = +eventId;
+      }
+    });
+
+    // Load events from API and add markers
+    this.loadEventsAndAddMarkers();
 
     const viewControl = (L as any).control({ position: 'topright' });
 
@@ -52,7 +75,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
       // prevent map drag when clicking on the select box
       L.DomEvent.disableClickPropagation(div);
-      L.DomEvent.on(select, 'change', (e: Event) => this.changeView(e));
+      L.DomEvent.on(select, 'change', (e: any) => this.changeView(e));
       const resetBtn = L.DomUtil.create('button', 'map-reset', div);
       resetBtn.textContent = 'Reset View';
       L.DomEvent.disableClickPropagation(resetBtn);
@@ -81,10 +104,10 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     };
 
   viewControl.addTo(this.map);
-  this.changeView({ target: { value: 'neworleans' } } as any);
+  // Don't set default view yet - wait for events to load
   }
 
-  changeView(event: Event): void {
+  changeView(event: any): void {
     const view = (event.target as HTMLSelectElement).value;
 
     const views = {
@@ -118,6 +141,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     this.view = (views as any)[view];
     this.setView();
   }
+  
   setView(): void {
     this.map.options.minZoom = this.view.minZoom;
     this.map.setView(this.view.center, this.view.zoom);
@@ -257,7 +281,6 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
 
   addMapPoints(events: MapEvent[]): void {
-
     const markerIcon = this.L.icon({
       iconUrl: 'assets/images/betterstar.png',
       iconSize: [40,40],
@@ -265,33 +288,219 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     });
 
     for (const event of events) {
-      this.L.marker(event.coords, { icon: markerIcon })
+      const marker = this.L.marker(event.coords, { icon: markerIcon })
       .addTo(this.map)
       .bindTooltip(`${event.title} — ${event.date}`)
       .on('click', () => window.open(event.website, '_blank'));
-
     }
-    
+  }
+
+  private loadEventsAndAddMarkers(): void {
+    this.eventService.getAllEvents().subscribe({
+      next: (events) => {
+        this.addDatabaseMapPoints(events);
+        this.setupCalendarIntegration(events);
+        
+        // After markers are loaded, check if we need to highlight an event
+        if (this.highlightedEventId) {
+          this.highlightEvent(this.highlightedEventId);
+        } else {
+          // Set default view to New Orleans if no event is highlighted
+          this.changeView({ target: { value: 'neworleans' } } as any);
+        }
+      },
+      error: (err) => {
+        console.error('Error loading events for map:', err);
+        // Set default view even on error
+        this.changeView({ target: { value: 'neworleans' } } as any);
+      }
+    });
+  }
+
+  private addDatabaseMapPoints(events: Event[]): void {
+    // Create custom div icon with fleur-de-lis emoji
+    const markerIcon = this.L.divIcon({
+      html: '<div style="font-size: 36px; filter: drop-shadow(0 0 2px rgba(0,0,0,1)) drop-shadow(0 0 4px rgba(0,0,0,0.8));">⚜️</div>',
+      className: 'custom-marker-icon',
+      iconSize: [40, 40],
+      iconAnchor: [20, 20]
+    });
+
+    const highlightedIcon = this.L.divIcon({
+      html: '<div style="font-size: 54px; filter: drop-shadow(0 0 3px rgba(0,0,0,1)) drop-shadow(0 0 6px rgba(0,0,0,0.8));">⚜️</div>',
+      className: 'custom-marker-icon-highlighted',
+      iconSize: [60, 60],
+      iconAnchor: [30, 30]
+    });
+
+    for (const event of events) {
+      const coords: [number, number] = [event.latitude, event.longitude];
+      const isHighlighted = event.id === this.highlightedEventId;
+      
+      // Create popup content with calendar button
+      const popupContent = this.createPopupContent(event);
+      
+      const marker = this.L.marker(coords, { 
+        icon: isHighlighted ? highlightedIcon : markerIcon 
+      })
+      .addTo(this.map)
+      .bindPopup(popupContent, { 
+        maxWidth: 300,
+        className: 'event-popup'
+      })
+      .on('click', () => {
+        marker.openPopup();
+      });
+
+      this.markers.set(event.id, marker);
+
+      // If this is the highlighted event, open its popup and pan to it
+      if (isHighlighted) {
+        marker.openPopup();
+        this.map.setView(coords, 15, { animate: true });
+      }
+    }
+  }
+
+  private createPopupContent(event: Event): string {
+    return `
+      <div class="map-event-popup">
+        <h3>${event.title}</h3>
+        <p class="event-date"><strong>📅 ${event.date}</strong></p>
+        <p class="event-location">📍 ${event.location}</p>
+        ${event.description ? `<p class="event-description">${event.description}</p>` : ''}
+        <div class="popup-actions">
+          ${event.website ? `<a href="${event.website}" target="_blank" class="popup-btn website-btn">
+            <span>🌐</span> Visit Website
+          </a>` : ''}
+          <button class="popup-btn calendar-btn" onclick="window.addEventToCalendar(${event.id})">
+            <span>📅</span> Add to Calendar
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  private setupCalendarIntegration(events: Event[]): void {
+    // Expose calendar function to window for popup buttons
+    (window as any).addEventToCalendar = (eventId: number) => {
+      const event = events.find(e => e.id === eventId);
+      if (event) {
+        this.showCalendarOptions(event);
+      }
+    };
+  }
+
+  private showCalendarOptions(event: Event): void {
+    this.showCalendarDialog(event);
+  }
+
+  private showCalendarDialog(event: Event): void {
+    const dialog = document.createElement('div');
+    dialog.className = 'calendar-dialog-overlay';
+    dialog.innerHTML = `
+      <div class="calendar-dialog">
+        <h3>Add to Calendar</h3>
+        <p>Select your calendar service:</p>
+        <div class="calendar-options">
+          <button class="calendar-option-btn google" data-type="google">
+            <span>📅</span> Google Calendar
+          </button>
+          <button class="calendar-option-btn outlook" data-type="outlook">
+            <span>📧</span> Outlook
+          </button>
+          <button class="calendar-option-btn yahoo" data-type="yahoo">
+            <span>📮</span> Yahoo Calendar
+          </button>
+          <button class="calendar-option-btn ics" data-type="ics">
+            <span>💾</span> Download ICS
+          </button>
+        </div>
+        <button class="calendar-close-btn">Cancel</button>
+      </div>
+    `;
+
+    document.body.appendChild(dialog);
+
+    // Add event listeners
+    dialog.querySelector('.google')?.addEventListener('click', () => {
+      this.addToGoogleCalendar(event);
+      document.body.removeChild(dialog);
+    });
+
+    dialog.querySelector('.outlook')?.addEventListener('click', () => {
+      this.addToOutlook(event);
+      document.body.removeChild(dialog);
+    });
+
+    dialog.querySelector('.yahoo')?.addEventListener('click', () => {
+      this.addToYahooCalendar(event);
+      document.body.removeChild(dialog);
+    });
+
+    dialog.querySelector('.ics')?.addEventListener('click', () => {
+      this.downloadICS(event);
+      document.body.removeChild(dialog);
+    });
+
+    dialog.querySelector('.calendar-close-btn')?.addEventListener('click', () => {
+      document.body.removeChild(dialog);
+    });
+
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) {
+        document.body.removeChild(dialog);
+      }
+    });
+  }
+
+  private addToGoogleCalendar(event: Event): void {
+    const url = this.calendarService.getGoogleCalendarUrl(event);
+    this.calendarService.openCalendarLink(url);
+  }
+
+  private addToOutlook(event: Event): void {
+    const url = this.calendarService.getOutlookUrl(event);
+    this.calendarService.openCalendarLink(url);
+  }
+
+  private addToYahooCalendar(event: Event): void {
+    const url = this.calendarService.getYahooCalendarUrl(event);
+    this.calendarService.openCalendarLink(url);
+  }
+
+  private downloadICS(event: Event): void {
+    this.calendarService.downloadICS(event);
   }
 
   addHeatmap(events: MapEvent[]): void {
-    const heatPoints=events.map(e => [
+    const heatPoints = events.map(e => [
       e.coords[0],
       e.coords[1],
-      e.popularity*2
-    ])
+      e.popularity * 2
+    ]);
 
-    this.heatmapLayer=this.L.heatLayer(heatPoints, {
+    this.heatmapLayer = this.L.heatLayer(heatPoints, {
       radius: 60,
       blur: 50,
-      maxZoom:14,
+      maxZoom: 14,
       max: 1.0
     });
-    this.map.addLayer(this.heatmapLayer)
+    this.map.addLayer(this.heatmapLayer);
   }
-  
-}
 
+  private highlightEvent(eventId: number): void {
+    const marker = this.markers.get(eventId);
+    if (marker) {
+      const coords = marker.getLatLng();
+      // Clear map bounds to allow navigation to any location
+      this.map.setMaxBounds(null);
+      this.map.options.minZoom = 0;
+      this.map.setView([coords.lat, coords.lng], 15, { animate: true });
+      marker.openPopup();
+    }
+  }
+}
 
 interface MapEvent {
   id: number;
