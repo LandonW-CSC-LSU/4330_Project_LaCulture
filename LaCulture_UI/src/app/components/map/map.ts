@@ -1,19 +1,37 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { EventService } from '../../services/event.service';
+import { CalendarService } from '../../services/calendar.service';
+import { Event } from '../../models/event.model';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.html',
   styleUrls: ['./map.css'],
-  standalone: true
+  standalone: true,
+  encapsulation: ViewEncapsulation.None
 })
 export class MapComponent implements AfterViewInit, OnDestroy {
   private map: any;
   private L: any;
   private view: any;
+  private heatmapLayer: any;
+  private markers: Map<number, any> = new Map();
+  private highlightedEventId: number | null = null;
+
+  constructor(
+    private eventService: EventService,
+    private calendarService: CalendarService,
+    private route: ActivatedRoute
+  ) {}
 
   async ngAfterViewInit(): Promise<void> {
     const L = await import('leaflet');
-    this.L = L;
+    // @ts-ignore - leaflet.heat module exists at runtime
+    await import('leaflet.heat');
+    this.L = (window as any).L;
+    console.log("HeatLayer exists now?", this.L.heatLayer);
+
 
     this.map = L.map('map', {
       center: [29.9511, -90.0715],
@@ -21,39 +39,34 @@ export class MapComponent implements AfterViewInit, OnDestroy {
       maxBoundsViscosity: 1.0
     });
 
-    const markerIcon = L.icon({
-      iconUrl: 'assets/images/marker.png',
-      iconAnchor: [37, 47]
-    });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors',
       detectRetina: true
     }).addTo(this.map);
 
-    const markerOne = L.marker([29.9511, -90.0715], { icon: markerIcon })
-      .addTo(this.map)
-      .bindTooltip('Google');
+    const events = this.getMapEvents();
 
-    const markerTwo = L.marker([29.9611, -90.0715], { icon: markerIcon })
-      .addTo(this.map)
-      .bindTooltip('Bing');
+    this.addMapPoints(events);
+    this.addHeatmap(events);
+    
+    // Check for eventId query parameter before loading events
+    this.route.queryParams.subscribe(params => {
+      const eventId = params['eventId'];
+      if (eventId) {
+        this.highlightedEventId = +eventId;
+      }
+    });
 
-    markerOne.on('click', () => window.location.href = 'https://www.google.com');
-    markerTwo.on('click', () => window.location.href = 'https://www.bing.com');
+    // Load events from API and add markers
+    this.loadEventsAndAddMarkers();
+
     const viewControl = (L as any).control({ position: 'topright' });
 
     viewControl.onAdd = () => {
-      const div = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-      div.style.background = 'white';
-      div.style.padding = '10px';
-      div.style.borderRadius = '8px';
-      div.style.boxShadow = '0 2px 6px rgba(0,0,0,0.3)';
-      div.style.fontSize = '16px';
-      div.style.fontWeight = '500';
-      div.style.zIndex = '1000';
+      const div = L.DomUtil.create('div', 'leaflet-bar leaflet-control custom-map-control');
 
-      const select = L.DomUtil.create('select', '', div);
+      const select = L.DomUtil.create('select', 'map-select', div);
       select.innerHTML = `
         <option value="neworleans">New Orleans</option>
         <option value="batonrouge">Baton Rouge</option>
@@ -62,21 +75,39 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
       // prevent map drag when clicking on the select box
       L.DomEvent.disableClickPropagation(div);
-      L.DomEvent.on(select, 'change', (e: Event) => this.changeView(e));
-      const resetBtn = L.DomUtil.create('button', '', div);
+      L.DomEvent.on(select, 'change', (e: any) => this.changeView(e));
+      const resetBtn = L.DomUtil.create('button', 'map-reset', div);
       resetBtn.textContent = 'Reset View';
       L.DomEvent.disableClickPropagation(resetBtn);
       L.DomEvent.on(resetBtn, 'click', () => {
         this.setView();
       });
+      const heatContainer=L.DomUtil.create('div', 'heat-container', div);
+      const heatLabel=L.DomUtil.create('label', 'heat-toggle-label', heatContainer);
+      const heatmapToggle=L.DomUtil.create('input', 'heat-toggle', heatContainer);
+      heatmapToggle.type = 'checkbox';
+      heatmapToggle.checked = true;
+      heatmapToggle.id = 'heatmap-toggle';
+      heatLabel.htmlFor = 'heatmap-toggle';
+      heatLabel.textContent = 'Show Heatmap'
+      L.DomEvent.disableClickPropagation(heatmapToggle);
+      L.DomEvent.disableClickPropagation(heatLabel);
+      L.DomEvent.on(heatmapToggle, 'change', () => {
+        if (heatmapToggle.checked) {
+          this.map.addLayer(this.heatmapLayer);
+        } else {
+          this.map.removeLayer(this.heatmapLayer);
+        }
+        });
+
       return div;
     };
 
   viewControl.addTo(this.map);
-  this.changeView({ target: { value: 'neworleans' } } as any);
+  // Don't set default view yet - wait for events to load
   }
 
-  changeView(event: Event): void {
+  changeView(event: any): void {
     const view = (event.target as HTMLSelectElement).value;
 
     const views = {
@@ -110,6 +141,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     this.view = (views as any)[view];
     this.setView();
   }
+  
   setView(): void {
     this.map.options.minZoom = this.view.minZoom;
     this.map.setView(this.view.center, this.view.zoom);

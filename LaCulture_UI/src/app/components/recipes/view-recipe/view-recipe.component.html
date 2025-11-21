@@ -1,0 +1,39 @@
+<mat-card class="view-recipe-card">
+  <img mat-card-image [src]="data.recipe?.image || 'assets/images/placeholder.jpg'" [alt]="data.recipe?.title"/>
+  <mat-card-header>
+    <mat-card-title>{{ data.recipe?.title }}</mat-card-title>
+    <mat-card-subtitle *ngIf="data.recipe?.author">by {{ data.recipe.author }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p class="lead">{{ data.recipe?.description }}</p>
+
+    <div class="meta">
+      <span class="meta-item"> Prep time: {{ data.recipe?.prepTime }}</span>
+      <span class="meta-item"> Cook time: {{ data.recipe?.cookTime }}</span>
+      <span class="meta-item">{{ data.recipe?.servings }} servings</span>
+    </div>
+
+    <div class="section">
+      <h4>Ingredients</h4>
+      <ul>
+        <li *ngFor="let ing of data.recipe?.ingredients">{{ ing }}</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h4>Instructions</h4>
+      <ol>
+        <li *ngFor="let step of data.recipe?.instructions">{{ step }}</li>
+      </ol>
+    </div>
+
+    <div class="tags" *ngIf="data.recipe?.tags?.length">
+      <span class="tag" *ngFor="let t of data.recipe.tags">#{{ t }}</span>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-stroked-button (click)="close()"><mat-icon>close</mat-icon> Close</button>
+  </mat-card-actions>
+</mat-card>

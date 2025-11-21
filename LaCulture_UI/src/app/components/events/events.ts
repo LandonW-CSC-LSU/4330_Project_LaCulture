@@ -1,42 +1,29 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-interface Event {
-  id: number;
-  title: string;
-  date: string;
-  location: string;
-  website?: string;
-}
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { Router } from '@angular/router';
+import { EventService } from '../../services/event.service';
+import { CalendarService } from '../../services/calendar.service';
+import { Event } from '../../models/event.model';
 
 @Component({
   selector: 'app-events',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, MatMenuModule],
   templateUrl: './events.html', 
   styleUrls: ['./events.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EventsComponent {
-  public items = signal<Event[]>([
-    { id: 1, title: 'LSU vs Texas A&M', date: '10/25/2025', location: 'Baton Rouge', website: 'https://lsusports.evenue.net/list/FB'},
-    { id: 2, title: 'Saints vs Buccaneers', date: '10/26/2025', location: 'New Orleans', website: 'https://www.neworleanssaints.com/tickets/' },
-    { id: 3, title: 'National Fried Chicken Festival', date: '10/4-5/2025', location: 'New Orleans', website: 'https://www.friedchickenfestival.com/' },
-    { id: 4, title: 'Oktoberfest', date: '10/10-25/2025', location: 'New Orleans', website: 'https://deutscheshaus.org/oktoberfest/' },
-    { id: 5, title: 'Nola Funk Fest 2025', date: '10/17-19/2025', location: 'New Orleans', website: 'https://www.nolafunkfest.com/' },
-    { id: 6, title: 'Praise Fest', date: '10/17-19/2025', location: 'New Orleans', website: 'https://www.praisefestnola.com/' },
-    { id: 7, title: 'New Orleans Film Festival ', date: '10/23/2025-11/2/2025', location: 'New Orleans', website: 'https://neworleansfilmsociety.org/attend/' },
-    { id: 8, title: 'LGBT Halloween New Orleans (HNO)', date: '10/24-26/2025', location: 'New Orleans', website: 'https://www.halloweenneworleans.com/' },
-    { id: 9, title: 'NOLA Reggae Fest', date: '10/24-26/2025', location: 'New Orleans', website: 'https://www.eventbrite.com/e/2025-nola-reggae-fest-tickets-1369000991819' },
-    { id: 10, title: 'Krewe of BOO!', date: '10/25/2025', location: 'New Orleans', website: 'https://www.kreweofboo.com/' },
-    { id: 11, title: 'Treme Fall Fest', date: '10/25/2025', location: 'New Orleans', website: 'https://www.tremefest.org/' },
-    { id: 12, title: 'NOLA MusiCon', date: '10/28-30/2025', location: 'New Orleans', website: 'https://www.nolamusicon.com/' },
-    { id: 13, title: 'Bayou Bacchanal', date: '10/31-11/1/2025', location: 'New Orleans', website: 'https://www.friendsofculture.org/' },
-    { id: 14, title: 'Freret Street Fall Festival', date: '11/1/2025', location: 'New Orleans', website: 'https://freretstreetfestival.org/' },
-    { id: 15, title: 'Tremé Creole Gumbo Festival', date: '11/8-9/2025', location: 'New Orleans', website: 'https://www.jazzandheritage.org/events/2025-treme-creole-gumbo-festival/' },
-    { id: 16, title: 'Beignet Fest', date: '11/15/2025', location: 'New Orleans', website: 'https://beignetfest.com/' }
-  ]);
+export class EventsComponent implements OnInit {
+  public items = signal<Event[]>([]);
+  public isLoading = signal<boolean>(true);
+  public error = signal<string | null>(null);
+  public selectedEventForCalendar = signal<Event | null>(null);
 
-   public locations = computed(() => ['All', ...new Set(this.items().map(e => e.location))]);
+  public locations = computed(() => ['All', ...new Set(this.items().map(e => e.location))]);
   
   public selectedLocation = signal<string>('All');
 
@@ -48,7 +35,74 @@ export class EventsComponent {
     return this.items().filter(event => event.location === loc);
   });
 
+  constructor(
+    private eventService: EventService,
+    private calendarService: CalendarService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.loadEvents();
+  }
+
+  private loadEvents(): void {
+    this.isLoading.set(true);
+    this.error.set(null);
+    
+    this.eventService.getAllEvents().subscribe({
+      next: (events) => {
+        this.items.set(events);
+        this.isLoading.set(false);
+      },
+      error: (err) => {
+        console.error('Error loading events:', err);
+        this.error.set('Failed to load events. Please try again later.');
+        this.isLoading.set(false);
+      }
+    });
+  }
+
   public filterByLocation(location: string): void {
     this.selectedLocation.set(location);
+  }
+
+  // trackBy for the event list to avoid unnecessary DOM updates
+  public trackByEventId(index: number, event: Event): number {
+    return event.id;
+  }
+
+  public viewOnMap(eventId: number): void {
+    this.router.navigate(['/map'], { queryParams: { eventId } });
+  }
+
+  public showCalendarDialog(event: Event): void {
+    this.selectedEventForCalendar.set(event);
+  }
+
+  public closeCalendarDialog(): void {
+    this.selectedEventForCalendar.set(null);
+  }
+
+  public addToGoogleCalendar(event: Event): void {
+    const url = this.calendarService.getGoogleCalendarUrl(event);
+    this.calendarService.openCalendarLink(url);
+    this.closeCalendarDialog();
+  }
+
+  public addToOutlook(event: Event): void {
+    const url = this.calendarService.getOutlookUrl(event);
+    this.calendarService.openCalendarLink(url);
+    this.closeCalendarDialog();
+  }
+
+  public addToYahooCalendar(event: Event): void {
+    const url = this.calendarService.getYahooCalendarUrl(event);
+    this.calendarService.openCalendarLink(url);
+    this.closeCalendarDialog();
+  }
+
+  public downloadICS(event: Event): void {
+    this.calendarService.downloadICS(event);
+    this.closeCalendarDialog();
   }
 }

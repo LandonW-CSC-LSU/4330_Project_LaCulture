@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Audubonzoo } from './components/audubonzoo/audubonzoo';
-import { Bourbonstreet } from './components/bourbonstreet/bourbonstreet';
 import { Brennans } from './components/brennans/brennans';
 import { Cafedumonde } from './components/cafedumonde/cafedumonde';
 import { Frenchquarter } from './components/frenchquarter/frenchquarter';
-import { Marielaveau } from './components/marielaveau/marielaveau';
 import { Statecapitol } from './components/statecapitol/statecapitol';
 import { Superdome } from './components/superdome/superdome';
 import { Tigerstadium } from './components/tigerstadium/tigerstadium';

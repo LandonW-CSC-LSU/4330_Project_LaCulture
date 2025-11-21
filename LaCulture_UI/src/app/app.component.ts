@@ -1,6 +1,7 @@
-import { Component, HostListener } from '@angular/core';
-import { RouterOutlet, Router } from '@angular/router';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -35,7 +36,7 @@ import { CommonModule } from '@angular/common';
       overflow: hidden;
     }
     .scrolled {
-      background: rgba(128, 0, 128, 0.95);
+      background: rgba(72, 36, 90);
       padding: 8px 0 8px 0;
       backdrop-filter: blur(10px);
     }
@@ -57,26 +58,76 @@ import { CommonModule } from '@angular/common';
       border-bottom: 2px solid #ffd700;
       transform: scale(1.1);
     }
-    @media (max-width: 768px) {
-      .menu-link {
-        font-size: 2rem;
-        margin: 0 8px;
-      }
-    }
   `]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'laculture-ui';
   menuHeaderClass = '';
-  menuOptions = ['Home', 'Recipes', 'Events', 'Map', 'About', 'Calendar'];
+  menuOptions = ['Home', 'Recipes', 'Events', 'Tours', 'Map', 'Calendar', 'About'];
   selectedOption = this.menuOptions[0];
+  isHomePage = true;
 
   @HostListener('window:scroll', []) 
   onScroll() {
-    this.menuHeaderClass = window.scrollY > 0 ? 'scrolled' : '';
+    this.updateMenuHeaderClass();
   }
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    // Subscribe to router events to detect route changes
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      // Check if we're on the home page
+      this.isHomePage = this.router.url === '/' || this.router.url === '/home';
+      this.updateMenuHeaderClass();
+      this.updateSelectedOption();
+    });
+  }
+
+  ngOnInit() {
+    // Initialize the header state
+    this.isHomePage = this.router.url === '/' || this.router.url === '/home';
+    this.updateMenuHeaderClass();
+    this.updateSelectedOption();
+  }
+
+  private updateSelectedOption() {
+    const url = this.router.url.split('?')[0]; // Remove query params
+    
+    if (url === '/' || url === '/home') {
+      this.selectedOption = 'Home';
+    } else if (url === '/recipes') {
+      this.selectedOption = 'Recipes';
+    } else if (url === '/events') {
+      this.selectedOption = 'Events';
+    } else if (url === '/tours') {
+      this.selectedOption = 'Tours';
+    } else if (url === '/map') {
+      this.selectedOption = 'Map';
+    } else if (url === '/calendar') {
+      this.selectedOption = 'Calendar';
+    } else if (url === '/about') {
+      this.selectedOption = 'About';
+    }
+  }
+
+  private updateMenuHeaderClass() {
+    // Guard window usage for server-side rendering
+    if (typeof window === 'undefined') {
+      // On the server we can't read scroll position; apply non-scrolled for home
+      // and scrolled for all other pages so initial render matches client intent.
+      this.menuHeaderClass = this.isHomePage ? '' : 'scrolled';
+      return;
+    }
+
+    if (this.isHomePage) {
+      // On home page, only show scrolled class when scrolled
+      this.menuHeaderClass = window.scrollY > 0 ? 'scrolled' : '';
+    } else {
+      // On other pages, always show scrolled class
+      this.menuHeaderClass = 'scrolled';
+    }
+  }
 
   selectOption(option: string) {
     this.selectedOption = option;
@@ -92,14 +143,17 @@ export class AppComponent {
       case 'Events':
         this.router.navigate(['/events']);
         break;
+      case 'Tours':
+        this.router.navigate(['tours']);
+        break;
       case 'Map':
         this.router.navigate(['/map']);
         break;
-      case 'About':
-        // Add navigation when about page is created
-        break;
       case 'Calendar':
-        this.router.navigate(['/Calendar']);
+        this.router.navigate(['/calendar']);
+        break;
+      case 'About':
+        this.router.navigate(['/about']);
     }
   }
 }

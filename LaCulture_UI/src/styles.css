@@ -1,7 +1,168 @@
-/* You can add global styles to this file, and also import other style files */
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+/* Custom Font */
 @font-face {
   font-family: 'frenchDemo';
   src: url('assets/fonts/frenchDemo.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
+}
+
+/* Reset and Base Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: #2c2c2c;
+  background-color: #ffffff;
+}
+
+/* Typography Scale */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+  color: #1a1a1a;
+}
+
+h1 {
+  font-size: 2.5rem;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 2rem;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+/* French-style decorative text */
+.french-title {
+  font-family: 'frenchDemo', 'Cormorant Garamond', serif;
+  font-weight: normal;
+}
+
+/* Paragraph and Body Text */
+p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #2c2c2c;
+}
+
+.lead {
+  font-size: 1.125rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #1a1a1a;
+}
+
+/* Links */
+a {
+  color: #4b006e;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: #7b1fa2;
+  text-decoration: underline;
+}
+
+/* Helper Classes */
+.text-italic {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+}
+
+.text-light {
+  font-weight: 300;
+}
+
+.text-regular {
+  font-weight: 400;
+}
+
+.text-medium {
+  font-weight: 500;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+  
+  h4 {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* Make the dialog container for viewing recipes scrollable so the whole card can scroll
+   (image/title will scroll away as you scroll down the dialog) */
+.view-recipe-panel .mat-dialog-container {
+  max-height: 90vh !important;
+  padding: 0 !important; /* card handles its own padding */
+  overflow: auto !important; /* allow the dialog itself to scroll */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-recipe-panel .view-recipe-card {
+  width: 100%;
+  max-width: 900px;
+  max-height: none !important;
 }
