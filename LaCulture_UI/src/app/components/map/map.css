@@ -184,6 +184,13 @@
   line-height: 1.4;
 }
 
+.map-event-popup .event-popularity {
+  margin: 10px 0;
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.4;
+}
+
 .map-event-popup .popup-actions {
   display: flex;
   flex-direction: column;

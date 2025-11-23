@@ -25,7 +25,8 @@ namespace LaCulture.API.Data
                     Latitude = 30.4120,
                     Longitude = -91.1830,
                     Description = "LSU Tigers football game at Tiger Stadium",
-                    Category = "Sports"
+                    Category = "Sports",
+                    Popularity = 1.00
                 },
                 new Event
                 {
@@ -36,7 +37,8 @@ namespace LaCulture.API.Data
                     Latitude = 29.9511,
                     Longitude = -90.0812,
                     Description = "New Orleans Saints NFL game at the Superdome",
-                    Category = "Sports"
+                    Category = "Sports",
+                    Popularity = 0.95
                 },
                 new Event
                 {
@@ -47,7 +49,8 @@ namespace LaCulture.API.Data
                     Latitude = 29.9935,
                     Longitude = -90.0640,
                     Description = "Annual celebration of fried chicken with tastings and entertainment",
-                    Category = "Food & Drink"
+                    Category = "Food & Drink",
+                    Popularity = 0.80
                 },
                 new Event
                 {
@@ -58,7 +61,8 @@ namespace LaCulture.API.Data
                     Latitude = 29.9903,
                     Longitude = -90.0930,
                     Description = "German festival celebrating beer, food, and culture",
-                    Category = "Festival"
+                    Category = "Festival",
+                    Popularity = 0.65
                 },
                 new Event
                 {
@@ -69,7 +73,8 @@ namespace LaCulture.API.Data
                     Latitude = 29.9412,
                     Longitude = -90.0672,
                     Description = "Music festival celebrating funk and soul music",
-                    Category = "Music"
+                    Category = "Music",
+                    Popularity = 0.55
                 },
                 new Event
                 {
@@ -80,7 +85,8 @@ namespace LaCulture.API.Data
                     Latitude = 29.9538,
                     Longitude = -90.0638,
                     Description = "Gospel music festival",
-                    Category = "Music"
+                    Category = "Music",
+                    Popularity = 0.45
                 },
                 new Event
                 {
@@ -91,7 +97,8 @@ namespace LaCulture.API.Data
                     Latitude = 29.9520,
                     Longitude = -90.0700,
                     Description = "Annual film festival showcasing independent films",
-                    Category = "Arts & Culture"
+                    Category = "Arts & Culture",
+                    Popularity = 0.60
                 },
                 new Event
                 {
@@ -102,7 +109,8 @@ namespace LaCulture.API.Data
                     Latitude = 29.9570,
                     Longitude = -90.0620,
                     Description = "Halloween celebration with parties and events",
-                    Category = "Festival"
+                    Category = "Festival",
+                    Popularity = 0.75
                 },
                 new Event
                 {
@@ -113,7 +121,8 @@ namespace LaCulture.API.Data
                     Latitude = 29.9880,
                     Longitude = -90.0930,
                     Description = "Reggae music festival",
-                    Category = "Music"
+                    Category = "Music",
+                    Popularity = 0.40
                 },
                 new Event
                 {
@@ -124,7 +133,8 @@ namespace LaCulture.API.Data
                     Latitude = 29.9510,
                     Longitude = -90.0720,
                     Description = "Halloween parade through the French Quarter",
-                    Category = "Festival"
+                    Category = "Festival",
+                    Popularity = 0.85
                 },
                 new Event
                 {
@@ -135,7 +145,8 @@ namespace LaCulture.API.Data
                     Latitude = 29.9713,
                     Longitude = -90.0707,
                     Description = "Neighborhood festival celebrating Tremé culture",
-                    Category = "Festival"
+                    Category = "Festival",
+                    Popularity = 0.55
                 },
                 new Event
                 {
@@ -146,7 +157,8 @@ namespace LaCulture.API.Data
                     Latitude = 29.9412,
                     Longitude = -90.0672,
                     Description = "Music industry conference and festival",
-                    Category = "Music"
+                    Category = "Music",
+                    Popularity = 0.35
                 },
                 new Event
                 {
@@ -157,7 +169,8 @@ namespace LaCulture.API.Data
                     Latitude = 29.9688,
                     Longitude = -90.0715,
                     Description = "Caribbean cultural festival",
-                    Category = "Festival"
+                    Category = "Festival",
+                    Popularity = 0.50
                 },
                 new Event
                 {
@@ -168,7 +181,8 @@ namespace LaCulture.API.Data
                     Latitude = 29.9386,
                     Longitude = -90.1030,
                     Description = "Street festival with local vendors and music",
-                    Category = "Festival"
+                    Category = "Festival",
+                    Popularity = 0.70
                 },
                 new Event
                 {
@@ -179,7 +193,8 @@ namespace LaCulture.API.Data
                     Latitude = 29.9670,
                     Longitude = -90.0708,
                     Description = "Festival celebrating Creole cuisine and gumbo",
-                    Category = "Food & Drink"
+                    Category = "Food & Drink",
+                    Popularity = 0.65
                 },
                 new Event
                 {
@@ -190,7 +205,8 @@ namespace LaCulture.API.Data
                     Latitude = 29.9895,
                     Longitude = -90.0945,
                     Description = "Festival celebrating the iconic New Orleans beignet",
-                    Category = "Food & Drink"
+                    Category = "Food & Drink",
+                    Popularity = 0.75
                 }
             };
 

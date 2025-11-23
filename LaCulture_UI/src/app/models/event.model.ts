@@ -8,6 +8,7 @@ export interface Event {
   longitude: number;
   description?: string;
   category?: string;
+  popularity?: number;
   image?: string;
 }
 
@@ -20,6 +21,7 @@ export interface CreateEventDto {
   longitude: number;
   description?: string;
   category?: string;
+  popularity?: number;
 }
 
 export interface UpdateEventDto {
@@ -31,4 +33,5 @@ export interface UpdateEventDto {
   longitude?: number;
   description?: string;
   category?: string;
+  popularity?: number;
 }
