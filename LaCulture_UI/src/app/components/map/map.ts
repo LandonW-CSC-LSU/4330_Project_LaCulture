@@ -341,14 +341,14 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     const heatPoints = events.map(e => [
       e.latitude,
       e.longitude,
-      (e.popularity ?? 0.5) * 2
+      (e.popularity ?? 0.5)
     ]);
-
+    const maxPopularity = Math.max(...events.map(e => (e.popularity ?? 0.5)));
     this.heatmapLayer = this.L.heatLayer(heatPoints, {
       radius: 60,
       blur: 50,
       maxZoom: 14,
-      max: 1.0
+      max: maxPopularity
     });
     this.map.addLayer(this.heatmapLayer);
   }
