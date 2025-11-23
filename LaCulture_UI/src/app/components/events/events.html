@@ -48,6 +48,10 @@
             @if (event.description) {
               <p class="event-description">{{ event.description }}</p>
             }
+
+            @if (event.popularity)   {
+              <p class="event-popularity">Popularity: {{ event.popularity * 10 | number:'1.0-0' }}/10</p>
+            }
           </mat-card-content>
 
           <mat-card-actions>
