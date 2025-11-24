@@ -135,6 +135,8 @@ namespace LaCulture.API.Controllers
                     existingEvent.Description = updateEventDto.Description;
                 if (updateEventDto.Category != null)
                     existingEvent.Category = updateEventDto.Category;
+                if (updateEventDto.Popularity.HasValue)
+                    existingEvent.Popularity = updateEventDto.Popularity.Value;
 
                 var updatedEvent = await _eventService.UpdateEventAsync(id, existingEvent);
 
@@ -182,7 +184,8 @@ namespace LaCulture.API.Controllers
                 Latitude = eventItem.Latitude,
                 Longitude = eventItem.Longitude,
                 Description = eventItem.Description,
-                Category = eventItem.Category
+                Category = eventItem.Category,
+                Popularity = eventItem.Popularity
             };
         }
 
@@ -197,7 +200,8 @@ namespace LaCulture.API.Controllers
                 Latitude = dto.Latitude,
                 Longitude = dto.Longitude,
                 Description = dto.Description,
-                Category = dto.Category
+                Category = dto.Category,
+                Popularity = dto.Popularity
             };
         }
     }
