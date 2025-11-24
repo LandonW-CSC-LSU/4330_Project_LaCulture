@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -41,6 +41,7 @@ export class AddRecipeComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private cdr: ChangeDetectorRef,
     public dialogRef: MatDialogRef<AddRecipeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -122,6 +123,7 @@ export class AddRecipeComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = (e) => {
         this.imagePreview = e.target?.result as string;
+        this.cdr.detectChanges(); // Trigger change detection to update the view
       };
       reader.readAsDataURL(file);
     }
