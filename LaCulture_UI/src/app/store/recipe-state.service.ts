@@ -40,10 +40,8 @@ export class RecipeStateService {
   );
 
   constructor(private recipeService: RecipeService) {
-    // Subscribe to recipe service updates
-    this.recipeService.recipes$.subscribe(recipes => {
-      this.updateState({ recipes });
-    });
+    // Removed automatic subscription to avoid duplicates
+    // State is now managed exclusively through action methods
   }
 
   // Actions

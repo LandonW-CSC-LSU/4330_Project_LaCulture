@@ -32,6 +32,8 @@ namespace LaCulture.API.Models
         
         [StringLength(50)]
         public string? Category { get; set; }
+
+        public double? Popularity { get; set; }
         
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         

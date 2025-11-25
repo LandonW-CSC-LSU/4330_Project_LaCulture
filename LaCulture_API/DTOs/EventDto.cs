@@ -32,6 +32,8 @@ namespace LaCulture.API.DTOs
         
         [StringLength(50)]
         public string? Category { get; set; }
+
+        public double? Popularity { get; set; }
     }
 
     public class CreateEventDto
@@ -62,6 +64,8 @@ namespace LaCulture.API.DTOs
         
         [StringLength(50)]
         public string? Category { get; set; }
+
+        public double? Popularity { get; set; }
     }
 
     public class UpdateEventDto
@@ -87,5 +91,7 @@ namespace LaCulture.API.DTOs
         
         [StringLength(50)]
         public string? Category { get; set; }
+
+        public double? Popularity { get; set; }
     }
 }
