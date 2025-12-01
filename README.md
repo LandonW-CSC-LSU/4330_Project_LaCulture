@@ -3,6 +3,8 @@
 LaCulture 
 A webapp showcasing the riches of Louisiana culture and getting users in touch with cultural experiences around the state.
 
+Participants: Landon Walls, Aidan LaBrano, Royce Paul, Nicholas Luke, Felix Schafer
+
 SETUP: 
 
 ### 1. Clone the Repository
