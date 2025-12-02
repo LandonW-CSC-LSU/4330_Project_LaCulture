@@ -96,9 +96,13 @@
   box-shadow: 0 8px 24px rgba(128, 0, 128, 0.15);
 }
 
-.event-card mat-card-header {
-  padding: 16px;
-  background: linear-gradient(135deg, #f8f8ff 0%, #f3e6ff 100%);
+.event-card-header {
+  position: relative;
+  min-height: 140px; /* adjust as needed */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0; /* let inner content handle spacing */
 }
 
 .event-card mat-card-title {
@@ -106,12 +110,16 @@
   font-family: 'Playfair Display', serif;
   font-size: 1.3rem;
   font-weight: 600;
+  position: relative;
+  z-index: 1;
 }
 
 .event-card mat-card-subtitle {
   color: #7b1fa2;
   font-style: italic;
   margin-top: 4px;
+  position: relative;
+  z-index: 1;
 }
 
 .event-card mat-card-content {

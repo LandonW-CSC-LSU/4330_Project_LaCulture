@@ -448,6 +448,14 @@
   color: white;
 }
 
+/* Prevent horizontal scrollbars inside the calendar */
+.calendar-page,
+.calendar,
+.calendar-grid,
+.day-events {
+  overflow-x: hidden;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .section-title {
