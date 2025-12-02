@@ -185,7 +185,8 @@ namespace LaCulture.API.Controllers
                 Longitude = eventItem.Longitude,
                 Description = eventItem.Description,
                 Category = eventItem.Category,
-                Popularity = eventItem.Popularity
+                Popularity = eventItem.Popularity,
+                Image = eventItem.Image
             };
         }
 
@@ -201,7 +202,8 @@ namespace LaCulture.API.Controllers
                 Longitude = dto.Longitude,
                 Description = dto.Description,
                 Category = dto.Category,
-                Popularity = dto.Popularity
+                Popularity = dto.Popularity,
+                Image = dto.Image
             };
         }
     }

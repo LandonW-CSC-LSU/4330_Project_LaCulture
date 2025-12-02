@@ -18,27 +18,29 @@ namespace LaCulture.API.Data
             {
                 new Event
                 {
-                    Title = "LSU vs Texas A&M",
-                    Date = "10/25/2025",
-                    Location = "Baton Rouge",
-                    Website = "https://lsusports.evenue.net/list/FB",
-                    Latitude = 30.4120,
-                    Longitude = -91.1830,
-                    Description = "LSU Tigers football game at Tiger Stadium",
-                    Category = "Sports",
-                    Popularity = 1.00
+                    Title = "Algiers Bonfire & Concert",
+                    Date = "12/6/2025",
+                    Location = "New Orleans",
+                    Website = "https://www.algierseconomic.com/algiersbonfire/",
+                    Latitude = 29.9539,
+                    Longitude = -90.0545,
+                    Description = "The Algiers Bonfire and Concert is Algiers’ biggest annual holiday celebration and New Orleans’ only official holiday bonfire.",
+                    Category = "Music, Food & Market",
+                    Popularity = 0.70,
+                    Image = "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_avif,h_933,q_65,w_1152/v1/crm/neworleans/NOTMC_36668_9c23725c-5056-bfce-a815cc170aaee0fb.jpg"
                 },
                 new Event
                 {
-                    Title = "Saints vs Buccaneers",
-                    Date = "10/26/2025",
+                    Title = "Saints vs Panthers",
+                    Date = "12/14/2025",
                     Location = "New Orleans",
                     Website = "https://www.neworleanssaints.com/tickets/",
                     Latitude = 29.9511,
                     Longitude = -90.0812,
                     Description = "New Orleans Saints NFL game at the Superdome",
                     Category = "Sports",
-                    Popularity = 0.95
+                    Popularity = 0.95,
+                    Image = "https://static.clubs.nfl.com/f_auto/saints/cstbojoaffmjfar8xp0f.jpg"
                 },
                 new Event
                 {
@@ -54,7 +56,7 @@ namespace LaCulture.API.Data
                 },
                 new Event
                 {
-                    Title = "Oktoberfest",
+                    Title = "Oktobefest",
                     Date = "10/10-25/2025",
                     Location = "New Orleans",
                     Website = "https://deutscheshaus.org/oktoberfest/",
@@ -207,6 +209,17 @@ namespace LaCulture.API.Data
                     Description = "Festival celebrating the iconic New Orleans beignet",
                     Category = "Food & Drink",
                     Popularity = 0.75
+                }, 
+                new Event 
+                {
+                    Title = "Ballerinas at the Castle ",
+                    Date = "11/28/2025",
+                    Location = "Baton Rouge",
+                    Website = "https://www.eventbrite.com/e/ballerinas-at-the-castle-tickets-1968790375010?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=cp&aff=ebdsshcopyurl",
+                    Latitude = 30.4466,
+                    Longitude = -91.1890,
+                    Description = "The Baton Rouge Ballet Theatre brings the magic of 'The Nutcracker — A Tale from the Bayou' to life inside Louisiana's Old State Capitol, where little dancers take center stage.",
+                    Category = "Arts & Ballet"
                 }
             };
 
