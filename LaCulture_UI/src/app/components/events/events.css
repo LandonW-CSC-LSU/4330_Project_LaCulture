@@ -98,11 +98,11 @@
 
 .event-card-header {
   position: relative;
-  min-height: 140px; /* adjust as needed */
+  min-height: 250px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding: 0; /* let inner content handle spacing */
+  padding: 0;
 }
 
 .event-card mat-card-title {
